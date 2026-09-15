@@ -30,13 +30,26 @@ export const trackConversionEvent = (
     metadata,
   };
 
+  // Standardized conversion tags mapping
+  const conversionIdMap: Record<ConditionId, string> = {
+    piles: 'piles',
+    gallstone: 'gallstones',
+    hernia: 'hernia',
+    'uterine-fibroids': 'uterine_fibroids',
+    endometriosis: 'endometriosis',
+  };
+
+  const diseaseIdentifier = conversionIdMap[condition] || condition;
+  const pagePath = condition === 'uterine-fibroids' ? '/uterine-fibroids' : condition === 'endometriosis' ? '/endometriosis' : `/${condition}-treatment`;
+
   // 1. Google Tag Manager / GA4 DataLayer
   if (typeof window !== 'undefined') {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: eventName,
-      disease_category: condition,
-      page_path: `/${condition}-treatment`,
+      disease_category: diseaseIdentifier,
+      conversion_disease: diseaseIdentifier,
+      page_path: pagePath,
       ...metadata,
     });
 
@@ -44,7 +57,8 @@ export const trackConversionEvent = (
     if (typeof window.gtag === 'function') {
       window.gtag('event', eventName, {
         event_category: 'Medical_Ad_Lead',
-        event_label: condition,
+        event_label: diseaseIdentifier,
+        conversion_disease: diseaseIdentifier,
         ...metadata,
       });
     }
@@ -59,7 +73,8 @@ export const trackConversionEvent = (
       };
       const metaName = metaEventMap[eventName] || 'CustomEvent';
       window.fbq('track', metaName, {
-        content_name: `${condition}_treatment`,
+        content_name: `${diseaseIdentifier}_treatment`,
+        content_category: diseaseIdentifier,
         ...metadata,
       });
     }

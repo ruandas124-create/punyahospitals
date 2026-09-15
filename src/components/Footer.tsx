@@ -57,6 +57,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Hernia Treatment in Bangalore
                 </button>
               </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('uterine-fibroids')}
+                  className="hover:text-[#7B4FA3] hover:underline transition-colors text-left"
+                >
+                  Uterine Fibroids Care in Bangalore
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('endometriosis')}
+                  className="hover:text-[#7B4FA3] hover:underline transition-colors text-left"
+                >
+                  Endometriosis Care in Bangalore
+                </button>
+              </li>
             </ul>
           </div>
 

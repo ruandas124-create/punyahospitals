@@ -30,6 +30,18 @@ export const AdCampaignBar: React.FC<AdCampaignBarProps> = ({
       url: '/hernia-treatment',
       query: 'Google Ad: "Hernia Treatment in Bangalore"',
     },
+    {
+      id: 'uterine-fibroids',
+      label: 'Page 4: Uterine Fibroids',
+      url: '/uterine-fibroids',
+      query: 'Google & Meta Ad: "Uterine Fibroids Care Bangalore"',
+    },
+    {
+      id: 'endometriosis',
+      label: 'Page 5: Endometriosis',
+      url: '/endometriosis',
+      query: 'Google & Meta Ad: "Endometriosis Care Bangalore"',
+    },
   ];
 
   return (

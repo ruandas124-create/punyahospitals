@@ -1,4 +1,4 @@
-export type ConditionId = 'piles' | 'gallstone' | 'hernia';
+export type ConditionId = 'piles' | 'gallstone' | 'hernia' | 'uterine-fibroids' | 'endometriosis';
 
 export interface Symptom {
   id: string;

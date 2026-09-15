@@ -163,6 +163,8 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     <option value="piles">Piles Treatment (Colorectal Care)</option>
                     <option value="gallstone">Gallstone Treatment (Laparoscopic Care)</option>
                     <option value="hernia">Hernia Treatment (Advanced Mesh Repair)</option>
+                    <option value="uterine-fibroids">Uterine Fibroids Care (Gynecology)</option>
+                    <option value="endometriosis">Endometriosis Care (Women's Health)</option>
                   </select>
                 </div>
 

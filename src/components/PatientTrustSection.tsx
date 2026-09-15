@@ -16,6 +16,10 @@ export const PatientTrustSection: React.FC<PatientTrustSectionProps> = ({ condit
         return 'Gallstone Consultation';
       case 'hernia':
         return 'Hernia Care';
+      case 'uterine-fibroids':
+        return 'Fibroid Care';
+      case 'endometriosis':
+        return 'Endometriosis Care';
       default:
         return 'Surgical Care';
     }

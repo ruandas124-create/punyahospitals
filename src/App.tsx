@@ -24,6 +24,8 @@ export default function App() {
   const getConditionFromPath = (): ConditionId => {
     if (typeof window === 'undefined') return 'piles';
     const path = window.location.pathname.toLowerCase();
+    if (path.includes('uterine-fibroids') || path.includes('fibroid')) return 'uterine-fibroids';
+    if (path.includes('endometriosis')) return 'endometriosis';
     if (path.includes('gallstone')) return 'gallstone';
     if (path.includes('hernia')) return 'hernia';
     return 'piles';
@@ -73,7 +75,12 @@ export default function App() {
 
   const handleNavigate = (condition: ConditionId) => {
     setCurrentCondition(condition);
-    const targetPath = `/${condition}-treatment`;
+    let targetPath = `/${condition}-treatment`;
+    if (condition === 'uterine-fibroids') {
+      targetPath = '/uterine-fibroids';
+    } else if (condition === 'endometriosis') {
+      targetPath = '/endometriosis';
+    }
     if (window.location.pathname !== targetPath) {
       window.history.pushState(null, '', targetPath);
     }

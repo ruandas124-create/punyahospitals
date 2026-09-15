@@ -78,7 +78,14 @@ export const TreatmentOptionsSection: React.FC<TreatmentOptionsSectionProps> = (
         <div className="bg-[#EAF4E5]/60 border border-[#579B35]/20 rounded-2xl p-5 sm:p-6 mb-10 flex items-center gap-3.5 max-w-4xl mx-auto">
           <Shield className="w-6 h-6 text-[#579B35] flex-shrink-0" />
           <p className="text-xs sm:text-sm text-gray-800 font-medium">
-            <strong className="text-[#579B35] font-bold">Important Clinical Notice:</strong> Treatment options and recommendations depend strictly upon an in-person medical examination, symptom severity, diagnostic imaging, and clinical assessment by our certified surgical specialists.
+            <strong className="text-[#579B35] font-bold">Important Clinical Note: </strong>
+            {content.id === 'uterine-fibroids' ? (
+              'The best treatment depends on factors such as symptom severity, fibroid size and location, age and personal treatment preferences. A doctor will help guide your options.'
+            ) : content.id === 'endometriosis' ? (
+              'Treatment depends on symptom severity, location of tissue and personal goals. A specialist will help you understand the most appropriate option for your situation.'
+            ) : (
+              'Treatment options and recommendations depend strictly upon an in-person medical examination, symptom severity, diagnostic imaging, and clinical assessment by our certified surgical specialists.'
+            )}
           </p>
         </div>
 
@@ -93,7 +100,11 @@ export const TreatmentOptionsSection: React.FC<TreatmentOptionsSectionProps> = (
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-4 rounded-xl bg-[#7B4FA3] hover:bg-[#5D367F] text-white font-extrabold text-xs sm:text-base tracking-wide transition-all shadow-lg hover:shadow-xl active:scale-98 cursor-pointer min-h-[48px]"
             id="treatment-options-book-consult-btn"
           >
-            <span>BOOK A SPECIALIST CONSULTATION</span>
+            <span>
+              {content.id === 'uterine-fibroids' || content.id === 'endometriosis'
+                ? 'DISCUSS TREATMENT OPTIONS'
+                : 'BOOK A SPECIALIST CONSULTATION'}
+            </span>
             <ArrowRight className="w-4 h-4 flex-shrink-0" />
           </button>
         </div>

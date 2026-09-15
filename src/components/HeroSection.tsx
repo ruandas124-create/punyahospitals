@@ -3,6 +3,7 @@ import { CheckCircle2, Phone, MessageSquare, Calendar, ArrowRight, Shield, Clock
 import { ConditionId, LandingPageContent } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
 import doctorConsultationImg from '../assets/images/indian_doctor_consultation_1789457537922.jpg';
+import gynConsultationImg from '../assets/images/gyn_consultation_1789460990250.jpg';
 
 interface HeroSectionProps {
   content: LandingPageContent;
@@ -22,12 +23,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const trustPoints = [
-    'Experienced Doctors',
-    'Modern Treatment Options',
-    'Personalised Care',
-    'Hospital Support',
-  ];
+  const getTrustPoints = (id: ConditionId) => {
+    if (id === 'uterine-fibroids') {
+      return [
+        "Experienced Women's Health Specialists",
+        'Personalised Treatment',
+        'Modern Diagnostic & Treatment Options',
+        'Complete Hospital Support',
+      ];
+    }
+    if (id === 'endometriosis') {
+      return [
+        'Specialist Evaluation',
+        'Personalised Care',
+        'Modern Diagnostic Support',
+        "Complete Women's Healthcare",
+      ];
+    }
+    return [
+      'Experienced Doctors',
+      'Modern Treatment Options',
+      'Personalised Care',
+      'Hospital Support',
+    ];
+  };
+
+  const trustPoints = getTrustPoints(content.id);
+  const isGynCondition = content.id === 'uterine-fibroids' || content.id === 'endometriosis';
+  const heroImage = isGynCondition ? gynConsultationImg : doctorConsultationImg;
 
   const handlePhoneClick = () => {
     trackConversionEvent('phone_click', content.id, { location: 'hero_call_button' });
@@ -166,7 +189,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             {/* Realistic Indian Doctor & Patient Consultation Photography */}
             <div className="relative rounded-2xl overflow-hidden shadow-xl border-2 border-white bg-white group">
               <img
-                src={doctorConsultationImg}
+                src={heroImage}
                 alt={`Realistic Indian doctor consulting patient for ${content.title} at PUNYA Hospital Bangalore`}
                 referrerPolicy="no-referrer"
                 className="w-full h-64 sm:h-72 md:h-80 object-cover object-center group-hover:scale-102 transition-transform duration-500"
@@ -178,7 +201,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   PUNYA Hospital Consultation Suite
                 </div>
                 <div className="text-sm font-semibold text-white/95">
-                  Qualified Surgical Specialists • Bengaluru
+                  {isGynCondition ? "Senior Women's Health Specialist • Bengaluru" : "Qualified Surgical Specialists • Bengaluru"}
                 </div>
               </div>
             </div>

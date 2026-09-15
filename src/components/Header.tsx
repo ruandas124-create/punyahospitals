@@ -22,6 +22,8 @@ export const Header: React.FC<HeaderProps> = ({
     { id: 'piles', name: 'Piles Treatment', tag: 'Colorectal Care' },
     { id: 'gallstone', name: 'Gallstone Treatment', tag: 'Laparoscopic Care' },
     { id: 'hernia', name: 'Hernia Treatment', tag: 'Advanced Mesh Repair' },
+    { id: 'uterine-fibroids', name: 'Uterine Fibroids', tag: "Women's Health & Laparoscopy" },
+    { id: 'endometriosis', name: 'Endometriosis', tag: 'Pelvic Pain & Care' },
   ];
 
   const handlePhoneClick = () => {
@@ -35,6 +37,8 @@ export const Header: React.FC<HeaderProps> = ({
       piles: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Piles treatment. Please help me with an appointment.',
       gallstone: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Gallstone treatment. Please help me with an appointment.',
       hernia: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Hernia treatment. Please help me with an appointment.',
+      'uterine-fibroids': 'Hello PUNYA Hospital, I would like to consult a specialist regarding Uterine Fibroids treatment. Please help me with an appointment.',
+      endometriosis: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Endometriosis treatment. Please help me with an appointment.',
     };
     const encoded = encodeURIComponent(messages[currentCondition]);
     window.open(`https://wa.me/918045689000?text=${encoded}`, '_blank', 'noopener,noreferrer');
@@ -224,7 +228,7 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="text-xs font-bold text-[#5D367F] uppercase tracking-wider mb-2">
               Select Treatment Landing Page:
             </div>
-            <div className="grid grid-cols-3 gap-1.5 text-xs font-semibold">
+            <div className="grid grid-cols-2 gap-1.5 text-xs font-semibold">
               {treatments.map((t) => (
                 <button
                   key={t.id}
@@ -233,13 +237,13 @@ export const Header: React.FC<HeaderProps> = ({
                     onNavigate(t.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`py-2 px-1 rounded-lg text-center transition-all ${
+                  className={`py-2 px-2 rounded-lg text-center transition-all ${
                     currentCondition === t.id
                       ? 'bg-[#7B4FA3] text-white font-bold shadow-xs'
                       : 'bg-white text-gray-700 border border-purple-100 hover:bg-purple-50'
                   }`}
                 >
-                  {t.id === 'piles' ? 'Piles' : t.id === 'gallstone' ? 'Gallstone' : 'Hernia'}
+                  {t.name.replace(' Treatment', '')}
                 </button>
               ))}
             </div>

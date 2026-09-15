@@ -8,7 +8,8 @@ import {
   Armchair, 
   ShieldAlert, 
   ArrowRight, 
-  Stethoscope 
+  Stethoscope,
+  HeartHandshake
 } from 'lucide-react';
 import { LandingPageContent } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
@@ -36,9 +37,21 @@ export const SymptomsSection: React.FC<SymptomsSectionProps> = ({
         return <Armchair className="w-6 h-6 text-[#7B4FA3]" />;
       case 'ShieldAlert':
         return <ShieldAlert className="w-6 h-6 text-[#579B35]" />;
+      case 'HeartHandshake':
+        return <HeartHandshake className="w-6 h-6 text-[#7B4FA3]" />;
       default:
         return <Activity className="w-6 h-6 text-[#7B4FA3]" />;
     }
+  };
+
+  const getEducationalNote = () => {
+    if (content.id === 'uterine-fibroids') {
+      return 'Symptoms can vary depending on the size, number and location of fibroids. Proper evaluation is important.';
+    }
+    if (content.id === 'endometriosis') {
+      return 'Symptoms can vary from person to person. Persistent or severe symptoms should be evaluated by a qualified healthcare professional.';
+    }
+    return 'Early consultation allows for milder, conservative options and quick relief before symptoms advance.';
   };
 
   return (
@@ -91,7 +104,7 @@ export const SymptomsSection: React.FC<SymptomsSectionProps> = ({
                 Don't Ignore Persistent Symptoms
               </h4>
               <p className="text-xs sm:text-sm text-gray-700 mt-1 max-w-xl">
-                Early consultation allows for milder, conservative options and quick relief before symptoms advance.
+                {getEducationalNote()}
               </p>
             </div>
           </div>

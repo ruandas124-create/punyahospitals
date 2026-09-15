@@ -15,26 +15,26 @@ export const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({
   const steps = [
     {
       stepNumber: '01',
-      title: 'Book Appointment',
-      description: 'Choose your preferred date online, via quick call, or via WhatsApp message.',
+      title: 'Book an Appointment',
+      description: 'Choose your preferred date and time online, via quick call, or through WhatsApp.',
       icon: <Calendar className="w-5 h-5 text-[#7B4FA3]" />,
     },
     {
       stepNumber: '02',
-      title: 'Consult Our Specialist',
-      description: 'Meet in-person at PUNYA Hospital Bangalore for a confidential, respectful evaluation.',
+      title: 'Visit PUNYA Hospital',
+      description: 'Arrive at our hospital reception with dedicated coordinators assisting your check-in.',
       icon: <UserCheck className="w-5 h-5 text-[#579B35]" />,
     },
     {
       stepNumber: '03',
-      title: 'Get Proper Diagnosis',
-      description: 'Thorough clinical examination and high-precision diagnostics to identify root causes.',
+      title: 'Specialist Consultation & Diagnosis',
+      description: 'Comprehensive, private evaluation and necessary diagnostics by experienced doctors.',
       icon: <Stethoscope className="w-5 h-5 text-[#7B4FA3]" />,
     },
     {
       stepNumber: '04',
-      title: 'Start Your Treatment Plan',
-      description: 'Receive an individualised treatment roadmap — from conservative care to surgical options.',
+      title: 'Personalised Treatment Plan',
+      description: 'Receive a transparent treatment roadmap tailored to your symptoms and recovery goals.',
       icon: <HeartPulse className="w-5 h-5 text-[#579B35]" />,
     },
   ];

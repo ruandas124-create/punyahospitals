@@ -330,4 +330,252 @@ export const LANDING_PAGES_DATA: Record<ConditionId, LandingPageContent> = {
       },
     ],
   },
+  'uterine-fibroids': {
+    id: 'uterine-fibroids',
+    path: '/uterine-fibroids',
+    adKeyword: 'Uterine Fibroids Treatment in Bangalore',
+    title: 'Uterine Fibroids Treatment in Bangalore | PUNYA Hospital',
+    metaTitle: 'Uterine Fibroids Treatment in Bangalore | PUNYA Hospital',
+    metaDescription: 'Get expert evaluation and personalised treatment options for uterine fibroids at PUNYA Hospital Bangalore. Modern diagnostics and compassionate women’s healthcare.',
+    heroHeadline: 'Uterine Fibroids Treatment in Bangalore',
+    heroSupportingText: 'Get expert evaluation and personalised treatment options for uterine fibroids at PUNYA Hospital.',
+    whatsappMessage: 'Hello PUNYA Hospital, I would like to consult a specialist regarding uterine fibroids. Please help me with an appointment.',
+    doctorSpeciality: 'Gynecology & Women’s Health',
+    symptoms: [
+      {
+        id: 'heavy-bleeding',
+        name: 'Heavy or prolonged menstrual bleeding',
+        description: 'Excessive menstrual flow, passing blood clots, or bleeding episodes lasting longer than usual.',
+        iconName: 'Droplets',
+      },
+      {
+        id: 'pelvic-pressure',
+        name: 'Pelvic pressure or discomfort',
+        description: 'A constant feeling of heaviness, fullness, or chronic ache deep in the lower abdomen.',
+        iconName: 'ShieldAlert',
+      },
+      {
+        id: 'abdominal-pain',
+        name: 'Abdominal pain',
+        description: 'Recurrent cramping or localized tenderness in the lower abdomen and pelvic area.',
+        iconName: 'Flame',
+      },
+      {
+        id: 'frequent-urination',
+        name: 'Frequent urination',
+        description: 'Need to urinate frequently caused by fibroids exerting pressure against the urinary bladder.',
+        iconName: 'AlertCircle',
+      },
+      {
+        id: 'back-pain',
+        name: 'Lower back pain',
+        description: 'Persistent dull lower back or posterior pelvic ache radiating toward the hips or legs.',
+        iconName: 'Activity',
+      },
+      {
+        id: 'period-discomfort',
+        name: 'Period-related discomfort',
+        description: 'Severe menstrual cramps (dysmenorrhea) and pain that interferes with day-to-day routines.',
+        iconName: 'HeartHandshake',
+      },
+    ],
+    diagramTitle: 'Understanding Uterine Fibroids',
+    diagramDescription: 'Clear, non-graphic anatomical illustration explaining the normal uterus, fibroid positions, and classification: Submucosal, Intramural, and Subserosal.',
+    treatmentOptions: [
+      {
+        title: 'Observation & Monitoring',
+        subtitle: 'Watchful Clinical Waiting',
+        description: 'For suitable patients who may not require immediate active intervention, with routine ultrasound check-ups to track growth.',
+        suitableFor: 'Suitable for small, asymptomatic fibroids in patients approaching menopause or with stable clinical findings.',
+        badge: 'Regular Monitoring',
+      },
+      {
+        title: 'Medication-Based Management',
+        subtitle: 'Symptom Relief & Medical Therapy',
+        description: 'Treatment may be considered to help manage certain symptoms such as heavy bleeding and cramps, depending on the clinical situation.',
+        suitableFor: 'Recommended for managing bleeding irregularities or reducing discomfort under specialist guidance.',
+        badge: 'Medical Therapy',
+      },
+      {
+        title: 'Minimally Invasive Treatment',
+        subtitle: 'Organ-Preserving Advanced Care',
+        description: 'Appropriate modern procedures (e.g. hysteroscopic resection or laparoscopic myomectomy) may be considered for selected patients.',
+        suitableFor: 'Considered for patients wishing to preserve uterine anatomy with targeted fibroid removal.',
+        badge: 'Minimally Invasive',
+      },
+      {
+        title: 'Surgical Treatment',
+        subtitle: 'Definitive Surgical Care',
+        description: 'Surgery may be recommended depending on fibroid size, number, location, severity of symptoms, and individual health circumstances.',
+        suitableFor: 'Decided after proper clinical evaluation by a qualified specialist based on individual patient health.',
+        badge: 'Specialist Surgery',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What are uterine fibroids?',
+        answer: 'Uterine fibroids (leiomyomas) are non-cancerous muscular growths that develop within or on the muscular wall of the uterus. They vary in size from microscopic nodules to larger masses, and a woman may have a single fibroid or multiple fibroids.',
+      },
+      {
+        question: 'What causes uterine fibroids?',
+        answer: 'The exact cause is not fully understood, but clinical research indicates that reproductive hormones (estrogen and progesterone), genetic predispositions, and cellular growth factors influence their development and growth during reproductive years.',
+      },
+      {
+        question: 'What are the common symptoms?',
+        answer: 'Common symptoms include heavy or prolonged menstrual bleeding, pelvic pressure or chronic fullness, lower abdominal pain, frequent urination, difficulty emptying the bladder, and lower back ache. However, many women have fibroids with no symptoms at all.',
+      },
+      {
+        question: 'Can fibroids cause heavy periods?',
+        answer: 'Yes. Fibroids that press against or distort the uterine lining (particularly submucosal and intramural fibroids) frequently lead to heavy menstrual bleeding, presence of blood clots, and prolonged menstrual cycles, which may lead to iron-deficiency anemia if left unaddressed.',
+      },
+      {
+        question: 'Do all fibroids require treatment?',
+        answer: 'No, not every fibroid requires treatment. Small, asymptomatic fibroids that do not interfere with daily life or fertility can often be monitored safely through periodic ultrasound imaging and specialist check-ups.',
+      },
+      {
+        question: 'Can fibroids be treated without surgery?',
+        answer: 'Yes, medication-based management can help regulate heavy bleeding and relieve pain for many patients. Your gynecologist will evaluate your symptoms, age, fertility preferences, and ultrasound scans to recommend whether medical management or observation is suitable.',
+      },
+      {
+        question: 'When should I consult a gynecologist?',
+        answer: 'You should consult a gynecologist if you experience unusually heavy bleeding, severe menstrual pain, pelvic fullness or pain, bleeding between periods, or symptoms that affect your quality of life or energy levels.',
+      },
+      {
+        question: 'What tests are used to diagnose fibroids?',
+        answer: 'A pelvic examination by a gynecologist along with a pelvic ultrasound (abdominal or transvaginal) is the standard diagnostic tool. In certain complex cases, an MRI or saline infusion sonogram (SIS) may be recommended for detailed mapping of the fibroids.',
+      },
+      {
+        question: 'What treatment options are available?',
+        answer: 'Treatment options at PUNYA Hospital include clinical observation & monitoring, medical symptom management, minimally invasive endoscopic or laparoscopic procedures (such as myomectomy), and definitive surgical options tailored to your specific clinical findings.',
+      },
+      {
+        question: 'How do I book an appointment at PUNYA Hospital?',
+        answer: 'You can easily book your consultation by submitting the quick form on this page, calling our direct hospital helpline, or messaging us on WhatsApp to speak with our women’s healthcare team.',
+      },
+    ],
+  },
+  endometriosis: {
+    id: 'endometriosis',
+    path: '/endometriosis',
+    adKeyword: 'Endometriosis Treatment in Bangalore',
+    title: 'Endometriosis Treatment in Bangalore | PUNYA Hospital',
+    metaTitle: 'Endometriosis Treatment in Bangalore | PUNYA Hospital',
+    metaDescription: 'Get expert evaluation and personalised care for endometriosis at PUNYA Hospital Bangalore. Comprehensive women’s healthcare with experienced gynecologists.',
+    heroHeadline: 'Endometriosis Treatment in Bangalore',
+    heroSupportingText: 'Get expert evaluation and personalised care for endometriosis at PUNYA Hospital.',
+    whatsappMessage: 'Hello PUNYA Hospital, I would like to consult a specialist regarding endometriosis. Please help me with an appointment.',
+    doctorSpeciality: 'Gynecology & Endometriosis Care',
+    symptoms: [
+      {
+        id: 'painful-periods',
+        name: 'Painful periods',
+        description: 'Severe menstrual cramps and pelvic pain (dysmenorrhea) that may begin before and extend several days into your period.',
+        iconName: 'Flame',
+      },
+      {
+        id: 'pelvic-pain',
+        name: 'Pelvic pain',
+        description: 'Chronic pelvic pain and lower abdominal aching that may persist outside of the menstrual cycle.',
+        iconName: 'ShieldAlert',
+      },
+      {
+        id: 'pain-intercourse',
+        name: 'Pain during or after intercourse',
+        description: 'Deep pelvic pain experienced during or immediately following sexual intercourse (dyspareunia).',
+        iconName: 'AlertCircle',
+      },
+      {
+        id: 'pain-bowel',
+        name: 'Pain during bowel movements',
+        description: 'Painful bowel movements, particularly noticeable during or immediately around menstrual periods.',
+        iconName: 'Activity',
+      },
+      {
+        id: 'pain-urination',
+        name: 'Pain during urination',
+        description: 'Discomfort, urinary urgency, or burning sensations, particularly experienced around menstrual cycles.',
+        iconName: 'Droplets',
+      },
+      {
+        id: 'fertility-issues',
+        name: 'Difficulty becoming pregnant',
+        description: 'Challenges with fertility; endometriosis is sometimes first identified during clinical evaluation for conception difficulties.',
+        iconName: 'HeartHandshake',
+      },
+    ],
+    diagramTitle: 'Understanding Endometriosis',
+    diagramDescription: 'Professional, non-graphic medical diagram showing the uterus, ovaries, fallopian tubes, and ectopic endometrial-like tissue implants.',
+    treatmentOptions: [
+      {
+        title: 'Medical Management',
+        subtitle: 'Targeted Clinical Therapy',
+        description: 'Medication may be recommended depending on symptoms, age, and individual health circumstances to help manage inflammation and discomfort.',
+        suitableFor: 'Suitable for initial clinical care and symptom regulation under specialist oversight.',
+        badge: 'Medical Care',
+      },
+      {
+        title: 'Pain & Symptom Management',
+        subtitle: 'Multimodal Comfort Care',
+        description: 'A personalised approach may be used to help manage symptoms and improve daily quality of life through tailored medical therapies.',
+        suitableFor: 'Designed to relieve chronic pelvic discomfort and cycle-related pain effectively.',
+        badge: 'Personalised Relief',
+      },
+      {
+        title: 'Hormonal Treatment',
+        subtitle: 'Endocrine Therapy Options',
+        description: 'May be considered for suitable patients based on thorough medical evaluation to help slow the progression of endometrial-like tissue.',
+        suitableFor: 'Evaluated individually taking reproductive plans and health history into account.',
+        badge: 'Hormone Therapy',
+      },
+      {
+        title: 'Surgical Treatment',
+        subtitle: 'Laparoscopic Care in Selected Cases',
+        description: 'Surgery may be considered in selected cases when clinically appropriate (e.g. diagnostic laparoscopy or targeted excision of lesions).',
+        suitableFor: 'Recommended by qualified specialists when non-surgical approaches require definitive evaluation or intervention.',
+        badge: 'Specialist Surgery',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is endometriosis?',
+        answer: 'Endometriosis is a condition in which tissue similar to the lining inside the uterus (the endometrium) grows outside the uterus—such as on the ovaries, fallopian tubes, outer uterine surface, and pelvic peritoneum. This ectopic tissue responds to hormonal changes, causing localized inflammation and pain.',
+      },
+      {
+        question: 'What are the symptoms of endometriosis?',
+        answer: 'Common symptoms include severe menstrual cramps, chronic pelvic pain, deep pain during or after intercourse, pain with bowel movements or urination around periods, fatigue, and difficulty becoming pregnant.',
+      },
+      {
+        question: 'Why are periods painful with endometriosis?',
+        answer: 'Endometrial-like tissue outside the uterus thickens, breaks down, and bleeds during each menstrual cycle just like normal uterine lining. Because this tissue has no exit route from the body, it becomes trapped, triggering inflammation, swelling, and nerve irritation.',
+      },
+      {
+        question: 'Can endometriosis cause pelvic pain?',
+        answer: 'Yes. Chronic pelvic pain is one of the hallmark characteristics of endometriosis. The ongoing inflammation and formation of internal scar tissue (adhesions) can cause persistent discomfort even between menstrual periods.',
+      },
+      {
+        question: 'Can endometriosis affect fertility?',
+        answer: 'Endometriosis can impact fertility in some women by causing pelvic adhesions, altering anatomical relationships between fallopian tubes and ovaries, or creating an inflammatory environment. However, many women with endometriosis do conceive successfully with proper medical evaluation and management.',
+      },
+      {
+        question: 'How is endometriosis diagnosed?',
+        answer: 'Diagnosis begins with a thorough clinical history and pelvic examination by a gynecologist. High-resolution ultrasound and pelvic MRI can identify endometriomas ("chocolate cysts") and deep infiltrating lesions. In select cases, minimally invasive laparoscopy provides definitive visualization and treatment.',
+      },
+      {
+        question: 'Can endometriosis be managed without surgery?',
+        answer: 'Yes. Many women achieve significant symptom relief through medical and hormonal therapies, including anti-inflammatory medications, oral contraceptives, progestin therapies, or hormonal IUDs, avoiding the immediate need for surgery.',
+      },
+      {
+        question: 'When should I consult a gynecologist?',
+        answer: 'You should consult a gynecologist if your period pain is severe enough to interfere with work, school, or daily life, if over-the-counter pain relievers do not provide adequate relief, or if you experience pain during intercourse or difficulty conceiving.',
+      },
+      {
+        question: 'What treatment options are available?',
+        answer: 'PUNYA Hospital provides comprehensive endometriosis care including medical pain management, hormonal therapies, nutritional and lifestyle guidance, and advanced laparoscopic surgery when clinically indicated.',
+      },
+      {
+        question: 'How do I book an appointment at PUNYA Hospital?',
+        answer: 'You can book your consultation by completing the quick appointment form on this page, calling our direct hospital line, or sending us a message on WhatsApp for personalized support.',
+      },
+    ],
+  },
 };
