@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ConditionId } from './types';
+import { PatientRecord } from './types/hospital';
 import { LANDING_PAGES_DATA } from './data/landingPagesData';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
@@ -19,6 +20,15 @@ import { AppointmentModal } from './components/AppointmentModal';
 import { SeoStructuredData } from './components/SeoStructuredData';
 import { trackConversionEvent } from './utils/analytics';
 
+// Staff Portal Dashboards
+import { StaffPortalHeader } from './components/hospital/StaffPortalHeader';
+import { MasterAdminDashboard } from './components/hospital/MasterAdminDashboard';
+import { SalesDashboard } from './components/hospital/SalesDashboard';
+import { FrontOfficeDashboard } from './components/hospital/FrontOfficeDashboard';
+import { DataFlowAuditModal } from './components/hospital/DataFlowAuditModal';
+
+type StaffTab = 'master_admin' | 'sales' | 'front_office' | 'audit';
+
 export default function App() {
   // Determine initial condition based on pathname
   const getConditionFromPath = (): ConditionId => {
@@ -31,6 +41,30 @@ export default function App() {
     return 'piles';
   };
 
+  // Check if pathname points to internal staff portal
+  const checkStaffPortalFromPath = (): { isActive: boolean; tab: StaffTab } => {
+    if (typeof window === 'undefined') return { isActive: false, tab: 'master_admin' };
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes('/admin') || path.includes('/master-admin')) {
+      return { isActive: true, tab: 'master_admin' };
+    }
+    if (path.includes('/sales')) {
+      return { isActive: true, tab: 'sales' };
+    }
+    if (path.includes('/front-office') || path.includes('/frontoffice')) {
+      return { isActive: true, tab: 'front_office' };
+    }
+    if (path.includes('/audit')) {
+      return { isActive: true, tab: 'audit' };
+    }
+    return { isActive: false, tab: 'master_admin' };
+  };
+
+  const initialPortal = checkStaffPortalFromPath();
+  const [isStaffPortalActive, setIsStaffPortalActive] = useState<boolean>(initialPortal.isActive);
+  const [staffTab, setStaffTab] = useState<StaffTab>(initialPortal.tab);
+  const [selectedAuditPatient, setSelectedAuditPatient] = useState<PatientRecord | null>(null);
+
   const [currentCondition, setCurrentCondition] = useState<ConditionId>(getConditionFromPath);
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
 
@@ -41,14 +75,23 @@ export default function App() {
   // Handle URL changes & popstate
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentCondition(getConditionFromPath());
+      const portalCheck = checkStaffPortalFromPath();
+      if (portalCheck.isActive) {
+        setIsStaffPortalActive(true);
+        setStaffTab(portalCheck.tab);
+      } else {
+        setIsStaffPortalActive(false);
+        setCurrentCondition(getConditionFromPath());
+      }
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Reset scroll triggers and register scroll tracking
+  // Reset scroll triggers and register scroll tracking (only for public landing pages)
   useEffect(() => {
+    if (isStaffPortalActive) return;
+
     scrolled50Ref.current = false;
     scrolled90Ref.current = false;
 
@@ -71,9 +114,10 @@ export default function App() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [currentCondition]);
+  }, [currentCondition, isStaffPortalActive]);
 
   const handleNavigate = (condition: ConditionId) => {
+    setIsStaffPortalActive(false);
     setCurrentCondition(condition);
     let targetPath = `/${condition}-treatment`;
     if (condition === 'uterine-fibroids') {
@@ -87,8 +131,102 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleOpenStaffPortal = (tab: StaffTab = 'master_admin') => {
+    setIsStaffPortalActive(true);
+    setStaffTab(tab);
+    const pathMap: Record<StaffTab, string> = {
+      master_admin: '/admin',
+      sales: '/sales',
+      front_office: '/front-office',
+      audit: '/audit',
+    };
+    if (window.location.pathname !== pathMap[tab]) {
+      window.history.pushState(null, '', pathMap[tab]);
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToPublicWebsite = () => {
+    setIsStaffPortalActive(false);
+    let targetPath = `/${currentCondition}-treatment`;
+    if (currentCondition === 'uterine-fibroids') {
+      targetPath = '/uterine-fibroids';
+    } else if (currentCondition === 'endometriosis') {
+      targetPath = '/endometriosis';
+    }
+    window.history.pushState(null, '', targetPath);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenAuditForPatient = (patient: PatientRecord) => {
+    setSelectedAuditPatient(patient);
+    setStaffTab('audit');
+    if (window.location.pathname !== '/audit') {
+      window.history.pushState(null, '', '/audit');
+    }
+  };
+
   const content = LANDING_PAGES_DATA[currentCondition];
 
+  // If Staff Portal is Active, render the hospital operational dashboards
+  if (isStaffPortalActive) {
+    return (
+      <div className="min-h-screen flex flex-col bg-[#F9F7FA] text-[#252525]">
+        <StaffPortalHeader
+          currentTab={staffTab}
+          onSelectTab={(tab) => {
+            setStaffTab(tab);
+            const pathMap: Record<StaffTab, string> = {
+              master_admin: '/admin',
+              sales: '/sales',
+              front_office: '/front-office',
+              audit: '/audit',
+            };
+            if (window.location.pathname !== pathMap[tab]) {
+              window.history.pushState(null, '', pathMap[tab]);
+            }
+          }}
+          onBackToWebsite={handleBackToPublicWebsite}
+        />
+
+        <main className="flex-1">
+          {staffTab === 'master_admin' && (
+            <MasterAdminDashboard
+              onNavigateToFrontOffice={() => {
+                setStaffTab('front_office');
+                window.history.pushState(null, '', '/front-office');
+              }}
+              onOpenAuditForPatient={handleOpenAuditForPatient}
+            />
+          )}
+
+          {staffTab === 'sales' && (
+            <SalesDashboard
+              onNavigateToFrontOffice={() => {
+                setStaffTab('front_office');
+                window.history.pushState(null, '', '/front-office');
+              }}
+              onOpenAuditForPatient={handleOpenAuditForPatient}
+            />
+          )}
+
+          {staffTab === 'front_office' && (
+            <FrontOfficeDashboard
+              onOpenAuditForPatient={handleOpenAuditForPatient}
+            />
+          )}
+
+          {staffTab === 'audit' && (
+            <DataFlowAuditModal
+              selectedPatient={selectedAuditPatient}
+            />
+          )}
+        </main>
+      </div>
+    );
+  }
+
+  // Otherwise, render Public Landing Pages
   return (
     <div className="min-h-screen flex flex-col bg-white text-[#252525] selection:bg-[#F5F0F8] selection:text-[#5D367F]">
       {/* SEO & Structured JSON-LD Schemas */}
@@ -99,6 +237,7 @@ export default function App() {
         currentCondition={currentCondition}
         onNavigate={handleNavigate}
         onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+        onOpenStaffPortal={handleOpenStaffPortal}
       />
 
       {/* Main Landing Page Body */}
@@ -180,4 +319,3 @@ export default function App() {
     </div>
   );
 }
-

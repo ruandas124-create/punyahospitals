@@ -8,12 +8,14 @@ interface HeaderProps {
   currentCondition: ConditionId;
   onNavigate: (condition: ConditionId) => void;
   onOpenAppointmentModal: () => void;
+  onOpenStaffPortal?: (tab?: 'master_admin' | 'sales' | 'front_office' | 'audit') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentCondition,
   onNavigate,
   onOpenAppointmentModal,
+  onOpenStaffPortal,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [treatmentDropdownOpen, setTreatmentDropdownOpen] = useState(false);
@@ -145,6 +147,18 @@ export const Header: React.FC<HeaderProps> = ({
             >
               FAQs
             </button>
+
+            {onOpenStaffPortal && (
+              <button
+                type="button"
+                onClick={() => onOpenStaffPortal('master_admin')}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 text-[#5D367F] hover:bg-[#5D367F] hover:text-white border border-purple-200 text-xs font-bold transition-all cursor-pointer shadow-xs"
+                id="header-nav-staff-portal"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-[#579B35]" />
+                <span>Staff Portal (Acquire OPD)</span>
+              </button>
+            )}
           </nav>
 
           {/* Desktop Right CTAs */}
@@ -292,6 +306,25 @@ export const Header: React.FC<HeaderProps> = ({
             >
               Frequently Asked Questions
             </button>
+
+            {onOpenStaffPortal && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenStaffPortal('master_admin');
+                }}
+                className="text-left py-2.5 px-3 rounded-xl bg-purple-50 text-[#5D367F] font-bold text-sm flex items-center justify-between border border-purple-200"
+              >
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#579B35]" />
+                  <span>Staff Portal (Acquire OPD)</span>
+                </div>
+                <span className="text-[10px] bg-[#579B35] text-white px-2 py-0.5 rounded-full font-bold">
+                  Active
+                </span>
+              </button>
+            )}
           </div>
 
           <div className="pt-2 grid grid-cols-2 gap-2">
