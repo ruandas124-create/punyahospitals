@@ -2,6 +2,7 @@ import React from 'react';
 import { Calendar, Phone, MessageSquare, ArrowRight, ShieldCheck, Clock, MapPin } from 'lucide-react';
 import { ConditionId, LandingPageContent } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
+import { HOSPITAL_CONTACT } from '../constants/contactInfo';
 
 interface FinalCtaSectionProps {
   content: LandingPageContent;
@@ -14,13 +15,13 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
 }) => {
   const handlePhoneClick = () => {
     trackConversionEvent('phone_click', content.id, { location: 'final_cta_call' });
-    window.location.href = 'tel:+918045689000';
+    window.location.href = HOSPITAL_CONTACT.phoneTelLink;
   };
 
   const handleWhatsAppClick = () => {
     trackConversionEvent('whatsapp_click', content.id, { location: 'final_cta_whatsapp' });
     const encoded = encodeURIComponent(content.whatsappMessage);
-    window.open(`https://wa.me/918045689000?text=${encoded}`, '_blank', 'noopener,noreferrer');
+    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -89,8 +90,8 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
         <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-purple-200">
           <div className="flex items-center gap-2">
             <Phone className="w-4 h-4 text-[#EAF4E5]" />
-            <span>Direct Helpline:</span>
-            <strong className="text-white text-base tracking-wider">+91 80 4568 9000</strong>
+            <span>Support & WhatsApp:</span>
+            <strong className="text-white text-base tracking-wider">{HOSPITAL_CONTACT.phoneDisplay}</strong>
           </div>
           <div className="hidden sm:inline text-purple-300">•</div>
           <div className="flex items-center gap-2">

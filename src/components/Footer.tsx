@@ -1,7 +1,9 @@
 import React from 'react';
-import { Phone, MessageSquare, MapPin, Clock, ShieldCheck } from 'lucide-react';
+import { Phone, MessageSquare, MapPin, Clock, ShieldCheck, ExternalLink } from 'lucide-react';
 import { PunyaLogo } from './PunyaLogo';
 import { ConditionId } from '../types';
+import { HOSPITAL_CONTACT } from '../constants/contactInfo';
+import { ALL_TREATMENTS } from '../constants/treatmentRoutes';
 
 interface FooterProps {
   onNavigate: (condition: ConditionId) => void;
@@ -12,11 +14,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     <footer className="bg-white border-t border-purple-100 text-[#252525] pt-12 pb-24 md:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pb-10 border-b border-gray-100">
-          {/* Col 1: Logo & Mission (md:col-span-5) */}
-          <div className="md:col-span-5 space-y-4">
+          {/* Col 1: Logo & Mission (md:col-span-4) */}
+          <div className="md:col-span-4 space-y-4">
             <PunyaLogo size="md" />
             <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-sm">
-              PUNYA Hospital is Bangalore's dedicated surgical and multi-speciality centre providing evidence-based, compassionate care for proctology, hepato-biliary, and abdominal wall conditions.
+              PUNYA Hospital is Bangalore's dedicated surgical and multi-speciality centre providing evidence-based, compassionate care for proctology, hepato-biliary, abdominal wall, and gynecological conditions.
             </p>
             <div className="flex items-center gap-2 text-xs text-[#579B35] font-semibold bg-[#EAF4E5] px-3 py-1.5 rounded-xl w-fit">
               <ShieldCheck className="w-4 h-4" />
@@ -27,73 +29,81 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Col 2: Speciality Treatments (md:col-span-3) */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#5D367F]">
-              Speciality Treatments
+              5 Treatment Pages
             </h4>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('piles')}
-                  className="hover:text-[#7B4FA3] hover:underline transition-colors text-left"
-                >
-                  Piles Treatment in Bangalore
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('gallstone')}
-                  className="hover:text-[#7B4FA3] hover:underline transition-colors text-left"
-                >
-                  Gallstone Treatment in Bangalore
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('hernia')}
-                  className="hover:text-[#7B4FA3] hover:underline transition-colors text-left"
-                >
-                  Hernia Treatment in Bangalore
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('uterine-fibroids')}
-                  className="hover:text-[#7B4FA3] hover:underline transition-colors text-left"
-                >
-                  Uterine Fibroids Care in Bangalore
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('endometriosis')}
-                  className="hover:text-[#7B4FA3] hover:underline transition-colors text-left"
-                >
-                  Endometriosis Care in Bangalore
-                </button>
-              </li>
+              {ALL_TREATMENTS.map((t) => (
+                <li key={t.id}>
+                  <a
+                    href={t.url}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate(t.id);
+                    }}
+                    className="hover:text-[#7B4FA3] hover:underline transition-colors block text-left"
+                  >
+                    {t.name} in Bangalore
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Col 3: Hospital Contact Info (md:col-span-4) */}
-          <div className="md:col-span-4 space-y-3 text-xs sm:text-sm text-gray-600">
+          {/* Col 3: Hospital Contact Info (md:col-span-5) */}
+          <div className="md:col-span-5 space-y-3.5 text-xs sm:text-sm text-gray-600">
             <h4 className="text-xs font-bold uppercase tracking-wider text-[#5D367F]">
-              Hospital Contact & Location
+              Hospital Contact & Support
             </h4>
             <div className="flex items-start gap-2.5">
-              <MapPin className="w-4 h-4 text-[#7B4FA3] mt-0.5 flex-shrink-0" />
-              <span>PUNYA Hospital, Bengaluru, Karnataka 560001, India</span>
+              <MapPin className="w-4 h-4 text-[#7B4FA3] mt-1 flex-shrink-0" />
+              <div className="space-y-1">
+                <span className="font-semibold text-gray-900 block">Hospital Address:</span>
+                <span className="text-gray-700 leading-snug block">
+                  {HOSPITAL_CONTACT.address}
+                </span>
+                <a
+                  href={HOSPITAL_CONTACT.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-bold text-[#7B4FA3] hover:underline pt-0.5"
+                >
+                  <span>Open in Google Maps</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
             </div>
-            <div className="flex items-center gap-2.5">
+
+            <div className="flex items-center gap-2.5 pt-1">
               <Phone className="w-4 h-4 text-[#579B35] flex-shrink-0" />
-              <span>+91 80 4568 9000 (Helpline & Appointments)</span>
+              <div>
+                <span className="font-semibold text-gray-900 mr-2">Call Support:</span>
+                <a
+                  href={HOSPITAL_CONTACT.phoneTelLink}
+                  className="font-bold text-[#252525] hover:text-[#579B35] underline"
+                >
+                  {HOSPITAL_CONTACT.phoneDisplay}
+                </a>
+              </div>
             </div>
+
             <div className="flex items-center gap-2.5">
+              <MessageSquare className="w-4 h-4 text-[#579B35] flex-shrink-0" />
+              <div>
+                <span className="font-semibold text-gray-900 mr-2">WhatsApp Support:</span>
+                <a
+                  href={HOSPITAL_CONTACT.whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-bold text-[#579B35] hover:underline"
+                >
+                  {HOSPITAL_CONTACT.whatsappDisplay}
+                </a>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2.5 pt-1 text-gray-500">
               <Clock className="w-4 h-4 text-[#7B4FA3] flex-shrink-0" />
-              <span>OPD Timings: Monday – Saturday: 8:00 AM – 8:00 PM</span>
+              <span>OPD Timings: Monday – Saturday: 8:00 AM – 8:00 PM (Emergency 24/7)</span>
             </div>
           </div>
         </div>

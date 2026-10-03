@@ -7,18 +7,21 @@ import { HeroSection } from './components/HeroSection';
 import { SymptomsSection } from './components/SymptomsSection';
 import { MedicalDiagramSection } from './components/MedicalDiagramSection';
 import { TreatmentOptionsSection } from './components/TreatmentOptionsSection';
+import { AllTreatmentsSection } from './components/AllTreatmentsSection';
 import { WhyPunyaSection } from './components/WhyPunyaSection';
 import { DoctorSection } from './components/DoctorSection';
 import { HowItWorksSection } from './components/HowItWorksSection';
 import { PatientTrustSection } from './components/PatientTrustSection';
 import { TreatmentJourneySection } from './components/TreatmentJourneySection';
 import { FaqSection } from './components/FaqSection';
+import { HospitalLocationSection } from './components/HospitalLocationSection';
 import { FinalCtaSection } from './components/FinalCtaSection';
 import { Footer } from './components/Footer';
 import { MobileStickyBar } from './components/MobileStickyBar';
 import { AppointmentModal } from './components/AppointmentModal';
 import { SeoStructuredData } from './components/SeoStructuredData';
 import { trackConversionEvent } from './utils/analytics';
+import { resolveConditionFromPath, TREATMENT_URLS } from './constants/treatmentRoutes';
 
 // Staff Portal Dashboards
 import { StaffPortalHeader } from './components/hospital/StaffPortalHeader';
@@ -33,12 +36,7 @@ export default function App() {
   // Determine initial condition based on pathname
   const getConditionFromPath = (): ConditionId => {
     if (typeof window === 'undefined') return 'piles';
-    const path = window.location.pathname.toLowerCase();
-    if (path.includes('uterine-fibroids') || path.includes('fibroid')) return 'uterine-fibroids';
-    if (path.includes('endometriosis')) return 'endometriosis';
-    if (path.includes('gallstone')) return 'gallstone';
-    if (path.includes('hernia')) return 'hernia';
-    return 'piles';
+    return resolveConditionFromPath(window.location.pathname);
   };
 
   // Check if pathname points to internal staff portal
@@ -72,6 +70,17 @@ export default function App() {
   const scrolled50Ref = useRef(false);
   const scrolled90Ref = useRef(false);
 
+  // Sync initial URL if loaded on root /
+  useEffect(() => {
+    const portalCheck = checkStaffPortalFromPath();
+    if (!portalCheck.isActive) {
+      const currentPath = window.location.pathname.toLowerCase();
+      if (currentPath === '/' || currentPath === '') {
+        window.history.replaceState(null, '', TREATMENT_URLS[currentCondition]);
+      }
+    }
+  }, []);
+
   // Handle URL changes & popstate
   useEffect(() => {
     const handlePopState = () => {
@@ -81,8 +90,10 @@ export default function App() {
         setStaffTab(portalCheck.tab);
       } else {
         setIsStaffPortalActive(false);
-        setCurrentCondition(getConditionFromPath());
+        const condition = resolveConditionFromPath(window.location.pathname);
+        setCurrentCondition(condition);
       }
+      window.scrollTo({ top: 0, behavior: 'instant' });
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -119,16 +130,11 @@ export default function App() {
   const handleNavigate = (condition: ConditionId) => {
     setIsStaffPortalActive(false);
     setCurrentCondition(condition);
-    let targetPath = `/${condition}-treatment`;
-    if (condition === 'uterine-fibroids') {
-      targetPath = '/uterine-fibroids';
-    } else if (condition === 'endometriosis') {
-      targetPath = '/endometriosis';
-    }
+    const targetPath = TREATMENT_URLS[condition];
     if (window.location.pathname !== targetPath) {
       window.history.pushState(null, '', targetPath);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const handleOpenStaffPortal = (tab: StaffTab = 'master_admin') => {
@@ -148,14 +154,9 @@ export default function App() {
 
   const handleBackToPublicWebsite = () => {
     setIsStaffPortalActive(false);
-    let targetPath = `/${currentCondition}-treatment`;
-    if (currentCondition === 'uterine-fibroids') {
-      targetPath = '/uterine-fibroids';
-    } else if (currentCondition === 'endometriosis') {
-      targetPath = '/endometriosis';
-    }
+    const targetPath = TREATMENT_URLS[currentCondition];
     window.history.pushState(null, '', targetPath);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const handleOpenAuditForPatient = (patient: PatientRecord) => {
@@ -168,154 +169,170 @@ export default function App() {
 
   const content = LANDING_PAGES_DATA[currentCondition];
 
-  // If Staff Portal is Active, render the hospital operational dashboards
-  if (isStaffPortalActive) {
-    return (
-      <div className="min-h-screen flex flex-col bg-[#F9F7FA] text-[#252525]">
-        <StaffPortalHeader
-          currentTab={staffTab}
-          onSelectTab={(tab) => {
-            setStaffTab(tab);
-            const pathMap: Record<StaffTab, string> = {
-              master_admin: '/admin',
-              sales: '/sales',
-              front_office: '/front-office',
-              audit: '/audit',
-            };
-            if (window.location.pathname !== pathMap[tab]) {
-              window.history.pushState(null, '', pathMap[tab]);
-            }
-          }}
-          onBackToWebsite={handleBackToPublicWebsite}
-        />
-
-        <main className="flex-1">
-          {staffTab === 'master_admin' && (
-            <MasterAdminDashboard
-              onNavigateToFrontOffice={() => {
-                setStaffTab('front_office');
-                window.history.pushState(null, '', '/front-office');
-              }}
-              onOpenAuditForPatient={handleOpenAuditForPatient}
-            />
-          )}
-
-          {staffTab === 'sales' && (
-            <SalesDashboard
-              onNavigateToFrontOffice={() => {
-                setStaffTab('front_office');
-                window.history.pushState(null, '', '/front-office');
-              }}
-              onOpenAuditForPatient={handleOpenAuditForPatient}
-            />
-          )}
-
-          {staffTab === 'front_office' && (
-            <FrontOfficeDashboard
-              onOpenAuditForPatient={handleOpenAuditForPatient}
-            />
-          )}
-
-          {staffTab === 'audit' && (
-            <DataFlowAuditModal
-              selectedPatient={selectedAuditPatient}
-            />
-          )}
-        </main>
-      </div>
-    );
-  }
-
-  // Otherwise, render Public Landing Pages
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#252525] selection:bg-[#F5F0F8] selection:text-[#5D367F]">
-      {/* SEO & Structured JSON-LD Schemas */}
+    <div className="min-h-screen bg-[#FDFCFE] text-[#252525] flex flex-col font-sans selection:bg-[#7B4FA3]/20 selection:text-[#5D367F]">
+      {/* Dynamic SEO Meta & JSON-LD Structured Data */}
       <SeoStructuredData content={content} />
 
-      {/* Sticky Conversion-Focused Header */}
-      <Header
-        currentCondition={currentCondition}
-        onNavigate={handleNavigate}
-        onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        onOpenStaffPortal={handleOpenStaffPortal}
-      />
+      {/* Staff Portal View when URL is /admin, /sales, /front-office, /audit */}
+      {isStaffPortalActive ? (
+        <div className="flex-1 flex flex-col bg-gray-50">
+          <StaffPortalHeader
+            currentTab={staffTab}
+            onSelectTab={(tab) => {
+              setStaffTab(tab);
+              const pathMap: Record<StaffTab, string> = {
+                master_admin: '/admin',
+                sales: '/sales',
+                front_office: '/front-office',
+                audit: '/audit',
+              };
+              if (window.location.pathname !== pathMap[tab]) {
+                window.history.pushState(null, '', pathMap[tab]);
+              }
+            }}
+            onBackToWebsite={handleBackToPublicWebsite}
+          />
 
-      {/* Main Landing Page Body */}
-      <main className="flex-1 pb-16 md:pb-0">
-        {/* 1. Hero Section */}
-        <HeroSection
-          content={content}
-          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        />
+          <div className="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
+            {staffTab === 'master_admin' && (
+              <MasterAdminDashboard
+                onOpenAuditForPatient={handleOpenAuditForPatient}
+                onNavigateToFrontOffice={() => {
+                  setStaffTab('front_office');
+                  window.history.pushState(null, '', '/front-office');
+                }}
+              />
+            )}
 
-        {/* 2. Symptoms Section */}
-        <SymptomsSection
-          content={content}
-          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        />
+            {staffTab === 'sales' && (
+              <SalesDashboard
+                onOpenAuditForPatient={handleOpenAuditForPatient}
+                onNavigateToFrontOffice={() => {
+                  setStaffTab('front_office');
+                  window.history.pushState(null, '', '/front-office');
+                }}
+              />
+            )}
 
-        {/* 3. Medical Diagram Section (5-10 second comprehension) */}
-        <MedicalDiagramSection
-          content={content}
-          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        />
+            {staffTab === 'front_office' && (
+              <FrontOfficeDashboard
+                onOpenAuditForPatient={handleOpenAuditForPatient}
+              />
+            )}
 
-        {/* 4. Treatment Options Section */}
-        <TreatmentOptionsSection
-          content={content}
-          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        />
+            {staffTab === 'audit' && (
+              <DataFlowAuditModal
+                isOpen={true}
+                onClose={() => {
+                  setStaffTab('master_admin');
+                  window.history.pushState(null, '', '/admin');
+                }}
+                selectedPatient={selectedAuditPatient}
+              />
+            )}
+          </div>
+        </div>
+      ) : (
+        <>
+          {/* Header with Navigation and Conversion CTAs */}
+          <Header
+            currentCondition={currentCondition}
+            onNavigate={handleNavigate}
+            onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            onOpenStaffPortal={handleOpenStaffPortal}
+          />
 
-        {/* 5. Why Choose PUNYA Hospital Section */}
-        <WhyPunyaSection condition={currentCondition} />
+          {/* Main Landing Page Body */}
+          <main className="flex-1 pb-16 md:pb-0">
+            {/* 1. Hero Section */}
+            <HeroSection
+              content={content}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
 
-        {/* 6. Doctor Profile Section */}
-        <DoctorSection
-          condition={currentCondition}
-          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        />
+            {/* 2. Symptoms Section */}
+            <SymptomsSection
+              content={content}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
 
-        {/* 7. How It Works Section */}
-        <HowItWorksSection
-          condition={currentCondition}
-          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        />
+            {/* 3. Medical Diagram Section (5-10 second comprehension) */}
+            <MedicalDiagramSection
+              content={content}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
 
-        {/* 8. Patient Trust Section */}
-        <PatientTrustSection condition={currentCondition} />
+            {/* 4. Treatment Options Section */}
+            <TreatmentOptionsSection
+              content={content}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
 
-        {/* 9. Treatment Journey Section */}
-        <TreatmentJourneySection condition={currentCondition} />
+            {/* 5. Separate URL Showcase for All 5 Treatments */}
+            <AllTreatmentsSection
+              currentCondition={currentCondition}
+              onNavigate={handleNavigate}
+            />
 
-        {/* 10. Accordion FAQ Section */}
-        <FaqSection
-          content={content}
-          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        />
+            {/* 6. Why Choose PUNYA Hospital Section */}
+            <WhyPunyaSection condition={currentCondition} />
 
-        {/* 11. Final High-Converting Purple & Green CTA Section */}
-        <FinalCtaSection
-          content={content}
-          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-        />
-      </main>
+            {/* 7. Doctor Profile Section */}
+            <DoctorSection
+              condition={currentCondition}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
 
-      {/* Footer */}
-      <Footer onNavigate={handleNavigate} />
+            {/* 8. How It Works Section */}
+            <HowItWorksSection
+              condition={currentCondition}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
 
-      {/* Mobile Sticky Bottom Bar: CALL NOW | WHATSAPP | BOOK APPOINTMENT */}
-      <MobileStickyBar
-        content={content}
-        onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-      />
+            {/* 9. Patient Trust Section */}
+            <PatientTrustSection condition={currentCondition} />
 
-      {/* Dedicated Appointment Modal */}
-      <AppointmentModal
-        isOpen={isAppointmentModalOpen}
-        onClose={() => setIsAppointmentModalOpen(false)}
-        currentCondition={currentCondition}
-        content={content}
-      />
+            {/* 10. Treatment Journey Section */}
+            <TreatmentJourneySection condition={currentCondition} />
+
+            {/* 11. Accordion FAQ Section */}
+            <FaqSection
+              content={content}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
+
+            {/* 12. Hospital Location & Direct Contact Section */}
+            <HospitalLocationSection
+              condition={currentCondition}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
+
+            {/* 13. Final High-Converting Purple & Green CTA Section */}
+            <FinalCtaSection
+              content={content}
+              onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+            />
+          </main>
+
+          {/* Footer */}
+          <Footer onNavigate={handleNavigate} />
+
+          {/* Mobile Sticky Bottom Bar: CALL NOW | WHATSAPP | BOOK APPOINTMENT */}
+          <MobileStickyBar
+            content={content}
+            onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+          />
+
+          {/* Dedicated Appointment Modal */}
+          <AppointmentModal
+            isOpen={isAppointmentModalOpen}
+            onClose={() => setIsAppointmentModalOpen(false)}
+            currentCondition={currentCondition}
+            content={content}
+          />
+        </>
+      )}
     </div>
   );
 }

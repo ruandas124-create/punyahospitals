@@ -6,15 +6,13 @@ const AUDIT_LOG_KEY = 'punya_hospital_audit_logs_v2';
 
 // Standard doctors & branches for PUNYA Hospital
 export const HOSPITAL_BRANCHES = [
-  'PUNYA Hospital - Main Hospital, Rajajinagar, Bangalore',
-  'PUNYA Hospital - Specialty Clinic, Indiranagar, Bangalore',
-  'PUNYA Hospital - Women & Surgical Wing, Jayanagar, Bangalore',
-  'PUNYA Hospital - Day Care Centre, Whitefield, Bangalore',
+  'PUNYA Hospital - 52/10, 80 Feet Ring Rd, Basaveshwar Nagar, Bengaluru, 560079',
 ];
 
 export const HOSPITAL_DOCTORS = [
+  { name: 'Dr. Punyavathi C. Nagaraj', speciality: 'Best Laparoscopic Gynecologist & Endometriosis Specialist (20+ Yrs Exp)', branch: 'Rajajinagar' },
+  { name: 'Dr. Nagaraj B. Puttaswamy', speciality: 'Senior Consultant – General & Laparoscopic Surgery (30+ Yrs Exp)', branch: 'Rajajinagar' },
   { name: 'Dr. Anita Rao', speciality: 'Gynecology & Laparoscopic Surgery', branch: 'Rajajinagar' },
-  { name: 'Dr. Rajesh Kumar', speciality: 'Senior General & Laparoscopic Surgeon', branch: 'Rajajinagar' },
   { name: 'Dr. Priya Sharma', speciality: 'Obstetrics & Gynecological Endoscopy', branch: 'Jayanagar' },
   { name: 'Dr. Vikram Patel', speciality: 'Proctology & Colorectal Surgery', branch: 'Indiranagar' },
   { name: 'Dr. Sunita Deshmukh', speciality: 'Minimally Invasive Hernia Specialist', branch: 'Whitefield' },
@@ -71,7 +69,7 @@ const SEED_PATIENTS: PatientRecord[] = [
     mrn: 'PUN-2026-1043',
     opdToken: 'OPD-A-02',
     fullName: 'Meera Krishnan',
-    mobileNumber: '9900145678',
+    mobileNumber: '9845012345',
     age: 32,
     gender: 'Female',
     condition: 'Endometriosis Pain Consultation',

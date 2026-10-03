@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, HelpCircle, Phone, MessageSquare } from 'lucide-react';
 import { LandingPageContent } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
+import { HOSPITAL_CONTACT } from '../constants/contactInfo';
 
 interface FaqSectionProps {
   content: LandingPageContent;
@@ -21,13 +22,13 @@ export const FaqSection: React.FC<FaqSectionProps> = ({
 
   const handlePhoneClick = () => {
     trackConversionEvent('phone_click', content.id, { location: 'faq_support_link' });
-    window.location.href = 'tel:+918045689000';
+    window.location.href = HOSPITAL_CONTACT.phoneTelLink;
   };
 
   const handleWhatsAppClick = () => {
     trackConversionEvent('whatsapp_click', content.id, { location: 'faq_whatsapp_link' });
     const encoded = encodeURIComponent(content.whatsappMessage);
-    window.open(`https://wa.me/918045689000?text=${encoded}`, '_blank', 'noopener,noreferrer');
+    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
   };
 
   return (

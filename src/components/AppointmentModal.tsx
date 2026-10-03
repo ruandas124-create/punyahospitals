@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, CheckCircle2, Phone, MessageSquare, Calendar, Clock, AlertCircle } from 'lucide-react';
 import { ConditionId, LandingPageContent } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
+import { HOSPITAL_CONTACT } from '../constants/contactInfo';
 import { PunyaLogo } from './PunyaLogo';
 
 interface AppointmentModalProps {
@@ -57,13 +58,13 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
 
   const handlePhoneClick = () => {
     trackConversionEvent('phone_click', selectedCondition, { location: 'appointment_modal_success' });
-    window.location.href = 'tel:+918045689000';
+    window.location.href = HOSPITAL_CONTACT.phoneTelLink;
   };
 
   const handleWhatsAppClick = () => {
     trackConversionEvent('whatsapp_click', selectedCondition, { location: 'appointment_modal_success' });
     const encoded = encodeURIComponent(content.whatsappMessage);
-    window.open(`https://wa.me/918045689000?text=${encoded}`, '_blank', 'noopener,noreferrer');
+    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleResetAndClose = () => {

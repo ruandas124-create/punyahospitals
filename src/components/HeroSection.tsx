@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, Phone, MessageSquare, Calendar, ArrowRight, Shield, Clock, Users } from 'lucide-react';
 import { ConditionId, LandingPageContent } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
+import { HOSPITAL_CONTACT } from '../constants/contactInfo';
 import doctorConsultationImg from '../assets/images/indian_doctor_consultation_1789457537922.jpg';
 import gynConsultationImg from '../assets/images/gyn_consultation_1789460990250.jpg';
 
@@ -54,13 +55,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   const handlePhoneClick = () => {
     trackConversionEvent('phone_click', content.id, { location: 'hero_call_button' });
-    window.location.href = 'tel:+918045689000';
+    window.location.href = HOSPITAL_CONTACT.phoneTelLink;
   };
 
   const handleWhatsAppClick = () => {
     trackConversionEvent('whatsapp_click', content.id, { location: 'hero_whatsapp_button' });
     const encoded = encodeURIComponent(content.whatsappMessage);
-    window.open(`https://wa.me/918045689000?text=${encoded}`, '_blank', 'noopener,noreferrer');
+    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleQuickFormSubmit = (e: React.FormEvent) => {

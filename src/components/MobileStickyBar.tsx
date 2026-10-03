@@ -1,7 +1,8 @@
 import React from 'react';
 import { Phone, MessageSquare, Calendar } from 'lucide-react';
-import { ConditionId, LandingPageContent } from '../types';
+import { LandingPageContent } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
+import { HOSPITAL_CONTACT } from '../constants/contactInfo';
 
 interface MobileStickyBarProps {
   content: LandingPageContent;
@@ -14,13 +15,13 @@ export const MobileStickyBar: React.FC<MobileStickyBarProps> = ({
 }) => {
   const handlePhoneClick = () => {
     trackConversionEvent('phone_click', content.id, { location: 'mobile_sticky_bar' });
-    window.location.href = 'tel:+918045689000';
+    window.location.href = HOSPITAL_CONTACT.phoneTelLink;
   };
 
   const handleWhatsAppClick = () => {
     trackConversionEvent('whatsapp_click', content.id, { location: 'mobile_sticky_bar' });
     const encoded = encodeURIComponent(content.whatsappMessage);
-    window.open(`https://wa.me/918045689000?text=${encoded}`, '_blank', 'noopener,noreferrer');
+    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
   };
 
   return (

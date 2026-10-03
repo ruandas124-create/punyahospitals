@@ -3,6 +3,8 @@ import { Phone, MessageSquare, Menu, X, ChevronDown, Award, Stethoscope, HelpCir
 import { PunyaLogo } from './PunyaLogo';
 import { ConditionId } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
+import { HOSPITAL_CONTACT } from '../constants/contactInfo';
+import { ALL_TREATMENTS, TREATMENT_URLS } from '../constants/treatmentRoutes';
 
 interface HeaderProps {
   currentCondition: ConditionId;
@@ -20,17 +22,9 @@ export const Header: React.FC<HeaderProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [treatmentDropdownOpen, setTreatmentDropdownOpen] = useState(false);
 
-  const treatments: { id: ConditionId; name: string; tag: string }[] = [
-    { id: 'piles', name: 'Piles Treatment', tag: 'Colorectal Care' },
-    { id: 'gallstone', name: 'Gallstone Treatment', tag: 'Laparoscopic Care' },
-    { id: 'hernia', name: 'Hernia Treatment', tag: 'Advanced Mesh Repair' },
-    { id: 'uterine-fibroids', name: 'Uterine Fibroids', tag: "Women's Health & Laparoscopy" },
-    { id: 'endometriosis', name: 'Endometriosis', tag: 'Pelvic Pain & Care' },
-  ];
-
   const handlePhoneClick = () => {
     trackConversionEvent('phone_click', currentCondition, { location: 'header_call' });
-    window.location.href = 'tel:+918045689000';
+    window.location.href = HOSPITAL_CONTACT.phoneTelLink;
   };
 
   const handleWhatsAppClick = () => {
@@ -43,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({
       endometriosis: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Endometriosis treatment. Please help me with an appointment.',
     };
     const encoded = encodeURIComponent(messages[currentCondition]);
-    window.open(`https://wa.me/918045689000?text=${encoded}`, '_blank', 'noopener,noreferrer');
+    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -63,18 +57,29 @@ export const Header: React.FC<HeaderProps> = ({
         <span className="hidden md:inline text-purple-200">•</span>
         <span className="hidden md:inline text-purple-100">Direct Doctor Consultations Available Today</span>
         <span className="hidden lg:inline text-purple-200">•</span>
-        <span className="hidden lg:inline font-bold text-[#EAF4E5]">Call: +91 80 4568 9000</span>
+        <a 
+          href={HOSPITAL_CONTACT.whatsappLink} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hidden lg:inline font-bold text-[#EAF4E5] hover:text-white hover:underline"
+        >
+          Support / WhatsApp: {HOSPITAL_CONTACT.whatsappDisplay}
+        </a>
       </div>
 
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 gap-2">
           {/* Logo */}
-          <div 
+          <a 
+            href={TREATMENT_URLS[currentCondition]}
             className="cursor-pointer py-1 flex-shrink-0"
-            onClick={() => onNavigate(currentCondition)}
+            onClick={(e) => {
+              e.preventDefault();
+              onNavigate(currentCondition);
+            }}
           >
             <PunyaLogo size="md" />
-          </div>
+          </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-[#252525]">
@@ -83,39 +88,51 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={() => setTreatmentDropdownOpen(!treatmentDropdownOpen)}
-                onBlur={() => setTimeout(() => setTreatmentDropdownOpen(false), 200)}
+                onBlur={() => setTimeout(() => setTreatmentDropdownOpen(false), 250)}
                 className="flex items-center gap-1.5 hover:text-[#7B4FA3] py-2 transition-colors cursor-pointer"
                 id="header-treatment-menu-button"
               >
-                <span>Treatments</span>
+                <span>5 Treatments</span>
                 <ChevronDown className="w-4 h-4 text-[#7B4FA3]" />
               </button>
 
               {treatmentDropdownOpen && (
-                <div className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-xl border border-purple-100 py-2 z-50 animate-in fade-in slide-in-from-top-2">
-                  <div className="px-3 py-1 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                    Speciality Services
+                <div className="absolute top-full left-0 mt-1 w-80 bg-white rounded-xl shadow-2xl border border-purple-100 py-2 z-50 animate-in fade-in slide-in-from-top-2">
+                  <div className="px-4 py-1.5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 mb-1">
+                    Speciality Treatments
                   </div>
-                  {treatments.map((t) => (
-                    <button
+                  {ALL_TREATMENTS.map((t) => (
+                    <a
                       key={t.id}
-                      type="button"
-                      onClick={() => {
+                      href={t.url}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
                         onNavigate(t.id);
                         setTreatmentDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3.5 py-2.5 text-sm flex items-center justify-between hover:bg-[#F5F0F8] transition-colors ${
-                        currentCondition === t.id ? 'bg-[#F5F0F8] text-[#7B4FA3] font-bold' : 'text-gray-700'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onNavigate(t.id);
+                        setTreatmentDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-2.5 text-sm flex items-center justify-between hover:bg-[#F5F0F8] transition-colors group cursor-pointer ${
+                        currentCondition === t.id ? 'bg-[#F5F0F8]' : ''
                       }`}
                     >
                       <div>
-                        <div className="font-semibold">{t.name}</div>
-                        <div className="text-xs text-gray-500 font-normal">{t.tag}</div>
+                        <div className={`font-semibold transition-colors ${currentCondition === t.id ? 'text-[#7B4FA3] font-bold' : 'text-[#252525] group-hover:text-[#5D367F]'}`}>
+                          {t.name}
+                        </div>
+                        <div className="text-xs text-gray-500 font-normal mt-0.5">
+                          {t.tag}
+                        </div>
                       </div>
                       {currentCondition === t.id && (
-                        <span className="text-xs bg-[#579B35] text-white px-1.5 py-0.5 rounded font-medium">Active</span>
+                        <span className="text-[10px] bg-[#579B35] text-white px-2 py-0.5 rounded-full font-semibold">
+                          Active
+                        </span>
                       )}
-                    </button>
+                    </a>
                   ))}
                 </div>
               )}
@@ -141,6 +158,15 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               type="button"
+              onClick={() => scrollToSection('hospital-location')}
+              className="hover:text-[#7B4FA3] transition-colors cursor-pointer"
+              id="header-nav-location"
+            >
+              Location
+            </button>
+
+            <button
+              type="button"
               onClick={() => scrollToSection('faq-section')}
               className="hover:text-[#7B4FA3] transition-colors cursor-pointer"
               id="header-nav-faqs"
@@ -148,15 +174,15 @@ export const Header: React.FC<HeaderProps> = ({
               FAQs
             </button>
 
+            {/* Internal Staff System link */}
             {onOpenStaffPortal && (
               <button
                 type="button"
                 onClick={() => onOpenStaffPortal('master_admin')}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 text-[#5D367F] hover:bg-[#5D367F] hover:text-white border border-purple-200 text-xs font-bold transition-all cursor-pointer shadow-xs"
-                id="header-nav-staff-portal"
+                className="text-[11px] font-bold text-gray-400 hover:text-[#5D367F] border border-dashed border-gray-300 hover:border-[#7B4FA3] px-2 py-1 rounded-md transition-all cursor-pointer"
+                title="Internal Hospital Operations (Sales, Front Desk, Token Engine)"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#579B35]" />
-                <span>Staff Portal (Acquire OPD)</span>
+                Staff Portal
               </button>
             )}
           </nav>
@@ -169,6 +195,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={handlePhoneClick}
               className="inline-flex items-center gap-2 px-3.5 md:px-4 py-2.5 rounded-full border-2 border-[#7B4FA3] text-[#7B4FA3] hover:bg-[#7B4FA3] hover:text-white font-bold text-xs md:text-sm tracking-wide transition-all shadow-xs active:scale-95 cursor-pointer"
               id="header-call-btn-desktop"
+              title={`Call: ${HOSPITAL_CONTACT.phoneDisplay}`}
             >
               <Phone className="w-4 h-4 text-inherit" />
               <span>CALL NOW</span>
@@ -180,6 +207,7 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={handleWhatsAppClick}
               className="inline-flex items-center gap-2 px-3.5 md:px-4 py-2.5 rounded-full bg-[#579B35] hover:bg-[#467e2a] text-white font-bold text-xs md:text-sm tracking-wide transition-all shadow-sm active:scale-95 cursor-pointer"
               id="header-whatsapp-btn-desktop"
+              title={`WhatsApp: ${HOSPITAL_CONTACT.whatsappDisplay}`}
             >
               <MessageSquare className="w-4 h-4 fill-white" />
               <span>WHATSAPP</span>
@@ -203,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               onClick={handlePhoneClick}
               aria-label="Call PUNYA Hospital"
-              className="w-10 h-10 rounded-full bg-purple-50 text-[#7B4FA3] border border-purple-200 flex items-center justify-center active:bg-[#7B4FA3] active:text-white transition-colors"
+              className="w-9 h-9 rounded-full bg-purple-50 text-[#7B4FA3] flex items-center justify-center border border-purple-200"
               id="header-call-btn-mobile"
             >
               <Phone className="w-4 h-4" />
@@ -214,19 +242,19 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               onClick={handleWhatsAppClick}
               aria-label="WhatsApp PUNYA Hospital"
-              className="w-10 h-10 rounded-full bg-[#579B35] text-white flex items-center justify-center active:bg-[#467e2a] shadow-xs transition-colors"
+              className="w-9 h-9 rounded-full bg-[#579B35] text-white flex items-center justify-center shadow-xs"
               id="header-whatsapp-btn-mobile"
             >
               <MessageSquare className="w-4 h-4 fill-white" />
             </button>
 
-            {/* Hamburger Button */}
+            {/* Mobile Hamburger Button */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Navigation Menu"
-              className="w-10 h-10 rounded-xl border border-gray-200 flex items-center justify-center text-gray-700 hover:text-[#7B4FA3] active:bg-gray-100 transition-colors"
-              id="header-hamburger-btn"
+              className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-700 hover:text-black ml-1"
+              aria-label="Toggle navigation menu"
+              id="mobile-menu-toggle"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -234,31 +262,42 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Dropdown Menu */}
       {mobileMenuOpen && (
         <div className="sm:hidden bg-white border-b border-purple-100 px-4 pt-2 pb-6 space-y-4 shadow-xl">
-          {/* Quick Disease Switcher on Mobile */}
+          {/* Quick Treatment URL Switcher on Mobile */}
           <div className="bg-[#F5F0F8] p-3 rounded-xl">
             <div className="text-xs font-bold text-[#5D367F] uppercase tracking-wider mb-2">
-              Select Treatment Landing Page:
+              Select Treatment:
             </div>
-            <div className="grid grid-cols-2 gap-1.5 text-xs font-semibold">
-              {treatments.map((t) => (
-                <button
+            <div className="flex flex-col gap-1.5 text-xs">
+              {ALL_TREATMENTS.map((t) => (
+                <a
                   key={t.id}
-                  type="button"
-                  onClick={() => {
+                  href={t.url}
+                  onClick={(e) => {
+                    e.preventDefault();
                     onNavigate(t.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`py-2 px-2 rounded-lg text-center transition-all ${
+                  className={`py-2.5 px-3 rounded-lg flex items-center justify-between transition-all ${
                     currentCondition === t.id
                       ? 'bg-[#7B4FA3] text-white font-bold shadow-xs'
                       : 'bg-white text-gray-700 border border-purple-100 hover:bg-purple-50'
                   }`}
                 >
-                  {t.name.replace(' Treatment', '')}
-                </button>
+                  <div>
+                    <div className="font-semibold text-sm">{t.name}</div>
+                    <div className={`text-xs ${currentCondition === t.id ? 'text-purple-100' : 'text-gray-500'}`}>
+                      {t.tag}
+                    </div>
+                  </div>
+                  {currentCondition === t.id && (
+                    <span className="text-[10px] bg-[#579B35] text-white px-2 py-0.5 rounded-full font-semibold">
+                      Active
+                    </span>
+                  )}
+                </a>
               ))}
             </div>
           </div>
@@ -287,6 +326,13 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               type="button"
+              onClick={() => scrollToSection('all-treatments')}
+              className="text-left py-2 px-3 rounded-lg hover:bg-purple-50 hover:text-[#7B4FA3]"
+            >
+              All 5 Treatment Pages
+            </button>
+            <button
+              type="button"
               onClick={() => scrollToSection('why-punya')}
               className="text-left py-2 px-3 rounded-lg hover:bg-purple-50 hover:text-[#7B4FA3]"
             >
@@ -298,6 +344,13 @@ export const Header: React.FC<HeaderProps> = ({
               className="text-left py-2 px-3 rounded-lg hover:bg-purple-50 hover:text-[#7B4FA3]"
             >
               Meet Specialist Doctor
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToSection('hospital-location')}
+              className="text-left py-2 px-3 rounded-lg hover:bg-purple-50 hover:text-[#7B4FA3]"
+            >
+              Hospital Location & Map
             </button>
             <button
               type="button"
@@ -314,37 +367,49 @@ export const Header: React.FC<HeaderProps> = ({
                   setMobileMenuOpen(false);
                   onOpenStaffPortal('master_admin');
                 }}
-                className="text-left py-2.5 px-3 rounded-xl bg-purple-50 text-[#5D367F] font-bold text-sm flex items-center justify-between border border-purple-200"
+                className="text-left py-2 px-3 rounded-lg bg-gray-100 text-[#5D367F] font-bold text-xs"
               >
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#579B35]" />
-                  <span>Staff Portal (Acquire OPD)</span>
-                </div>
-                <span className="text-[10px] bg-[#579B35] text-white px-2 py-0.5 rounded-full font-bold">
-                  Active
-                </span>
+                🔐 Open Hospital Staff Operations Portal
               </button>
             )}
           </div>
 
+          {/* Mobile Direct Action Buttons */}
           <div className="pt-2 grid grid-cols-2 gap-2">
             <button
               type="button"
-              onClick={handlePhoneClick}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-[#7B4FA3] text-[#7B4FA3] font-bold text-sm"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                handlePhoneClick();
+              }}
+              className="flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-[#7B4FA3] text-[#7B4FA3] font-bold text-sm"
             >
               <Phone className="w-4 h-4" />
               <span>CALL NOW</span>
             </button>
             <button
               type="button"
-              onClick={handleWhatsAppClick}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#579B35] text-white font-bold text-sm"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                handleWhatsAppClick();
+              }}
+              className="flex items-center justify-center gap-2 py-3 rounded-xl bg-[#579B35] text-white font-bold text-sm"
             >
               <MessageSquare className="w-4 h-4 fill-white" />
               <span>WHATSAPP</span>
             </button>
           </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenAppointmentModal();
+            }}
+            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#7B4FA3] text-white font-extrabold text-sm shadow-md"
+          >
+            <span>BOOK SPECIALIST APPOINTMENT</span>
+          </button>
         </div>
       )}
     </header>

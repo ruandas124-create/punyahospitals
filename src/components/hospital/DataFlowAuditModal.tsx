@@ -83,7 +83,7 @@ export const DataFlowAuditModal: React.FC<DataFlowAuditModalProps> = ({
     // Step 2: Sales Dashboard Booking
     const testSalesPatient = hospitalService.schedulePatient({
       fullName: `Audit Test Patient (Sales) - ${Date.now().toString().slice(-4)}`,
-      mobileNumber: '9900188888',
+      mobileNumber: '9845012345',
       age: 28,
       gender: 'Female',
       condition: 'Endometriosis Pain Care',

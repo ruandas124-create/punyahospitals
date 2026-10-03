@@ -37,14 +37,14 @@ export const SeoStructuredData: React.FC<SeoStructuredDataProps> = ({ content })
     logo: `${window.location.origin}/logo.png`,
     image: `${window.location.origin}/src/assets/images/indian_doctor_consultation_1789457537922.jpg`,
     description: 'Premier surgical and multi-speciality hospital in Bangalore specializing in minimally invasive proctology, gallbladder surgery, and hernia repair.',
-    telephone: '+918045689000',
+    telephone: '+919403890559',
     priceRange: '₹₹',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'PUNYA Hospital, Bengaluru',
+      streetAddress: '52/10, 80 Feet Ring Rd, A D Halli, 2nd Stage, KHB Colony, Basaveshwar Nagar',
       addressLocality: 'Bengaluru',
       addressRegion: 'Karnataka',
-      postalCode: '560001',
+      postalCode: '560079',
       addressCountry: 'IN',
     },
     geo: {
