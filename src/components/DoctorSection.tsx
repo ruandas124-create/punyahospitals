@@ -16,8 +16,8 @@ export const DoctorSection: React.FC<DoctorSectionProps> = ({
   const isGeneralSurgicalCondition = condition === 'piles' || condition === 'hernia' || condition === 'gallstone';
 
   const doctorImg = isGynCondition
-    ? '/dr-punyavathi.jpg'
-    : '/dr-nagaraj.png';
+    ? 'https://aeghhbrvlefahqdbnudc.supabase.co/storage/v1/object/public/IMG/ChatGPT%20Image%20Oct%204,%202026,%2012_45_27%20AM.png'
+    : 'https://aeghhbrvlefahqdbnudc.supabase.co/storage/v1/object/public/IMG/ChatGPT%20Image%20Oct%204,%202026,%2012_42_01%20AM.png';
 
   return (
     <section id="doctor-profile" className="py-14 sm:py-16 md:py-20 bg-white">

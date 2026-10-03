@@ -30,12 +30,12 @@ export const DoctorsPage: React.FC<DoctorsPageProps> = ({ onOpenAppointmentModal
             {/* Image Column */}
             <div className="md:col-span-5 relative bg-purple-50 min-h-[320px] sm:min-h-[400px]">
               <img
-                src="/dr-nagaraj.png"
+                src="https://aeghhbrvlefahqdbnudc.supabase.co/storage/v1/object/public/IMG/ChatGPT%20Image%20Oct%204,%202026,%2012_42_01%20AM.png"
                 alt="Dr. Nagaraj B. Puttaswamy - Senior Consultant Surgeon at PUNYA Hospital Bangalore"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-top"
                 onError={(e) => {
-                  e.currentTarget.src = 'https://punyahospitals.com/assets/images/team/dr-nagaraj.png';
+                  e.currentTarget.src = '/dr-nagaraj.png';
                 }}
               />
               <div className="absolute top-4 left-4">
@@ -114,12 +114,12 @@ export const DoctorsPage: React.FC<DoctorsPageProps> = ({ onOpenAppointmentModal
             {/* Image Column */}
             <div className="md:col-span-5 relative bg-purple-50 min-h-[320px] sm:min-h-[400px]">
               <img
-                src="/dr-punyavathi.jpg"
+                src="https://aeghhbrvlefahqdbnudc.supabase.co/storage/v1/object/public/IMG/ChatGPT%20Image%20Oct%204,%202026,%2012_45_27%20AM.png"
                 alt="Dr. Punyavathi C. Nagaraj - Best Laparoscopic Gynecologist at PUNYA Hospital Bangalore"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-top"
                 onError={(e) => {
-                  e.currentTarget.src = 'https://punyahospitals.com/assets/images/team/dr.jpg';
+                  e.currentTarget.src = '/dr-punyavathi.jpg';
                 }}
               />
               <div className="absolute top-4 left-4">
