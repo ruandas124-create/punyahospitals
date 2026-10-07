@@ -61,6 +61,14 @@ export const trackConversionEvent = (
         conversion_disease: diseaseIdentifier,
         ...metadata,
       });
+
+      // Fire Google Ads Lead conversion on form submission or appointment booking
+      if (eventName === 'form_submit' || eventName === 'appointment_click') {
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-18499292312/WKZUCL6-y5QdEJiZk_VE',
+          ...metadata,
+        });
+      }
     }
 
     // 3. Meta Pixel fbq if initialized
