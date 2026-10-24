@@ -1,13 +1,12 @@
 import React from 'react';
 import { 
-  UserCheck, 
+  Heart, 
   Cpu, 
-  HeartHandshake, 
-  Building2, 
-  Compass, 
-  CalendarCheck,
-  Award,
-  Sparkles
+  Clock, 
+  Users, 
+  IndianRupee, 
+  ShieldCheck,
+  Award 
 } from 'lucide-react';
 import { ConditionId } from '../types';
 
@@ -18,34 +17,34 @@ interface WhyPunyaSectionProps {
 export const WhyPunyaSection: React.FC<WhyPunyaSectionProps> = ({ condition }) => {
   const reasons = [
     {
-      icon: <UserCheck className="w-6 h-6 text-[#7B4FA3]" />,
-      title: 'Experienced Doctors',
-      description: 'Specialist-led evaluation and treatment by qualified consultant surgeons.',
+      icon: <Heart className="w-6 h-6 text-[#7B4FA3]" />,
+      title: 'Comfortable Patient Care',
+      description: 'We treat every patient like family with gentle, respectful care from consultation to recovery.',
     },
     {
       icon: <Cpu className="w-6 h-6 text-[#579B35]" />,
       title: 'Modern Treatment Options',
-      description: 'Treatment based on your condition, clinical assessment, and accurate diagnosis.',
+      description: 'Advanced keyhole and laser procedures chosen carefully based on your clinical assessment.',
     },
     {
-      icon: <HeartHandshake className="w-6 h-6 text-[#7B4FA3]" />,
-      title: 'Personalised Care',
-      description: 'Individual treatment planning focused on your comfort, lifestyle, and recovery needs.',
+      icon: <Clock className="w-6 h-6 text-[#7B4FA3]" />,
+      title: 'Same-Day Discharge for Suitable Cases',
+      description: 'Many procedures allow patients to return home on the same day after a short observation period.',
     },
     {
-      icon: <Building2 className="w-6 h-6 text-[#579B35]" />,
-      title: 'Complete Hospital Support',
-      description: 'In-house consultation, high-resolution diagnostics, daycare, and post-procedure support.',
+      icon: <Users className="w-6 h-6 text-[#579B35]" />,
+      title: 'Friendly Staff Always Ready to Help',
+      description: 'Have doubts about appointments or hospital visits? Our team is always ready to guide you.',
     },
     {
-      icon: <Compass className="w-6 h-6 text-[#7B4FA3]" />,
-      title: 'Clear Guidance',
-      description: 'Understand your condition, test results, and all available treatment choices transparently.',
+      icon: <IndianRupee className="w-6 h-6 text-[#7B4FA3]" />,
+      title: 'Clear Treatment Cost Guidance',
+      description: 'We explain treatment costs openly before you decide, so you can plan with complete confidence.',
     },
     {
-      icon: <CalendarCheck className="w-6 h-6 text-[#579B35]" />,
-      title: 'Convenient Appointment',
-      description: 'Easy online booking, zero waiting times, and swift response from our care team.',
+      icon: <ShieldCheck className="w-6 h-6 text-[#579B35]" />,
+      title: 'Insurance Assistance & Support',
+      description: 'Our hospital helpdesk guides you through paperwork, claim forms, and insurer documentation.',
     },
   ];
 
@@ -58,10 +57,10 @@ export const WhyPunyaSection: React.FC<WhyPunyaSectionProps> = ({ condition }) =
             The PUNYA Hospital Difference
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#252525] tracking-tight">
-            Why Patients Choose PUNYA Hospital
+            Why Patients & Families Trust PUNYA Hospital
           </h2>
           <p className="mt-3 text-base text-gray-600">
-            Dedicated surgical care units built around clinical precision, patient empathy, and modern standards in Bengaluru.
+            Dedicated surgical care units built around clinical precision, patient comfort, and warm personal attention in Bangalore.
           </p>
         </div>
 

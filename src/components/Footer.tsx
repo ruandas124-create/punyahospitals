@@ -86,24 +86,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2.5">
-              <MessageSquare className="w-4 h-4 text-[#579B35] flex-shrink-0" />
-              <div>
-                <span className="font-semibold text-gray-900 mr-2">WhatsApp Support:</span>
-                <a
-                  href={HOSPITAL_CONTACT.whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold text-[#579B35] hover:underline"
-                >
-                  {HOSPITAL_CONTACT.whatsappDisplay}
-                </a>
-              </div>
-            </div>
+
 
             <div className="flex items-center gap-2.5 pt-1 text-gray-500">
               <Clock className="w-4 h-4 text-[#7B4FA3] flex-shrink-0" />
               <span>OPD Timings: Monday – Saturday: 8:00 AM – 8:00 PM (Emergency 24/7)</span>
+            </div>
+
+            <div className="p-2.5 rounded-xl bg-purple-50/60 border border-purple-100 text-xs text-[#5D367F] font-medium">
+              <span className="font-bold">Insurance Assistance:</span> Documentation and TPA pre-authorization support available across all eligible treatments.
             </div>
           </div>
         </div>

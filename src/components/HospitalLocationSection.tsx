@@ -18,11 +18,7 @@ export const HospitalLocationSection: React.FC<HospitalLocationSectionProps> = (
     window.location.href = HOSPITAL_CONTACT.phoneTelLink;
   };
 
-  const handleWhatsAppClick = () => {
-    trackConversionEvent('whatsapp_click', condition, { location: 'location_section_whatsapp' });
-    const message = `Hello PUNYA Hospital, I need directions/help to visit the hospital at Basaveshwar Nagar for ${condition} consultation.`;
-    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-  };
+
 
   return (
     <section id="hospital-location" className="py-14 sm:py-16 md:py-20 bg-[#F5F0F8]/30 border-t border-b border-purple-100">
@@ -76,25 +72,7 @@ export const HospitalLocationSection: React.FC<HospitalLocationSectionProps> = (
                 </div>
               </div>
 
-              <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100">
-                <div className="p-3 bg-[#EAF4E5] rounded-2xl text-[#579B35] flex-shrink-0">
-                  <MessageSquare className="w-6 h-6 text-[#579B35]" />
-                </div>
-                <div>
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-0.5">
-                    WhatsApp Desk
-                  </h3>
-                  <a
-                    href={HOSPITAL_CONTACT.whatsappLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleWhatsAppClick}
-                    className="text-lg sm:text-xl font-bold text-[#579B35] hover:underline"
-                  >
-                    {HOSPITAL_CONTACT.whatsappDisplay}
-                  </a>
-                </div>
-              </div>
+
 
               <div className="flex items-center gap-3.5 pt-2 border-t border-gray-100 text-xs sm:text-sm text-gray-600">
                 <div className="p-3 bg-purple-50 rounded-2xl text-[#7B4FA3] flex-shrink-0">

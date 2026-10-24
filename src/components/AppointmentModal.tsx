@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { X, CheckCircle2, Phone, MessageSquare, Calendar, Clock, AlertCircle } from 'lucide-react';
+import { X, CheckCircle2, Phone, MessageSquare, Calendar, Clock, AlertCircle, ShieldCheck, FileText } from 'lucide-react';
 import { ConditionId, LandingPageContent } from '../types';
 import { trackConversionEvent } from '../utils/analytics';
 import { HOSPITAL_CONTACT } from '../constants/contactInfo';
+import { hospitalService } from '../services/hospitalService';
 import { PunyaLogo } from './PunyaLogo';
 
 interface AppointmentModalProps {
@@ -23,9 +24,11 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
   const [selectedCondition, setSelectedCondition] = useState<ConditionId>(currentCondition);
   const [preferredDate, setPreferredDate] = useState('');
   const [preferredTime, setPreferredTime] = useState('Morning (9 AM - 1 PM)');
+  const [needInsuranceHelp, setNeedInsuranceHelp] = useState(false);
   const [message, setMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [submittedWhatsAppUrl, setSubmittedWhatsAppUrl] = useState('');
 
   // Sync initial condition when modal opens
   React.useEffect(() => {
@@ -34,26 +37,78 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
 
   if (!isOpen) return null;
 
+  const conditionLabels: Record<ConditionId, string> = {
+    piles: 'Piles Treatment (Laser Proctology & Daycare Care)',
+    gallstone: 'Gallstone Treatment (Single-Incision & Laparoscopic)',
+    hernia: 'Hernia Treatment (Advanced 3D Mesh Repair)',
+    'uterine-fibroids': "Uterine Fibroids Care (Women's Health & Laparoscopy)",
+    endometriosis: 'Endometriosis Care (Pelvic Pain & Advanced Laparoscopy)',
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !mobileNumber.trim()) return;
 
     setLoading(true);
 
-    setTimeout(() => {
-      trackConversionEvent('form_submit', selectedCondition, {
-        source: 'appointment_modal_form',
-        patient_name: fullName,
-        mobile_prefix: mobileNumber.slice(0, 5),
-        disease_selected: selectedCondition,
-        preferred_date: preferredDate || 'Immediate',
-        preferred_time: preferredTime,
-        has_message: Boolean(message.trim()),
-      });
+    const isGyn = selectedCondition === 'uterine-fibroids' || selectedCondition === 'endometriosis';
+    const doctorName = isGyn ? 'Dr. Punyavathi C. Nagaraj' : 'Dr. Nagaraj B. Puttaswamy';
 
-      setLoading(false);
-      setIsSubmitted(true);
-    }, 650);
+    const patientName = fullName.trim();
+    const patientMobile = mobileNumber.trim();
+    const formattedDate = preferredDate ? preferredDate : 'Earliest Available / Flexible';
+    const insuranceText = needInsuranceHelp 
+      ? 'Yes, please guide on insurance documentation & TPA support' 
+      : 'Self-pay / General enquiry';
+    const symptomsText = message.trim() ? message.trim() : 'None provided';
+    const treatmentText = conditionLabels[selectedCondition] || selectedCondition;
+
+    // Google Ads conversion tracking
+    trackConversionEvent('form_submit', selectedCondition, {
+      source: 'appointment_modal_form',
+      patient_name: patientName,
+      mobile_prefix: patientMobile.slice(0, 5),
+      disease_selected: selectedCondition,
+      preferred_date: formattedDate,
+      preferred_time: preferredTime,
+      need_insurance_help: needInsuranceHelp,
+      has_message: Boolean(message.trim()),
+    });
+
+    // Record lead in internal hospital service
+    hospitalService.addPublicWebLead({
+      name: patientName,
+      mobile: patientMobile,
+      condition: selectedCondition,
+      treatmentName: treatmentText,
+      doctor: doctorName,
+      source: 'Website Modal Enquiry',
+      preferredDate: preferredDate || new Date().toISOString().split('T')[0],
+      insuranceHelpRequested: needInsuranceHelp,
+    });
+
+    // Construct full WhatsApp message with all patient data, dates, and preferences
+    const waMessage = `🏥 *PUNYA HOSPITAL — APPOINTMENT BOOKING*
+
+👤 *Patient Name:* ${patientName}
+📱 *Contact Mobile:* +91 ${patientMobile}
+🩺 *Treatment Required:* ${treatmentText}
+👨‍⚕️ *Consultant Doctor:* ${doctorName}
+📅 *Preferred Appointment Date:* ${formattedDate}
+⏰ *Preferred Time:* ${preferredTime}
+📋 *Insurance Support:* ${insuranceText}
+📝 *Symptoms / Notes:* ${symptomsText}
+
+_Booked via official PUNYA Hospital website. Please confirm doctor availability and appointment slot._`;
+
+    const waUrl = `${HOSPITAL_CONTACT.whatsappLink}?text=${encodeURIComponent(waMessage)}`;
+    setSubmittedWhatsAppUrl(waUrl);
+
+    setLoading(false);
+    setIsSubmitted(true);
+
+    // Direct redirection to Hospital WhatsApp number with all data
+    window.location.href = waUrl;
   };
 
   const handlePhoneClick = () => {
@@ -63,8 +118,8 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
 
   const handleWhatsAppClick = () => {
     trackConversionEvent('whatsapp_click', selectedCondition, { location: 'appointment_modal_success' });
-    const encoded = encodeURIComponent(content.whatsappMessage);
-    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
+    const fallbackUrl = submittedWhatsAppUrl || HOSPITAL_CONTACT.whatsappLink;
+    window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
   };
 
   const handleResetAndClose = () => {
@@ -72,6 +127,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     setFullName('');
     setMobileNumber('');
     setMessage('');
+    setNeedInsuranceHelp(false);
     onClose();
   };
 
@@ -85,9 +141,9 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
         {/* Header Ribbon */}
         <div className="bg-[#5D367F] px-5 sm:px-6 py-3.5 sm:py-4 text-white flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#579B35]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#579B35] animate-pulse" />
             <span className="text-xs sm:text-sm font-bold tracking-wide uppercase">
-              PUNYA Hospital OPD Desk
+              PUNYA Hospital Consultation Desk
             </span>
           </div>
           <button
@@ -100,38 +156,38 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
           </button>
         </div>
 
-        <div className="p-5 sm:p-8 overflow-y-auto flex-1">
+        <div className="p-5 sm:p-7 overflow-y-auto flex-1">
           {!isSubmitted ? (
             <>
-              <div className="text-center mb-5 sm:mb-6">
+              <div className="text-center mb-5">
                 <h3 className="text-xl sm:text-2xl font-extrabold text-[#252525]">
-                  Book Your Consultation
+                  Request a Consultation
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-600 mt-1">
-                  Confidential evaluation with our consultant surgeons in Bangalore.
+                  Direct evaluation with our senior specialists in Basaveshwar Nagar, Bangalore.
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-3.5">
                 {/* Full Name */}
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
-                    Full Name *
+                    Patient Name *
                   </label>
                   <input
                     type="text"
                     required
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="Enter your full name"
-                    className="w-full px-3.5 sm:px-4 py-3 sm:py-2.5 rounded-xl border border-gray-200 text-base sm:text-sm focus:outline-hidden focus:border-[#7B4FA3] focus:ring-2 focus:ring-purple-100 transition-all bg-gray-50/50"
+                    placeholder="Enter full name"
+                    className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-hidden focus:border-[#7B4FA3] focus:ring-2 focus:ring-purple-100 transition-all bg-gray-50/50"
                   />
                 </div>
 
                 {/* Mobile Number */}
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
-                    Mobile Number *
+                    Contact Mobile Number *
                   </label>
                   <div className="flex">
                     <span className="inline-flex items-center px-3 sm:px-3.5 rounded-l-xl border border-r-0 border-gray-200 bg-gray-100 text-gray-700 text-xs font-bold">
@@ -144,32 +200,32 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                       maxLength={10}
                       value={mobileNumber}
                       onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ''))}
-                      placeholder="10-digit phone number"
-                      className="w-full px-3.5 sm:px-4 py-3 sm:py-2.5 rounded-r-xl border border-gray-200 text-base sm:text-sm focus:outline-hidden focus:border-[#7B4FA3] focus:ring-2 focus:ring-purple-100 transition-all bg-gray-50/50"
+                      placeholder="10-digit mobile number"
+                      className="w-full px-3.5 sm:px-4 py-2.5 rounded-r-xl border border-gray-200 text-sm focus:outline-hidden focus:border-[#7B4FA3] focus:ring-2 focus:ring-purple-100 transition-all bg-gray-50/50"
                     />
                   </div>
                 </div>
 
-                {/* Disease / Treatment */}
+                {/* Treatment Selection */}
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
-                    Disease / Treatment *
+                    Treatment Required *
                   </label>
                   <select
                     required
                     value={selectedCondition}
                     onChange={(e) => setSelectedCondition(e.target.value as ConditionId)}
-                    className="w-full px-3.5 sm:px-4 py-3 sm:py-2.5 rounded-xl border border-gray-200 text-base sm:text-sm focus:outline-hidden focus:border-[#7B4FA3] focus:ring-2 focus:ring-purple-100 transition-all bg-gray-50/50 text-gray-800 font-medium"
+                    className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-hidden focus:border-[#7B4FA3] focus:ring-2 focus:ring-purple-100 transition-all bg-gray-50/50 text-gray-800 font-medium"
                   >
-                    <option value="piles">Piles Treatment (Colorectal Care)</option>
-                    <option value="gallstone">Gallstone Treatment (Laparoscopic Care)</option>
-                    <option value="hernia">Hernia Treatment (Advanced Mesh Repair)</option>
-                    <option value="uterine-fibroids">Uterine Fibroids Care (Gynecology)</option>
-                    <option value="endometriosis">Endometriosis Care (Women's Health)</option>
+                    <option value="piles">Piles Treatment (Laser Proctology & Daycare Care)</option>
+                    <option value="gallstone">Gallstone Treatment (Single-Incision & Laparoscopic)</option>
+                    <option value="hernia">Hernia Treatment (Advanced 3D Mesh Repair)</option>
+                    <option value="uterine-fibroids">Uterine Fibroids Care (Women's Health & Laparoscopy)</option>
+                    <option value="endometriosis">Endometriosis Care (Pelvic Pain & Advanced Laparoscopy)</option>
                   </select>
                 </div>
 
-                {/* Date and Time Row */}
+                {/* Preferred Date & Time */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
@@ -180,7 +236,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                       value={preferredDate}
                       min={new Date().toISOString().split('T')[0]}
                       onChange={(e) => setPreferredDate(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-base sm:text-sm focus:outline-hidden focus:border-[#7B4FA3] bg-gray-50/50 text-gray-700"
+                      className="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-sm focus:outline-hidden focus:border-[#7B4FA3] bg-gray-50/50 text-gray-700"
                     />
                   </div>
 
@@ -191,7 +247,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                     <select
                       value={preferredTime}
                       onChange={(e) => setPreferredTime(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-base sm:text-sm focus:outline-hidden focus:border-[#7B4FA3] bg-gray-50/50 text-gray-700"
+                      className="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-sm focus:outline-hidden focus:border-[#7B4FA3] bg-gray-50/50 text-gray-700"
                     >
                       <option>Morning (9 AM - 1 PM)</option>
                       <option>Afternoon (1 PM - 5 PM)</option>
@@ -200,17 +256,32 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                   </div>
                 </div>
 
+                {/* Insurance Support Request Checkbox */}
+                <div className="p-3 rounded-xl bg-purple-50/60 border border-purple-100 flex items-start gap-2.5">
+                  <input
+                    type="checkbox"
+                    id="modal-insurance-check"
+                    checked={needInsuranceHelp}
+                    onChange={(e) => setNeedInsuranceHelp(e.target.checked)}
+                    className="mt-0.5 rounded border-gray-300 text-[#7B4FA3] focus:ring-[#7B4FA3]"
+                  />
+                  <label htmlFor="modal-insurance-check" className="text-xs text-gray-700 cursor-pointer select-none">
+                    <strong className="text-[#5D367F] block">Insurance Assistance:</strong>
+                    I would like guidance on insurance documentation & TPA support for my treatment.
+                  </label>
+                </div>
+
                 {/* Message */}
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1">
-                    Message (Optional)
+                    Symptoms or Scan Details (Optional)
                   </label>
                   <textarea
                     rows={2}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Briefly describe your symptoms or scan details"
-                    className="w-full px-3.5 sm:px-4 py-2.5 rounded-xl border border-gray-200 text-base sm:text-sm focus:outline-hidden focus:border-[#7B4FA3] focus:ring-2 focus:ring-purple-100 transition-all bg-gray-50/50"
+                    placeholder="E.g. Duration of symptoms, ultrasound findings, or previous consultation notes"
+                    className="w-full px-3.5 sm:px-4 py-2 rounded-xl border border-gray-200 text-sm focus:outline-hidden focus:border-[#7B4FA3] focus:ring-2 focus:ring-purple-100 transition-all bg-gray-50/50"
                   />
                 </div>
 
@@ -224,7 +295,7 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
                   {loading ? (
                     <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   ) : (
-                    <span>BOOK MY CONSULTATION</span>
+                    <span>CONFIRM CONSULTATION REQUEST</span>
                   )}
                 </button>
 
@@ -234,51 +305,60 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
               </form>
             </>
           ) : (
-            /* Post-Submission Thank You State strictly matching prompt requirements */
+            /* Post-Submission State */
             <div className="py-6 text-center space-y-4 animate-in fade-in">
               <div className="w-16 h-16 rounded-full bg-[#EAF4E5] text-[#579B35] flex items-center justify-center mx-auto shadow-xs">
                 <CheckCircle2 className="w-9 h-9" />
               </div>
 
               <h3 className="text-2xl font-extrabold text-[#5D367F]">
-                Thank You!
+                Thank You! Request Received
               </h3>
 
               <p className="text-sm text-gray-700 max-w-sm mx-auto leading-relaxed">
-                Your appointment request has been received. Our team will contact you shortly.
+                Connecting you directly to PUNYA Hospital WhatsApp (+91 94038 90559) with your appointment request and preferred date.
               </p>
 
-              <div className="p-4 bg-[#F5F0F8] rounded-2xl border border-purple-100 text-left space-y-1.5 text-xs text-gray-600 max-w-xs mx-auto">
+              <div className="p-4 bg-[#F5F0F8] rounded-2xl border border-purple-100 text-left space-y-1.5 text-xs text-gray-700 max-w-xs mx-auto shadow-xs">
                 <div><strong>Patient:</strong> {fullName}</div>
                 <div><strong>Mobile:</strong> +91 {mobileNumber}</div>
-                <div><strong>Condition:</strong> {selectedCondition.toUpperCase()} Treatment</div>
+                <div><strong>Treatment:</strong> {conditionLabels[selectedCondition] || selectedCondition}</div>
                 <div><strong>Preferred Slot:</strong> {preferredDate || 'Earliest Available'} • {preferredTime}</div>
+                {message.trim() && (
+                  <div><strong>Notes:</strong> {message.trim()}</div>
+                )}
+                {needInsuranceHelp && (
+                  <div className="text-[#579B35] font-semibold pt-0.5">✓ Insurance Assistance Requested</div>
+                )}
               </div>
 
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                  href={submittedWhatsAppUrl || HOSPITAL_CONTACT.whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#579B35] hover:bg-[#48822B] text-white font-extrabold text-xs tracking-wide shadow-md min-h-[44px] cursor-pointer"
+                  id="modal-open-whatsapp-btn"
+                >
+                  <MessageSquare className="w-4 h-4 fill-white" />
+                  <span>OPEN IN WHATSAPP NOW</span>
+                </a>
+
                 <button
                   type="button"
                   onClick={handlePhoneClick}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#7B4FA3] text-white font-bold text-xs tracking-wide shadow-xs min-h-[44px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#7B4FA3] hover:bg-[#5D367F] text-white font-bold text-xs tracking-wide shadow-xs min-h-[44px] cursor-pointer"
+                  id="modal-call-hospital-btn"
                 >
                   <Phone className="w-3.5 h-3.5" />
-                  <span>CALL NOW</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleWhatsAppClick}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#579B35] text-white font-bold text-xs tracking-wide shadow-xs min-h-[44px]"
-                >
-                  <MessageSquare className="w-3.5 h-3.5 fill-white" />
-                  <span>WHATSAPP US</span>
+                  <span>CALL HOSPITAL DESK</span>
                 </button>
               </div>
 
               <button
                 type="button"
                 onClick={handleResetAndClose}
-                className="text-xs text-gray-500 hover:text-gray-800 underline block mx-auto pt-2"
+                className="text-xs text-gray-500 hover:text-gray-800 underline block mx-auto pt-2 cursor-pointer"
               >
                 Close Window
               </button>

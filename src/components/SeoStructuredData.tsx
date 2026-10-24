@@ -19,12 +19,47 @@ export const SeoStructuredData: React.FC<SeoStructuredDataProps> = ({ content })
     }
     metaDescription.setAttribute('content', content.metaDescription);
 
-    // 3. Update OpenGraph tags
+    // 3. Update canonical link
+    const canonicalHref = content.canonicalUrl || `${window.location.origin}${content.path}`;
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', canonicalHref);
+
+    // 4. Update OpenGraph tags
     let ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) ogTitle.setAttribute('content', content.metaTitle);
 
     let ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc) ogDesc.setAttribute('content', content.metaDescription);
+
+    let ogUrl = document.querySelector('meta[property="og:url"]');
+    if (!ogUrl) {
+      ogUrl = document.createElement('meta');
+      ogUrl.setAttribute('property', 'og:url');
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.setAttribute('content', canonicalHref);
+
+    // 5. Update Twitter tags
+    let twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    if (!twitterTitle) {
+      twitterTitle = document.createElement('meta');
+      twitterTitle.setAttribute('name', 'twitter:title');
+      document.head.appendChild(twitterTitle);
+    }
+    twitterTitle.setAttribute('content', content.metaTitle);
+
+    let twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    if (!twitterDesc) {
+      twitterDesc = document.createElement('meta');
+      twitterDesc.setAttribute('name', 'twitter:description');
+      document.head.appendChild(twitterDesc);
+    }
+    twitterDesc.setAttribute('content', content.metaDescription);
   }, [content]);
 
   // Schema 1: Hospital & MedicalOrganization Schema (Local SEO Bangalore)
@@ -36,7 +71,8 @@ export const SeoStructuredData: React.FC<SeoStructuredDataProps> = ({ content })
     url: window.location.origin,
     logo: `${window.location.origin}/logo.png`,
     image: `${window.location.origin}/src/assets/images/indian_doctor_consultation_1789457537922.jpg`,
-    description: 'Premier surgical and multi-speciality hospital in Bangalore specializing in minimally invasive proctology, gallbladder surgery, and hernia repair.',
+    description:
+      'Premier surgical and multi-speciality hospital in Bangalore specializing in minimally invasive proctology, gallbladder surgery, hernia repair, and laparoscopic gynecology.',
     telephone: '+919403890559',
     priceRange: '₹₹',
     address: {
@@ -71,6 +107,7 @@ export const SeoStructuredData: React.FC<SeoStructuredDataProps> = ({ content })
       'GeneralSurgery',
       'Gastroenterology',
       'ColorectalSurgery',
+      'Gynecology',
     ],
   };
 
@@ -80,7 +117,7 @@ export const SeoStructuredData: React.FC<SeoStructuredDataProps> = ({ content })
     '@type': 'MedicalWebPage',
     name: content.title,
     description: content.metaDescription,
-    url: `${window.location.origin}${content.path}`,
+    url: content.canonicalUrl || `${window.location.origin}${content.path}`,
     about: {
       '@type': 'MedicalCondition',
       name: content.heroHeadline,

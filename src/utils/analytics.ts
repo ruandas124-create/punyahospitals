@@ -18,6 +18,9 @@ declare global {
   }
 }
 
+// In-memory set to prevent duplicate lead conversion counts within a session
+const recentConversions = new Set<string>();
+
 export const trackConversionEvent = (
   eventName: AnalyticsEvent['eventName'],
   condition: ConditionId,
@@ -40,10 +43,15 @@ export const trackConversionEvent = (
   };
 
   const diseaseIdentifier = conversionIdMap[condition] || condition;
-  const pagePath = condition === 'uterine-fibroids' ? '/uterine-fibroids' : condition === 'endometriosis' ? '/endometriosis' : `/${condition}-treatment`;
+  const pagePath =
+    condition === 'uterine-fibroids'
+      ? '/uterine-fibroids'
+      : condition === 'endometriosis'
+      ? '/endometriosis'
+      : `/${condition}-treatment`;
 
-  // 1. Google Tag Manager / GA4 DataLayer
   if (typeof window !== 'undefined') {
+    // 1. Google Tag Manager / GA4 DataLayer
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: eventName,
@@ -55,6 +63,7 @@ export const trackConversionEvent = (
 
     // 2. Google Ads gtag if initialized
     if (typeof window.gtag === 'function') {
+      // General engagement tracking
       window.gtag('event', eventName, {
         event_category: 'Medical_Ad_Lead',
         event_label: diseaseIdentifier,
@@ -62,12 +71,17 @@ export const trackConversionEvent = (
         ...metadata,
       });
 
-      // Fire Google Ads Lead conversion on form submission or appointment booking
-      if (eventName === 'form_submit' || eventName === 'appointment_click') {
-        window.gtag('event', 'conversion', {
-          send_to: 'AW-18499292312/WKZUCL6-y5QdEJiZk_VE',
-          ...metadata,
-        });
+      // Fire Google Ads Lead conversion ONLY on genuine completed inquiries (form submissions)
+      // and de-duplicate to prevent false inflation
+      if (eventName === 'form_submit') {
+        const leadIdentifier = `${diseaseIdentifier}_${metadata?.mobile_prefix || metadata?.patient_name || 'lead'}`;
+        if (!recentConversions.has(leadIdentifier)) {
+          recentConversions.add(leadIdentifier);
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-18499292312/WKZUCL6-y5QdEJiZk_VE',
+            ...metadata,
+          });
+        }
       }
     }
 
@@ -88,7 +102,7 @@ export const trackConversionEvent = (
     }
   }
 
-  // Notify registered local listeners (e.g. for real-time debug/marketing feedback banner)
+  // Notify registered local listeners
   listeners.forEach((listener) => {
     try {
       listener(event);

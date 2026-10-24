@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Phone, MessageSquare, Menu, X, ChevronDown, Award, Stethoscope, HelpCircle, ShieldCheck } from 'lucide-react';
+import { Menu, X, ChevronDown, Award, Stethoscope, HelpCircle, ShieldCheck, Calendar } from 'lucide-react';
 import { PunyaLogo } from './PunyaLogo';
 import { ConditionId } from '../types';
-import { trackConversionEvent } from '../utils/analytics';
 import { HOSPITAL_CONTACT } from '../constants/contactInfo';
 import { ALL_TREATMENTS, TREATMENT_URLS } from '../constants/treatmentRoutes';
 
@@ -10,35 +9,15 @@ interface HeaderProps {
   currentCondition: ConditionId;
   onNavigate: (condition: ConditionId) => void;
   onOpenAppointmentModal: () => void;
-  onOpenStaffPortal?: (tab?: 'master_admin' | 'sales' | 'front_office' | 'audit') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentCondition,
   onNavigate,
   onOpenAppointmentModal,
-  onOpenStaffPortal,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [treatmentDropdownOpen, setTreatmentDropdownOpen] = useState(false);
-
-  const handlePhoneClick = () => {
-    trackConversionEvent('phone_click', currentCondition, { location: 'header_call' });
-    window.location.href = HOSPITAL_CONTACT.phoneTelLink;
-  };
-
-  const handleWhatsAppClick = () => {
-    trackConversionEvent('whatsapp_click', currentCondition, { location: 'header_whatsapp' });
-    const messages: Record<ConditionId, string> = {
-      piles: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Piles treatment. Please help me with an appointment.',
-      gallstone: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Gallstone treatment. Please help me with an appointment.',
-      hernia: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Hernia treatment. Please help me with an appointment.',
-      'uterine-fibroids': 'Hello PUNYA Hospital, I would like to consult a specialist regarding Uterine Fibroids treatment. Please help me with an appointment.',
-      endometriosis: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Endometriosis treatment. Please help me with an appointment.',
-    };
-    const encoded = encodeURIComponent(messages[currentCondition]);
-    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
-  };
 
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
@@ -50,21 +29,11 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-xs transition-all">
-      {/* Top micro-bar showing hospital accreditation / ad banner */}
       <div className="bg-[#5D367F] text-white text-[11px] sm:text-xs py-1 px-4 text-center font-medium flex items-center justify-center gap-2">
         <span className="inline-block w-2 h-2 rounded-full bg-[#579B35] animate-pulse"></span>
         <span>Bangalore's Premier Specialist Care Centre</span>
         <span className="hidden md:inline text-purple-200">•</span>
         <span className="hidden md:inline text-purple-100">Direct Doctor Consultations Available Today</span>
-        <span className="hidden lg:inline text-purple-200">•</span>
-        <a 
-          href={HOSPITAL_CONTACT.whatsappLink} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="hidden lg:inline font-bold text-[#EAF4E5] hover:text-white hover:underline"
-        >
-          Support / WhatsApp: {HOSPITAL_CONTACT.whatsappDisplay}
-        </a>
       </div>
 
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -140,6 +109,15 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               type="button"
+              onClick={() => scrollToSection('patient-benefits')}
+              className="hover:text-[#7B4FA3] transition-colors cursor-pointer"
+              id="header-nav-benefits"
+            >
+              Patient Benefits
+            </button>
+
+            <button
+              type="button"
               onClick={() => scrollToSection('why-punya')}
               className="hover:text-[#7B4FA3] transition-colors cursor-pointer"
               id="header-nav-why-punya"
@@ -167,85 +145,46 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               type="button"
+              onClick={() => scrollToSection('insurance-support')}
+              className="hover:text-[#7B4FA3] transition-colors cursor-pointer"
+              id="header-nav-insurance"
+            >
+              Insurance
+            </button>
+
+            <button
+              type="button"
               onClick={() => scrollToSection('faq-section')}
               className="hover:text-[#7B4FA3] transition-colors cursor-pointer"
               id="header-nav-faqs"
             >
               FAQs
             </button>
-
-            {/* Internal Staff System link */}
-            {onOpenStaffPortal && (
-              <button
-                type="button"
-                onClick={() => onOpenStaffPortal('master_admin')}
-                className="text-[11px] font-bold text-gray-400 hover:text-[#5D367F] border border-dashed border-gray-300 hover:border-[#7B4FA3] px-2 py-1 rounded-md transition-all cursor-pointer"
-                title="Internal Hospital Operations (Sales, Front Desk, Token Engine)"
-              >
-                Staff Portal
-              </button>
-            )}
           </nav>
 
-          {/* Desktop Right CTAs */}
-          <div className="hidden sm:flex items-center gap-2.5 md:gap-3">
-            {/* Call Now */}
-            <button
-              type="button"
-              onClick={handlePhoneClick}
-              className="inline-flex items-center gap-2 px-3.5 md:px-4 py-2.5 rounded-full border-2 border-[#7B4FA3] text-[#7B4FA3] hover:bg-[#7B4FA3] hover:text-white font-bold text-xs md:text-sm tracking-wide transition-all shadow-xs active:scale-95 cursor-pointer"
-              id="header-call-btn-desktop"
-              title={`Call: ${HOSPITAL_CONTACT.phoneDisplay}`}
-            >
-              <Phone className="w-4 h-4 text-inherit" />
-              <span>CALL NOW</span>
-            </button>
-
-            {/* WhatsApp */}
-            <button
-              type="button"
-              onClick={handleWhatsAppClick}
-              className="inline-flex items-center gap-2 px-3.5 md:px-4 py-2.5 rounded-full bg-[#579B35] hover:bg-[#467e2a] text-white font-bold text-xs md:text-sm tracking-wide transition-all shadow-sm active:scale-95 cursor-pointer"
-              id="header-whatsapp-btn-desktop"
-              title={`WhatsApp: ${HOSPITAL_CONTACT.whatsappDisplay}`}
-            >
-              <MessageSquare className="w-4 h-4 fill-white" />
-              <span>WHATSAPP</span>
-            </button>
-
-            {/* Quick Book Consultation CTA */}
+          {/* Desktop Right: Single Book Appointment Button */}
+          <div className="hidden sm:flex items-center">
             <button
               type="button"
               onClick={onOpenAppointmentModal}
-              className="hidden xl:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#7B4FA3] hover:bg-[#5D367F] text-white font-bold text-xs md:text-sm tracking-wide transition-all shadow-md active:scale-95 cursor-pointer"
-              id="header-book-consult-desktop"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#7B4FA3] hover:bg-[#5D367F] text-white font-bold text-xs md:text-sm tracking-wide transition-all shadow-md active:scale-95 cursor-pointer"
+              id="header-book-appointment-desktop"
             >
-              <span>BOOK VISIT</span>
+              <Calendar className="w-4 h-4" />
+              <span>BOOK APPOINTMENT</span>
             </button>
           </div>
 
-          {/* Mobile Right Quick Action Icons + Hamburger */}
-          <div className="flex sm:hidden items-center gap-1.5 flex-shrink-0">
-            {/* Quick Call icon */}
+          {/* Mobile Right: Single Book Appointment Button + Hamburger */}
+          <div className="flex sm:hidden items-center gap-2 flex-shrink-0">
             <button
               type="button"
-              onClick={handlePhoneClick}
-              aria-label="Call PUNYA Hospital"
-              className="w-9 h-9 rounded-full bg-purple-50 text-[#7B4FA3] flex items-center justify-center border border-purple-200"
-              id="header-call-btn-mobile"
+              onClick={onOpenAppointmentModal}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#7B4FA3] text-white font-bold text-xs shadow-xs active:scale-95 cursor-pointer"
+              id="header-book-appointment-mobile"
             >
-              <Phone className="w-4 h-4" />
-            </button>
-
-            {/* Quick WhatsApp icon */}
-            <button
-              type="button"
-              onClick={handleWhatsAppClick}
-              aria-label="WhatsApp PUNYA Hospital"
-              className="w-9 h-9 rounded-full bg-[#579B35] text-white flex items-center justify-center shadow-xs"
-              id="header-whatsapp-btn-mobile"
-            >
-              <MessageSquare className="w-4 h-4 fill-white" />
+              <Calendar className="w-3.5 h-3.5" />
+              <span>BOOK APPOINTMENT</span>
             </button>
 
             {/* Mobile Hamburger Button */}
@@ -319,6 +258,13 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               type="button"
+              onClick={() => scrollToSection('patient-benefits')}
+              className="text-left py-2 px-3 rounded-lg hover:bg-purple-50 hover:text-[#7B4FA3]"
+            >
+              Patient Benefits & Comfort
+            </button>
+            <button
+              type="button"
               onClick={() => scrollToSection('treatment-options')}
               className="text-left py-2 px-3 rounded-lg hover:bg-purple-50 hover:text-[#7B4FA3]"
             >
@@ -354,62 +300,36 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               type="button"
+              onClick={() => scrollToSection('insurance-support')}
+              className="text-left py-2 px-3 rounded-lg hover:bg-purple-50 hover:text-[#7B4FA3]"
+            >
+              Insurance Support
+            </button>
+            <button
+              type="button"
               onClick={() => scrollToSection('faq-section')}
               className="text-left py-2 px-3 rounded-lg hover:bg-purple-50 hover:text-[#7B4FA3]"
             >
               Frequently Asked Questions
             </button>
 
-            {onOpenStaffPortal && (
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenStaffPortal('master_admin');
-                }}
-                className="text-left py-2 px-3 rounded-lg bg-gray-100 text-[#5D367F] font-bold text-xs"
-              >
-                🔐 Open Hospital Staff Operations Portal
-              </button>
-            )}
           </div>
 
-          {/* Mobile Direct Action Buttons */}
-          <div className="pt-2 grid grid-cols-2 gap-2">
+          {/* Mobile Single Action Button */}
+          <div className="pt-2">
             <button
               type="button"
               onClick={() => {
                 setMobileMenuOpen(false);
-                handlePhoneClick();
+                onOpenAppointmentModal();
               }}
-              className="flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-[#7B4FA3] text-[#7B4FA3] font-bold text-sm"
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#7B4FA3] hover:bg-[#5D367F] text-white font-extrabold text-sm shadow-md active:scale-98 transition-all cursor-pointer"
+              id="header-mobile-drawer-book-btn"
             >
-              <Phone className="w-4 h-4" />
-              <span>CALL NOW</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                handleWhatsAppClick();
-              }}
-              className="flex items-center justify-center gap-2 py-3 rounded-xl bg-[#579B35] text-white font-bold text-sm"
-            >
-              <MessageSquare className="w-4 h-4 fill-white" />
-              <span>WHATSAPP</span>
+              <Calendar className="w-4 h-4" />
+              <span>BOOK APPOINTMENT</span>
             </button>
           </div>
-
-          <button
-            type="button"
-            onClick={() => {
-              setMobileMenuOpen(false);
-              onOpenAppointmentModal();
-            }}
-            className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#7B4FA3] text-white font-extrabold text-sm shadow-md"
-          >
-            <span>BOOK SPECIALIST APPOINTMENT</span>
-          </button>
         </div>
       )}
     </header>

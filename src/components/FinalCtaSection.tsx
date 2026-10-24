@@ -18,11 +18,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
     window.location.href = HOSPITAL_CONTACT.phoneTelLink;
   };
 
-  const handleWhatsAppClick = () => {
-    trackConversionEvent('whatsapp_click', content.id, { location: 'final_cta_whatsapp' });
-    const encoded = encodeURIComponent(content.whatsappMessage);
-    window.open(`${HOSPITAL_CONTACT.whatsappLink}?text=${encoded}`, '_blank', 'noopener,noreferrer');
-  };
+
 
   return (
     <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-[#5D367F] via-[#7B4FA3] to-[#5D367F] text-white relative overflow-hidden">
@@ -38,17 +34,17 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
 
         {/* Headline */}
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight max-w-3xl mx-auto leading-tight">
-          Don't Let Your Symptoms Control Your Daily Life
+          Your Health & Comfort Matter Most
         </h2>
 
         {/* Supporting text */}
         <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-purple-100 max-w-2xl mx-auto leading-relaxed">
-          Get evaluated by a qualified specialist and understand the appropriate treatment options for your condition.
+          Speak to our friendly care team today to understand your treatment options, daycare recovery, and clear cost guidance.
         </p>
 
         {/* 3 Conversion Action Buttons */}
         <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 max-w-xl mx-auto">
-          {/* Book Appointment */}
+          {/* Primary Action */}
           <button
             type="button"
             onClick={() => {
@@ -59,7 +55,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
             id="final-cta-book-appointment"
           >
             <Calendar className="w-4 h-4 text-[#7B4FA3]" />
-            <span>BOOK APPOINTMENT</span>
+            <span>{content.heroCtaText ? content.heroCtaText.toUpperCase() : 'REQUEST A CONSULTATION'}</span>
             <ArrowRight className="w-4 h-4 text-[#7B4FA3]" />
           </button>
 
@@ -74,16 +70,7 @@ export const FinalCtaSection: React.FC<FinalCtaSectionProps> = ({
             <span>CALL NOW</span>
           </button>
 
-          {/* WhatsApp Us */}
-          <button
-            type="button"
-            onClick={handleWhatsAppClick}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-white/15 hover:bg-white/25 border border-white/30 text-white font-extrabold text-sm sm:text-base tracking-wide transition-all active:scale-98 cursor-pointer backdrop-blur-xs min-h-[48px]"
-            id="final-cta-whatsapp-us"
-          >
-            <MessageSquare className="w-4 h-4 fill-white" />
-            <span>WHATSAPP US</span>
-          </button>
+
         </div>
 
         {/* Phone Number Banner */}

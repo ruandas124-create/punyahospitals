@@ -4,109 +4,202 @@ export const LANDING_PAGES_DATA: Record<ConditionId, LandingPageContent> = {
   piles: {
     id: 'piles',
     path: '/piles-treatment',
+    canonicalUrl: 'https://punyahospital.acquiresurgery.com/piles-treatment',
     adKeyword: 'Piles Treatment in Bangalore',
-    title: 'Piles Treatment in Bangalore | PUNYA Hospital',
-    metaTitle: 'Piles Treatment in Bangalore | PUNYA Hospital',
-    metaDescription: 'Get expert evaluation and personalised treatment for piles from qualified specialists at PUNYA Hospital, Bangalore. Modern clinical facilities and confidential care.',
-    heroHeadline: 'Piles Treatment in Bangalore',
-    heroSupportingText: 'Get expert evaluation and personalised treatment for piles from qualified specialists at PUNYA Hospital.',
-    whatsappMessage: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Piles treatment. Please help me with an appointment.',
-    doctorSpeciality: 'Colorectal & General Surgery',
+    title: 'Piles Treatment in Bangalore — Get the Right Guidance | PUNYA Hospital',
+    metaTitle: 'Piles Treatment in Bangalore — Get the Right Guidance | PUNYA Hospital',
+    metaDescription:
+      'Looking for piles treatment in Bangalore? Explore suitable treatment options, daycare laser care, affordable cost guidance, and insurance assistance at PUNYA Hospital.',
+    heroHeadline: 'Piles Treatment in Bangalore — Get the Right Guidance',
+    heroSubheadline:
+      'Looking for piles treatment? Explore suitable treatment options and get help understanding your next steps.',
+    heroSupportingText:
+      'We understand that piles discomfort can affect your daily work and peace of mind. Speak to Dr. Nagaraj B. Puttaswamy (30+ years surgical experience) for private, comfortable clinical care in Basaveshwar Nagar, Bangalore.',
+    heroBadge: 'Laser Proctology & Daycare Care • Bangalore',
+    heroCtaText: 'Call Now for Piles Treatment',
+    whatsappMessage:
+      'Hello PUNYA Hospital, I am looking for guidance on piles treatment options and insurance support. Please help me with an appointment.',
+    doctorSpeciality: 'Senior Consultant – General, Laparoscopic & Colorectal Surgery',
+    benefitCards: [
+      {
+        title: 'Comfortable Patient Care',
+        description: 'Get guidance and warm support throughout your treatment journey from our senior doctor and caring nursing team.',
+        iconName: 'Heart',
+        badge: 'Gentle Care',
+      },
+      {
+        title: 'Daycare Treatment Options',
+        description: 'Ask whether same-day discharge is suitable for your procedure so you can recover in the comfort of your home.',
+        iconName: 'Clock',
+        badge: 'Same-Day Option',
+      },
+      {
+        title: 'Friendly Hospital Staff',
+        description: 'Get quick help with your appointment booking, timings, and treatment questions in simple language.',
+        iconName: 'Users',
+        badge: 'Helpful Staff',
+      },
+      {
+        title: 'Affordable Treatment Guidance',
+        description: 'Discuss expected costs and available options with our team openly before deciding on your care.',
+        iconName: 'IndianRupee',
+        badge: 'Clear Estimates',
+      },
+      {
+        title: 'Insurance Assistance',
+        description: 'Ask our team about insurance documentation and available support to make your claim process smooth.',
+        iconName: 'ShieldCheck',
+        badge: 'Insurance Desk',
+      },
+    ],
     symptoms: [
       {
         id: 'pain-stool',
-        name: 'Pain while passing stool',
-        description: 'Sharp or aching pain during bowel movements, often intensifying with strain.',
+        name: 'Pain or sharp burning while passing stool',
+        description: 'Stinging sensation or aching pain during and after bowel movements that makes sitting uncomfortable.',
         iconName: 'Flame',
       },
       {
         id: 'bleeding',
-        name: 'Bleeding',
-        description: 'Bright red blood noticed on toilet tissue or in the bowl during evacuation.',
+        name: 'Fresh red blood during bowel movements',
+        description: 'Bright red blood noticed on toilet paper, in the toilet bowl, or as drops while passing stool.',
         iconName: 'Droplets',
       },
       {
-        id: 'itching',
-        name: 'Itching & Irritation',
-        description: 'Persistent itching, soreness, or burning sensation around the perianal area.',
+        id: 'swelling-lump',
+        name: 'A small lump or swelling near the anal area',
+        description: 'A soft tissue swelling that you can feel, which may come out during straining or stay outside.',
+        iconName: 'ShieldAlert',
+      },
+      {
+        id: 'itching-discharge',
+        name: 'Itching, irritation, or moisture',
+        description: 'Persistent itching and soreness around the anal skin that causes continuous discomfort.',
         iconName: 'AlertCircle',
       },
       {
-        id: 'swelling',
-        name: 'Swelling',
-        description: 'Inflammation and tenderness of sensitive anal blood vessels.',
-        iconName: 'Activity',
-      },
-      {
         id: 'discomfort-sitting',
-        name: 'Discomfort while sitting',
-        description: 'Uncomfortable pressure or tenderness when sitting for regular periods.',
+        name: 'Discomfort while sitting or riding',
+        description: 'A feeling of heaviness or pressure that makes two-wheeler rides and long desk hours difficult.',
         iconName: 'Armchair',
       },
       {
-        id: 'lump-anus',
-        name: 'Lump around the anus',
-        description: 'A palpable soft or firm tissue mass at the anal opening requiring clinical check.',
-        iconName: 'ShieldAlert',
+        id: 'incomplete-evacuation',
+        name: 'Feeling that bowels are not fully empty',
+        description: 'Feeling like you still need to pass stool even after using the washroom.',
+        iconName: 'Activity',
       },
     ],
-    diagramTitle: 'Understanding Piles (Hemorrhoids)',
-    diagramDescription: 'Clear anatomical illustration showing the progression from normal vascular cushions to swollen venous clusters.',
+    warningSigns: {
+      title: 'When Should You See a Doctor Promptly?',
+      description:
+        'Most piles can be managed comfortably when diagnosed early. Speak to our doctor right away if you notice:',
+      signs: [
+        'Continuous bleeding that makes you feel tired, dizzy, or weak',
+        'Sudden, severe pain that stops you from sitting or walking comfortably',
+        'A swollen lump that becomes hard, dark, and cannot be pushed back gently',
+        'Fever, chills, or unusual discharge around the area',
+      ],
+    },
+    diagramTitle: 'Understanding Piles (Hemorrhoids) in Simple Terms',
+    diagramDescription:
+      'This simple diagram shows healthy cushions, how swollen veins cause pain or bleeding, and how modern laser treatment gently reduces swelling.',
     treatmentOptions: [
       {
-        title: 'Conservative Treatment',
-        subtitle: 'Early Clinical Management',
-        description: 'Personalised dietary modifications, fiber supplementation, stool softeners, and topical medications under physician guidance.',
-        suitableFor: 'Suitable for early-stage (Grade I & mild Grade II) cases after medical evaluation.',
+        title: 'Dietary & Medical Management',
+        subtitle: 'Early Stage Care',
+        description:
+          'High-fiber diet plan, plenty of fluids, stool softeners, and soothing ointments prescribed by our doctor.',
+        suitableFor: 'Suitable for early-stage piles after a careful checkup by our specialist.',
         badge: 'Medical Management',
       },
       {
-        title: 'Minimally Invasive Procedures',
-        subtitle: 'Advanced Clinic & Daycare Care',
-        description: 'Procedures such as rubber band ligation, infrared coagulation, or modern laser-assisted energy options depending on diagnosis.',
-        suitableFor: 'Treatment options selected depending on diagnosis and detailed clinical assessment.',
+        title: 'Modern Laser Proctology',
+        subtitle: 'Gentle Daycare Procedure',
+        description:
+          'Focused diode laser energy gently closes swollen blood vessels from the inside without large cuts.',
+        suitableFor: 'Ideal for symptomatic piles where medicines have not provided enough relief.',
         badge: 'Daycare Option',
       },
       {
-        title: 'Surgical Treatment',
-        subtitle: 'Definitive Clinical Intervention',
-        description: 'Procedures like stapled hemorrhoidopexy or surgical excision to relieve persistent, prolapsed, or severe hemorrhoidal tissue.',
-        suitableFor: 'Recommended when clinically appropriate for advanced grades or persistent symptoms.',
+        title: 'Specialist Surgical Care',
+        subtitle: 'For Advanced Piles',
+        description:
+          'Stapler procedure (MIPH) or surgical repair carried out in our modern operation theatre for prolapsed piles.',
+        suitableFor: 'Recommended when piles are advanced and require structural repair.',
         badge: 'Specialist Surgery',
       },
     ],
+    daycareInfo: {
+      headline: 'Ask About Same-Day Discharge Options',
+      summary:
+        'Some procedures allow patients to return home on the same day. Our team will explain the expected discharge time based on your treatment and medical condition.',
+      bulletPoints: [
+        'Ask about same-day discharge options for suitable laser procedures',
+        'Explore daycare surgery for suitable conditions with minimal hospital stay',
+        'Understand your expected recovery timeline: light desk work often resumed in 1 to 3 days',
+        'Speak to our team about your treatment options and post-procedure care at home',
+      ],
+      recoveryTimeline:
+        'Most patients can walk comfortably within a few hours after a daycare laser procedure. You can usually return to light office work and daily routines in 1 to 3 days with simple doctor instructions.',
+      clinicalDisclaimer:
+        'Clinical Note: Same-day discharge and recovery timelines depend on your individual checkup, the grade of piles, and your surgeon’s advice. Discharge timing is decided solely by your doctor for your safety.',
+    },
+    insuranceInfo: {
+      title: 'Need Help With Insurance? Speak to Our Team',
+      badge: 'Insurance Assistance',
+      description:
+        'Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
+      ctaText: 'Enquire About Insurance Support',
+      coverageNote:
+        'Cashless hospitalisation facility is available subject to verification of your specific insurer, active policy terms, and third-party administrator (TPA) approval.',
+      points: [
+        'Guidance on pre-authorization forms and claim paperwork',
+        'Help with hospital bills, diagnostic records, and discharge summaries',
+        'Support for corporate insurance policies and individual health plans',
+        'Clear cost estimates explained upfront so there are no surprises',
+      ],
+    },
     faqs: [
       {
-        question: 'What causes piles?',
-        answer: 'Piles (hemorrhoids) develop when vascular cushions in the anal canal become swollen. Common contributing factors include chronic constipation, excessive straining during bowel movements, prolonged sitting, low dietary fiber intake, heavy lifting, and increased abdominal pressure during pregnancy.',
-      },
-      {
-        question: 'When should I see a doctor for piles?',
-        answer: 'You should consult a doctor if you experience rectal bleeding, persistent pain, palpable lumps, or discomfort that does not improve after a few days. Rectal bleeding should always be evaluated by a qualified doctor to rule out other medical conditions.',
+        question: 'What causes piles to form?',
+        answer:
+          'Piles develop when the normal blood vessels in the lower rectum swell. Common causes include chronic constipation, straining on the toilet, sitting for long hours, lack of dietary fiber, and lifting heavy weights.',
       },
       {
         question: 'Can piles be treated without surgery?',
-        answer: 'Yes. Many early-stage piles respond well to non-surgical measures including high-fiber diet, adequate hydration, lifestyle modifications, and prescribed medical ointments. Your specialist will examine you first to determine if non-surgical treatment is suitable.',
+        answer:
+          'Yes. In the early stages, dietary changes, fiber supplements, drinking plenty of water, and prescribed ointments bring good relief. Our doctor will examine you first to see if surgery can be avoided.',
       },
       {
-        question: 'Is surgery always required?',
-        answer: 'No, surgery is not always required. The decision depends on the grade of piles, severity of symptoms, and whether conservative treatments have brought relief. Surgery is typically considered only when clinically appropriate.',
+        question: 'Is laser piles treatment comfortable?',
+        answer:
+          'Yes. Modern laser proctology is designed for patient comfort. The laser treats the swollen tissue from within without making big incisions, so there is significantly less pain and bleeding compared to older methods.',
       },
       {
-        question: 'How long does recovery take?',
-        answer: 'Recovery time depends on the specific treatment provided. Patients undergoing conservative or minimally invasive daycare procedures often resume light activities within 1–3 days, while surgical treatments may require 1–2 weeks for complete healing under specialist advice.',
+        question: 'Can I go home on the same day?',
+        answer:
+          'For many suitable laser procedures, patients are discharged on the same day after a short observation period. Your doctor will confirm your discharge after checking your comfort and walking ability.',
       },
       {
-        question: 'Can piles come back?',
-        answer: 'While appropriate medical or surgical treatment addresses existing hemorrhoidal tissue, maintaining healthy bowel habits, drinking plenty of water, and avoiding chronic straining are essential to minimise future recurrence.',
+        question: 'How much does piles treatment cost at PUNYA Hospital?',
+        answer:
+          'Treatment costs depend on whether you need medical management, daycare laser treatment, or advanced surgical care. Our team provides clear, transparent cost guidance before you start treatment so your family can plan comfortably.',
       },
       {
-        question: 'Which doctor treats piles?',
-        answer: 'Piles are evaluated and treated by qualified General Surgeons, Proctologists, and Colorectal Specialists. At PUNYA Hospital, our Consultant General & Laparoscopic Surgeons conduct thorough assessments in a confidential setting.',
+        question: 'Does PUNYA Hospital offer insurance assistance?',
+        answer:
+          'Yes. Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
+      },
+      {
+        question: 'Who is the specialist doctor for piles?',
+        answer:
+          'You will be evaluated by Dr. Nagaraj B. Puttaswamy, our Chief Consultant Surgeon with over 30 years of clinical experience in proctology and laparoscopic surgery in Bangalore.',
       },
       {
         question: 'How do I book an appointment?',
-        answer: 'You can book an appointment easily by submitting the consultation request form on this page, calling our dedicated hospital desk directly, or reaching out via WhatsApp for immediate appointment assistance.',
+        answer:
+          'You can book by submitting the simple form on this page, calling our direct hospital number (+91 94038 90559), or sending a message on WhatsApp. Our friendly staff will assist you immediately.',
       },
     ],
   },
@@ -114,109 +207,196 @@ export const LANDING_PAGES_DATA: Record<ConditionId, LandingPageContent> = {
   gallstone: {
     id: 'gallstone',
     path: '/gallstone-treatment',
+    canonicalUrl: 'https://punyahospital.acquiresurgery.com/gallstone-treatment',
     adKeyword: 'Gallstone Treatment in Bangalore',
-    title: 'Gallstone Treatment in Bangalore | PUNYA Hospital',
-    metaTitle: 'Gallstone Treatment in Bangalore | PUNYA Hospital',
-    metaDescription: 'Get expert evaluation and appropriate treatment options for gallstones at PUNYA Hospital, Bangalore. Specialist laparoscopic care and comprehensive diagnostics.',
-    heroHeadline: 'Gallstone Treatment in Bangalore',
-    heroSupportingText: 'Get expert evaluation and appropriate treatment options for gallstones at PUNYA Hospital.',
-    whatsappMessage: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Gallstone treatment. Please help me with an appointment.',
-    doctorSpeciality: 'Hepato-Biliary & Laparoscopic Surgery',
+    title: 'Gallstone Treatment in Bangalore — Explore Your Options | PUNYA Hospital',
+    metaTitle: 'Gallstone Treatment in Bangalore — Explore Your Options | PUNYA Hospital',
+    metaDescription:
+      'Experiencing abdominal pain or diagnosed with gallstones? Speak to our team at PUNYA Hospital Bangalore about modern laparoscopic surgery, recovery plans, and insurance support.',
+    heroHeadline: 'Gallstone Treatment in Bangalore — Explore Your Options',
+    heroSubheadline:
+      'Experiencing abdominal pain or diagnosed with gallstones? Speak to our team about assessment and treatment options.',
+    heroSupportingText:
+      'Get clear answers about your ultrasound scan and treatment choices from Dr. Nagaraj B. Puttaswamy (30+ years experience). We provide gentle keyhole surgery, comfortable daycare options, and clear cost guidance in Basaveshwar Nagar, Bangalore.',
+    heroBadge: 'Single-Incision & Laparoscopic Care • Bangalore',
+    heroCtaText: 'Enquire About Gallstone Treatment',
+    whatsappMessage:
+      'Hello PUNYA Hospital, I am looking for guidance on gallstone treatment options and insurance support. Please help me with an appointment.',
+    doctorSpeciality: 'Chief Consultant – General, Laparoscopic & GI Surgery',
+    benefitCards: [
+      {
+        title: 'Modern Surgical Options',
+        description: 'Learn about laparoscopic keyhole surgery where clinically suitable, done with tiny incisions.',
+        iconName: 'Cpu',
+        badge: 'Keyhole Surgery',
+      },
+      {
+        title: 'Recovery Guidance',
+        description: 'Understand your expected recovery and discharge plan with clear steps from your healthcare team.',
+        iconName: 'Compass',
+        badge: 'Clear Pathway',
+      },
+      {
+        title: 'Clear Cost Information',
+        description: 'Discuss expected treatment costs with our team before proceeding, with no hidden surprises.',
+        iconName: 'IndianRupee',
+        badge: 'Clear Estimates',
+      },
+      {
+        title: 'Insurance Support',
+        description: 'Ask our team about available insurance assistance and required paperwork for your policy.',
+        iconName: 'ShieldCheck',
+        badge: 'Insurance Help',
+      },
+    ],
     symptoms: [
       {
         id: 'ab-pain',
-        name: 'Abdominal pain',
-        description: 'Intense or cramping pain in the upper abdomen that may radiate toward the back or shoulder.',
+        name: 'Pain in upper right side of stomach',
+        description: 'A cramping or aching pain under your right ribs that may spread towards your right shoulder blade or back.',
         iconName: 'Activity',
       },
       {
         id: 'pain-eating',
-        name: 'Pain after eating',
-        description: 'Noticeable discomfort or heaviness occurring 30 to 60 minutes after consuming fatty or heavy meals.',
+        name: 'Stomach pain after having oily or heavy meals',
+        description: 'Discomfort, heaviness, or sharp pain starting 30 to 60 minutes after lunch or dinner.',
         iconName: 'Flame',
       },
       {
         id: 'nausea',
-        name: 'Nausea',
-        description: 'Persistent feeling of queasiness or stomach unease during acute abdominal episodes.',
+        name: 'Feeling sick (nausea) and poor appetite',
+        description: 'Frequent queasy stomach, fullness, or loss of interest in food during digestion.',
         iconName: 'AlertCircle',
       },
       {
         id: 'vomiting',
-        name: 'Vomiting',
-        description: 'Bouts of vomiting accompanying sharp biliary colic episodes.',
+        name: 'Vomiting during severe pain attacks',
+        description: 'Throwing up when the pain gets intense under your ribs.',
         iconName: 'ShieldAlert',
       },
       {
-        id: 'right-ribs',
-        name: 'Pain under the right ribs',
-        description: 'Localized tenderness beneath the right rib cage where the gallbladder is situated.',
-        iconName: 'Armchair',
-      },
-      {
         id: 'indigestion',
-        name: 'Indigestion & Bloating',
-        description: 'Frequent gas, acid reflux, or fullness even after modest meals.',
+        name: 'Frequent gas, bloating, and acidity',
+        description: 'Burping, sour taste in the throat, and heavy stomach even after eating a small meal.',
         iconName: 'Droplets',
       },
+      {
+        id: 'chest-confusion',
+        name: 'Upper stomach ache often mistaken for acidity',
+        description: 'Pain in the middle upper abdomen that people often confuse with simple gastric irritation.',
+        iconName: 'Armchair',
+      },
     ],
-    diagramTitle: 'Understanding Gallstones (Cholelithiasis)',
-    diagramDescription: 'Anatomical diagram depicting bile flow from the liver through the gallbladder and bile duct, showing where gallstones form and cause blockage.',
+    warningSigns: {
+      title: 'Warning Signs: When to Seek Medical Attention Immediately',
+      description:
+        'Symptomatic gallstones can cause swelling or blockage in the bile duct. Speak to a doctor immediately if you experience:',
+      signs: [
+        'Severe stomach pain that stays continuously for more than 4 hours without relief',
+        'Fever with shivering or body chills (sign of gallbladder infection)',
+        'Yellowing of your eyes or skin (jaundice), or high-colored dark urine',
+        'Severe central stomach pain going straight to your back with repeated vomiting',
+      ],
+    },
+    diagramTitle: 'Understanding Gallstones in the Gallbladder',
+    diagramDescription:
+      'This simple diagram shows where the gallbladder sits under the liver, how stones form inside it, and how keyhole surgery gently resolves the blockage.',
     treatmentOptions: [
       {
-        title: 'Medical Evaluation & Observation',
-        subtitle: 'Diagnostic Assessment',
-        description: 'Comprehensive ultrasound imaging, liver function tests, and physician evaluation for asymptomatic or incidental gallstones.',
-        suitableFor: 'Suitable for select silent stones with no active inflammation, subject to clinical judgment.',
-        badge: 'Diagnostic Phase',
+        title: 'Medical Review & Ultrasound Check',
+        subtitle: 'For Silent Gallstones',
+        description:
+          'Careful ultrasound evaluation and doctor review for small stones discovered by chance that are not causing any pain.',
+        suitableFor: 'Suitable for selected silent gallstones under doctor observation.',
+        badge: 'Medical Review',
       },
       {
-        title: 'Minimally Invasive Laparoscopy',
-        subtitle: 'Laparoscopic Cholecystectomy',
-        description: 'Standard surgical removal of the gallbladder using tiny keyhole incisions, high-definition camera guidance, and rapid recovery protocols.',
-        suitableFor: 'Recommended for symptomatic gallstones to prevent recurring attacks, infection, or duct blockage.',
+        title: 'Laparoscopic Keyhole Surgery',
+        subtitle: 'Gold Standard Treatment',
+        description:
+          'Safe removal of the gallbladder through 3 or 4 tiny incisions (5mm to 10mm) using a mini camera.',
+        suitableFor: 'Recommended for gallstones that cause pain attacks or digestion problems.',
         badge: 'Gold Standard',
       },
       {
-        title: 'Supportive & Post-Treatment Care',
-        subtitle: 'Nutritional & Recovery Guidance',
-        description: 'Structured dietary counseling, digestive monitoring, and systematic follow-up to ensure seamless transition back to daily nutrition.',
-        suitableFor: 'Provided for all patients before and after treatment to safeguard digestive wellness.',
-        badge: 'Complete Support',
+        title: 'Single-Incision & Fast Track Care',
+        subtitle: 'Minimally Invasive Care',
+        description:
+          'Advanced laparoscopic approach with minimal marks, reduced discomfort, and quick return to regular food.',
+        suitableFor: 'Selected patients meeting clinical safety guidelines after surgeon assessment.',
+        badge: 'Daycare Option',
       },
     ],
+    daycareInfo: {
+      headline: 'Ask About Same-Day Discharge Options',
+      summary:
+        'Some procedures allow patients to return home on the same day or within 24 hours. Our team will explain the expected discharge time based on your treatment and medical condition.',
+      bulletPoints: [
+        'Ask about same-day discharge or 24-hour observation options',
+        'Explore daycare surgery for suitable conditions with keyhole incisions',
+        'Understand your expected recovery timeline: walking within hours, desk work in 5 to 7 days',
+        'Speak to our team about your treatment options and simple diet advice after surgery',
+      ],
+      recoveryTimeline:
+        'Most patients walk comfortably and take light liquids within hours of keyhole surgery. You can usually return to desk work and everyday routine in about 5 to 7 days with simple dietary care.',
+      clinicalDisclaimer:
+        'Clinical Note: Same-day discharge and recovery timelines depend on individual clinical assessment, acute inflammation levels, and your surgeon’s guidance. Discharge timing is determined solely by your doctor for your safety.',
+    },
+    insuranceInfo: {
+      title: 'Need Help With Insurance? Speak to Our Team',
+      badge: 'Insurance Assistance',
+      description:
+        'Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
+      ctaText: 'Enquire About Insurance Support',
+      coverageNote:
+        'Cashless hospitalisation facility is available subject to verification of your specific insurer, active policy terms, and third-party administrator (TPA) approval.',
+      points: [
+        'Guidance on pre-authorization forms and claim paperwork',
+        'Help with hospital bills, diagnostic records, and discharge summaries',
+        'Support for corporate insurance policies and individual health plans',
+        'Clear cost estimates explained upfront so there are no surprises',
+      ],
+    },
     faqs: [
       {
-        question: 'What causes gallstones?',
-        answer: 'Gallstones form when bile contains an imbalance of substances such as excess cholesterol, excess bilirubin, or insufficient bile salts, leading to crystallization within the gallbladder. Dietary patterns, genetics, age, and metabolic factors play key roles.',
+        question: 'Can gallstones be dissolved with medicines?',
+        answer:
+          'No, medicines cannot safely dissolve gallstones. Unlike kidney stones, gallstones sit in a small pouch with a narrow neck. Even if medicines are tried, stones almost always return once medication stops. Keyhole surgery is the proven, safe solution worldwide.',
       },
       {
-        question: 'What are the symptoms of gallstones?',
-        answer: 'Common symptoms include sharp or dull pain in the upper right abdomen, pain radiating to the shoulder blade after fatty meals, nausea, vomiting, indigestion, and bloating. Some people have silent gallstones with no symptoms.',
+        question: 'Why is the entire gallbladder removed instead of just the stones?',
+        answer:
+          'The gallbladder itself is where the imbalance occurs that makes stones form. If only the stones were taken out, new stones would form again in a few months. Removing the gallbladder solves the problem permanently.',
       },
       {
-        question: 'When should I see a doctor?',
-        answer: 'Seek medical evaluation if you have recurrent upper abdominal pain after meals, unprovoked nausea, or persistent discomfort. Immediate medical care is necessary if pain is accompanied by fever, chills, or yellowish tint in the eyes (jaundice).',
+        question: 'Can I digest food normally without a gallbladder?',
+        answer:
+          'Yes, absolutely. The liver produces bile to digest food, not the gallbladder. The gallbladder is just a small storage pouch. Without it, bile flows directly into your intestines. After a few weeks of eating light food, most patients eat normally without issues.',
       },
       {
-        question: 'Do all gallstones require surgery?',
-        answer: 'Not all gallstones require immediate surgery. Asymptomatic stones discovered incidentally may be monitored under physician supervision. However, symptomatic gallstones that trigger biliary colic or inflammation generally require treatment to prevent complications.',
+        question: 'What are the benefits of laparoscopic keyhole surgery?',
+        answer:
+          'Keyhole surgery uses tiny 5mm to 10mm cuts instead of a big cut. This means much less pain, very little blood loss, tiny scars, and a much faster return home and back to office work.',
       },
       {
-        question: 'What treatment options are available?',
-        answer: 'Treatment options include medical evaluation with dietary modifications, supportive symptom relief, and minimally invasive laparoscopic cholecystectomy (gallbladder removal), which is the clinically established standard for symptomatic cases.',
+        question: 'How much does gallstone surgery cost?',
+        answer:
+          'Our hospital team believes in clear cost guidance. The exact cost depends on your general health and room category chosen. Speak to our team before making any decision to get a clear estimate.',
       },
       {
-        question: 'How is gallstone treatment decided?',
-        answer: 'Treatment is decided based on a careful clinical examination, symptom severity, ultrasound findings, gallbladder wall thickness, and your overall health status evaluated by our surgical specialists.',
+        question: 'Does PUNYA Hospital assist with health insurance?',
+        answer:
+          'Yes. Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
       },
       {
-        question: 'How long does recovery take?',
-        answer: 'Following laparoscopic gallbladder surgery, most patients are able to walk comfortably within hours, be discharged within 24 to 48 hours, and resume routine desk work and light activities within 5 to 7 days as advised by the doctor.',
+        question: 'Who performs the surgery at PUNYA Hospital?',
+        answer:
+          'Your procedure will be performed by Dr. Nagaraj B. Puttaswamy, our Chief Consultant Surgeon with 30+ years of laparoscopic surgical experience in Bangalore.',
       },
       {
-        question: 'How can I book an appointment?',
-        answer: 'You can book an appointment by filling out the online consultation form on this page, calling our Bangalore hospital helpline, or messaging us directly on WhatsApp.',
+        question: 'How do I book a consultation or second opinion?',
+        answer:
+          'Simply fill in the form on this page, call our hospital helpline (+91 94038 90559), or WhatsApp our team. Bring any ultrasound reports you already have.',
       },
     ],
   },
@@ -224,357 +404,606 @@ export const LANDING_PAGES_DATA: Record<ConditionId, LandingPageContent> = {
   hernia: {
     id: 'hernia',
     path: '/hernia-treatment',
+    canonicalUrl: 'https://punyahospital.acquiresurgery.com/hernia-treatment',
     adKeyword: 'Hernia Treatment in Bangalore',
-    title: 'Hernia Treatment in Bangalore | PUNYA Hospital',
-    metaTitle: 'Hernia Treatment in Bangalore | PUNYA Hospital',
-    metaDescription: 'Get evaluated by a qualified specialist and understand the right treatment option for your hernia at PUNYA Hospital, Bangalore. Advanced laparoscopic & open repair.',
-    heroHeadline: 'Hernia Treatment in Bangalore',
-    heroSupportingText: 'Get evaluated by a qualified specialist and understand the right treatment option for your hernia.',
-    whatsappMessage: 'Hello PUNYA Hospital, I would like to consult a specialist regarding Hernia treatment. Please help me with an appointment.',
-    doctorSpeciality: 'Hernia & Laparoscopic Surgery',
+    title: 'Hernia Treatment in Bangalore — Get Expert Guidance | PUNYA Hospital',
+    metaTitle: 'Hernia Treatment in Bangalore — Get Expert Guidance | PUNYA Hospital',
+    metaDescription:
+      'Have a hernia bulge or discomfort? Understand your treatment options, laparoscopic 3D mesh repair, clear cost guidance, and insurance support at PUNYA Hospital Bangalore.',
+    heroHeadline: 'Hernia Treatment in Bangalore — Get Expert Guidance',
+    heroSubheadline:
+      'Have a hernia bulge or discomfort? Understand your treatment options and what to expect from consultation to recovery.',
+    heroSupportingText:
+      'Do not let an uncomfortable bulge stop you from your active life. Consult Dr. Nagaraj B. Puttaswamy (30+ years experience) for modern laparoscopic keyhole mesh repair with clear recovery guidance in Basaveshwar Nagar, Bangalore.',
+    heroBadge: 'Advanced 3D Mesh Repair • Bangalore',
+    heroCtaText: 'Enquire About Hernia Treatment',
+    whatsappMessage:
+      'Hello PUNYA Hospital, I am looking for guidance on hernia treatment options and insurance support. Please help me with an appointment.',
+    doctorSpeciality: 'Senior Consultant – Hernia, General & Laparoscopic Surgery',
+    benefitCards: [
+      {
+        title: 'Modern Hernia Repair',
+        description: 'Learn about suitable repair options using modern keyhole techniques and lightweight 3D mesh.',
+        iconName: 'Cpu',
+        badge: 'Keyhole Repair',
+      },
+      {
+        title: 'Patient-Friendly Care',
+        description: 'Get clear information at each step without difficult medical jargon, with complete respect for your comfort.',
+        iconName: 'Heart',
+        badge: 'Supportive Care',
+      },
+      {
+        title: 'Recovery Planning',
+        description: 'Understand your expected recovery and discharge milestones clearly before your procedure.',
+        iconName: 'Compass',
+        badge: 'Fast Recovery',
+      },
+      {
+        title: 'Cost and Insurance Guidance',
+        description: 'Ask about expected costs and available insurance support openly with our friendly care desk.',
+        iconName: 'IndianRupee',
+        badge: 'Clear Estimates',
+      },
+    ],
     symptoms: [
       {
         id: 'bulge',
-        name: 'Bulge or swelling',
-        description: 'A visible or palpable bulge in the groin, abdomen, or around the navel.',
+        name: 'Visible bulge in groin, belly button, or abdomen',
+        description: 'A soft swelling that shows more clearly when you stand up, bend over, cough, or lift heavy items.',
         iconName: 'ShieldAlert',
       },
       {
         id: 'pain-lifting',
-        name: 'Pain while lifting',
-        description: 'A dull ache or sharp strain felt when lifting heavy grocery bags or weights.',
+        name: 'Pain or pulling sensation when lifting items',
+        description: 'A dull ache, burning, or sharp tugging feeling during physical work or exercise.',
         iconName: 'Flame',
       },
       {
         id: 'cough-discomfort',
-        name: 'Discomfort while coughing',
-        description: 'Pressure or sudden popping sensation in the hernia site during coughing or sneezing.',
+        name: 'Discomfort when coughing or sneezing',
+        description: 'A noticeable impulse or sudden popping feeling at the bulge site when you cough.',
         iconName: 'AlertCircle',
       },
       {
         id: 'heaviness',
-        name: 'Heaviness in abdomen',
-        description: 'A dragging sensation or fullness in the lower abdominal or groin area.',
+        name: 'Dragging sensation or heaviness in lower belly',
+        description: 'A tired, heavy feeling in the groin area towards the evening after a busy day on your feet.',
         iconName: 'Activity',
       },
       {
         id: 'pain-standing',
-        name: 'Pain while standing',
-        description: 'Discomfort that builds up toward the end of the day after prolonged standing or walking.',
+        name: 'Pain that increases after standing for long hours',
+        description: 'Growing discomfort after long standing at work, traveling, or carrying groceries.',
         iconName: 'Armchair',
       },
       {
-        id: 'swelling-activity',
-        name: 'Swelling that increases during activity',
-        description: 'Bulge becomes more prominent when active and may reduce or disappear when lying down.',
+        id: 'disappearing-bulge',
+        name: 'Bulge that reduces when lying down flat',
+        description: 'In early stages, the swelling often slips back inside smoothly when you lie down in bed.',
         iconName: 'Droplets',
       },
     ],
-    diagramTitle: 'Understanding Hernia (Abdominal Wall Defect)',
-    diagramDescription: 'Anatomical illustration demonstrating the abdominal wall muscular layer, development of localized weakness, and tissue/bowel protrusion.',
+    warningSigns: {
+      title: 'Warning Signs: When a Hernia Needs Emergency Care',
+      description:
+        'A hernia can get trapped or twist (strangulation). If this happens, seek emergency hospital care right away:',
+      signs: [
+        'The bulge suddenly becomes very painful, hard, or tender and will not go back in',
+        'Feeling nauseous, vomiting, or unable to pass gas or motion',
+        'The skin over the bulge turns red, bluish, or dark',
+        'High fever with severe swelling in the stomach area',
+      ],
+    },
+    diagramTitle: 'Understanding Hernia & How Mesh Strengthens the Muscle',
+    diagramDescription:
+      'This simple diagram shows the muscle weakness where tissue pushes through, and how a soft medical mesh reinforces the wall so the bulge does not return.',
     treatmentOptions: [
       {
-        title: 'Observation & Supportive Care',
-        subtitle: 'Early Clinical Supervision',
-        description: 'Periodic clinical monitoring, activity adjustment guidance, and lifestyle counseling for small, asymptomatic reducible hernias.',
-        suitableFor: 'Suitable for select patients under careful specialist evaluation before definitive repair.',
-        badge: 'Clinical Monitoring',
+        title: 'Clinical Checkup & Advice',
+        subtitle: 'Specialist Examination',
+        description:
+          'Careful physical check and ultrasound scan to determine the exact type of hernia (inguinal, umbilical, or incisional).',
+        suitableFor: 'Every patient presenting with a bulge to plan the safest treatment.',
+        badge: 'Clinical Review',
       },
       {
-        title: 'Minimally Invasive Laparoscopic Repair',
-        subtitle: 'Keyhole Mesh Hernioplasty',
-        description: 'Repair performed through miniature incisions using a laparoscopic camera and sterile synthetic mesh reinforcement.',
-        suitableFor: 'Treatment options depending on diagnosis, clinical assessment, and hernia type (inguinal, umbilical, incisional).',
+        title: 'Laparoscopic Keyhole Mesh Repair',
+        subtitle: 'TAPP & TEP Technique',
+        description:
+          'Repair done from behind the muscle wall through three tiny cuts, placing a supportive 3D mesh with minimal pain.',
+        suitableFor: 'Recommended for most groin, navel, and bilateral hernias for quick healing.',
         badge: 'Minimally Invasive',
       },
       {
-        title: 'Open Surgical Hernia Repair',
-        subtitle: 'Targeted Mesh Repair',
-        description: 'Direct anatomical repair with supportive tension-free mesh reinforcement for complex, recurrent, or large abdominal wall defects.',
-        suitableFor: 'Recommended when clinically appropriate based on medical history and anatomical considerations.',
+        title: 'Open Tension-Free Mesh Repair',
+        subtitle: 'Targeted Open Repair',
+        description:
+          'Direct repair using comfortable local or regional anesthesia for very large or complex hernias.',
+        suitableFor: 'Recommended when laparoscopic approach is not advisable based on patient health history.',
         badge: 'Conventional Option',
       },
     ],
+    daycareInfo: {
+      headline: 'Ask About Same-Day Discharge Options',
+      summary:
+        'Some procedures allow patients to return home on the same day or within 24 hours. Our team will explain the expected discharge time based on your treatment and medical condition.',
+      bulletPoints: [
+        'Ask about same-day discharge options for suitable keyhole repairs',
+        'Explore daycare surgery for suitable conditions with gentle post-operative care',
+        'Understand your expected recovery timeline: comfortable walking within hours, desk work in 3 to 5 days',
+        'Speak to our team about your treatment options and safe activity milestones',
+      ],
+      recoveryTimeline:
+        'Most patients walk comfortably on the day of surgery. You can usually return to desk work and light daily activities within 3 to 5 days. Heavy lifting is safely avoided for 3 to 4 weeks under doctor advice.',
+      clinicalDisclaimer:
+        'Clinical Note: Same-day discharge and recovery timelines depend on individual clinical assessment, hernia size, patient fitness, and your surgeon’s guidance. Discharge timing is determined solely by your doctor for your safety.',
+    },
+    insuranceInfo: {
+      title: 'Need Help With Insurance? Speak to Our Team',
+      badge: 'Insurance Assistance',
+      description:
+        'Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
+      ctaText: 'Enquire About Insurance Support',
+      coverageNote:
+        'Cashless hospitalisation facility is available subject to verification of your specific insurer, active policy terms, and third-party administrator (TPA) approval.',
+      points: [
+        'Guidance on pre-authorization forms and claim paperwork',
+        'Help with hospital bills, diagnostic records, and discharge summaries',
+        'Support for corporate insurance policies and individual health plans',
+        'Clear cost estimates explained upfront so there are no surprises',
+      ],
+    },
     faqs: [
       {
-        question: 'What causes a hernia?',
-        answer: 'A hernia occurs when internal tissue or an organ pushes through a weakened spot in the surrounding muscle or connective tissue. Causes include congenital weakness, age-related tissue thinning, chronic cough, heavy weightlifting, straining from constipation, or prior surgical incisions.',
+        question: 'Can a hernia heal with exercise, belts, or medicines?',
+        answer:
+          'No. A hernia is a physical gap or tear in the muscle wall. No exercise, medicine, yoga, or hernia belt can close this muscular opening. In fact, heavy strain often makes the hole bigger.',
       },
       {
-        question: 'What are the common symptoms?',
-        answer: 'Common symptoms include a noticeable bulge in the groin, navel, or upper abdomen; aching pain or burning sensations at the bulge; increased discomfort when bending, lifting, or coughing; and a dragging feeling in the pelvis.',
+        question: 'What happens if I delay hernia treatment?',
+        answer:
+          'Over time, hernias gradually grow larger as daily stomach pressure pushes against the gap. Delaying also increases the chance of the intestine getting stuck inside (strangulation), which turns into an emergency.',
       },
       {
-        question: 'Can a hernia go away on its own?',
-        answer: 'No, a hernia cannot heal or repair itself on its own because the underlying muscular defect requires structural closure. While symptoms may fluctuate, the physical defect remains until repaired.',
+        question: 'Why is a mesh used in hernia repair?',
+        answer:
+          'The mesh acts like a gentle support net. It covers the weak spot without pulling the muscle tight. Over a few weeks, your natural tissue grows into the mesh, making the area strong and preventing the hernia from coming back.',
       },
       {
-        question: 'Does every hernia require surgery?',
-        answer: 'Not every hernia needs an immediate emergency procedure, but most symptomatic or expanding hernias are recommended for surgical repair to prevent complications such as obstruction or strangulation. A qualified doctor will evaluate your specific condition.',
+        question: 'Can I go home on the same day?',
+        answer:
+          'Yes, many eligible patients undergoing keyhole hernia repair are discharged on the same day after a short rest, or after an overnight 24-hour stay. Your doctor will check your comfort before confirming discharge.',
       },
       {
-        question: 'When should I consult a doctor?',
-        answer: 'You should consult a doctor as soon as you notice a bulge or recurrent pain. Seek immediate emergency evaluation if the bulge becomes suddenly painful, firm, discolored, or cannot be gently pushed back, especially if accompanied by vomiting.',
+        question: 'How much does hernia surgery cost?',
+        answer:
+          'We understand treatment costs matter to every family. Speak to our team to understand the available treatment options and expected costs before making a decision.',
       },
       {
-        question: 'What treatment options are available?',
-        answer: 'Treatment options at PUNYA Hospital include watchful observation for select early cases, advanced minimally invasive laparoscopic mesh repair (TAPP / TEP), and open mesh hernioplasty tailored to the patient’s anatomy.',
+        question: 'Does PUNYA Hospital help with insurance claims?',
+        answer:
+          'Yes. Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
       },
       {
-        question: 'How long does recovery take?',
-        answer: 'With modern laparoscopic hernia repair, patients generally walk the same day, go home within 24 hours, and can resume desk-based work within 3 to 7 days. Strenuous lifting is usually resumed after 3 to 4 weeks under doctor guidance.',
+        question: 'Who will examine my hernia?',
+        answer:
+          'You will be evaluated by Dr. Nagaraj B. Puttaswamy, our Chief Consultant Surgeon with over 30 years of surgical experience in Bangalore.',
       },
       {
         question: 'How do I book an appointment?',
-        answer: 'You can book your consultation by completing the form on this page, calling our direct hospital line, or connecting with our team on WhatsApp for prompt assistance.',
+        answer:
+          'Fill out the form on this page, call our hospital desk directly (+91 94038 90559), or message us on WhatsApp for quick scheduling.',
       },
     ],
   },
+
   'uterine-fibroids': {
     id: 'uterine-fibroids',
     path: '/uterine-fibroids',
+    canonicalUrl: 'https://punyahospital.acquiresurgery.com/uterine-fibroids',
     adKeyword: 'Uterine Fibroids Treatment in Bangalore',
-    title: 'Uterine Fibroids Treatment in Bangalore | PUNYA Hospital',
-    metaTitle: 'Uterine Fibroids Treatment in Bangalore | PUNYA Hospital',
-    metaDescription: 'Get expert evaluation and personalised treatment options for uterine fibroids at PUNYA Hospital Bangalore. Modern diagnostics and compassionate women’s healthcare.',
-    heroHeadline: 'Uterine Fibroids Treatment in Bangalore',
-    heroSupportingText: 'Get expert evaluation and personalised treatment options for uterine fibroids at PUNYA Hospital.',
-    whatsappMessage: 'Hello PUNYA Hospital, I would like to consult a specialist regarding uterine fibroids. Please help me with an appointment.',
-    doctorSpeciality: 'Gynecology & Women’s Health',
+    title: 'Uterine Fibroid Treatment in Bangalore — Understand Your Options | PUNYA Hospital',
+    metaTitle: 'Uterine Fibroid Treatment in Bangalore — Understand Your Options | PUNYA Hospital',
+    metaDescription:
+      'Experiencing heavy periods, pelvic pressure, or fibroids? Speak to senior lady gynecologist Dr. Punyavathi C. Nagaraj at PUNYA Hospital Bangalore about treatment options and insurance support.',
+    heroHeadline: 'Uterine Fibroid Treatment in Bangalore — Understand Your Options',
+    heroSubheadline:
+      'Experiencing heavy periods, pelvic pressure, or other symptoms? Speak to a specialist about assessment and suitable treatment options.',
+    heroSupportingText:
+      'Consult Dr. Punyavathi C. Nagaraj (20+ years experience, MD, Laparoscopy Diploma Germany) for compassionate women’s healthcare, fertility-preserving care, and clear cost guidance in Basaveshwar Nagar, Bangalore.',
+    heroBadge: "Women's Health & Laparoscopy • Bangalore",
+    heroCtaText: 'Request a Consultation',
+    whatsappMessage:
+      'Hello PUNYA Hospital, I am looking for guidance on uterine fibroids treatment options and insurance support. Please help me with an appointment.',
+    doctorSpeciality: 'Senior Consultant – Obstetrics, Gynecology & Laparoscopic Surgeon',
+    benefitCards: [
+      {
+        title: "Women's Health Support",
+        description: 'Get patient, personal guidance for your individual health concerns in a private, comfortable setting.',
+        iconName: 'Heart',
+        badge: 'Lady Doctor',
+      },
+      {
+        title: 'Treatment Options',
+        description: 'Understand available medical and surgical approaches, including techniques that protect your uterus.',
+        iconName: 'Cpu',
+        badge: 'Fertility Focus',
+      },
+      {
+        title: 'Recovery Guidance',
+        description: 'Learn about the expected recovery process clearly with helpful milestones from your doctor.',
+        iconName: 'Compass',
+        badge: 'Clear Pathway',
+      },
+      {
+        title: 'Cost and Insurance Support',
+        description: 'Ask about expected costs and available insurance assistance openly with our hospital helpdesk.',
+        iconName: 'IndianRupee',
+        badge: 'Clear Estimates',
+      },
+    ],
     symptoms: [
       {
         id: 'heavy-bleeding',
-        name: 'Heavy or prolonged menstrual bleeding',
-        description: 'Excessive menstrual flow, passing blood clots, or bleeding episodes lasting longer than usual.',
+        name: 'Heavy or prolonged periods with blood clots',
+        description: 'Periods lasting more than 7 days, needing frequent pad changes, or passing thick clots.',
         iconName: 'Droplets',
       },
       {
         id: 'pelvic-pressure',
-        name: 'Pelvic pressure or discomfort',
-        description: 'A constant feeling of heaviness, fullness, or chronic ache deep in the lower abdomen.',
+        name: 'Feeling of pressure or heaviness in lower belly',
+        description: 'A constant fullness or bloated feeling in your lower stomach as if carrying extra weight.',
         iconName: 'ShieldAlert',
       },
       {
         id: 'abdominal-pain',
-        name: 'Abdominal pain',
-        description: 'Recurrent cramping or localized tenderness in the lower abdomen and pelvic area.',
+        name: 'Painful cramps and lower stomach ache',
+        description: 'Severe monthly period pain or a persistent ache radiating to your back and thighs.',
         iconName: 'Flame',
       },
       {
         id: 'frequent-urination',
-        name: 'Frequent urination',
-        description: 'Need to urinate frequently caused by fibroids exerting pressure against the urinary bladder.',
+        name: 'Needing to urinate frequently',
+        description: 'Fibroids pressing on the bladder make you feel the urge to visit the washroom very often.',
         iconName: 'AlertCircle',
       },
       {
         id: 'back-pain',
-        name: 'Lower back pain',
-        description: 'Persistent dull lower back or posterior pelvic ache radiating toward the hips or legs.',
+        name: 'Dull, persistent lower back ache',
+        description: 'Back stiffness and lower ache caused by fibroids pressing against pelvic muscles and nerves.',
         iconName: 'Activity',
       },
       {
-        id: 'period-discomfort',
-        name: 'Period-related discomfort',
-        description: 'Severe menstrual cramps (dysmenorrhea) and pain that interferes with day-to-day routines.',
+        id: 'pain-intimacy',
+        name: 'Pain or discomfort during intimacy',
+        description: 'Discomfort during sexual intercourse caused by fibroids located near the lower uterus.',
         iconName: 'HeartHandshake',
       },
     ],
-    diagramTitle: 'Understanding Uterine Fibroids',
-    diagramDescription: 'Clear, non-graphic anatomical illustration explaining the normal uterus, fibroid positions, and classification: Submucosal, Intramural, and Subserosal.',
+    warningSigns: {
+      title: 'When Should You Consult a Gynecologist Promptly?',
+      description:
+        'While fibroids are non-cancerous, heavy bleeding can weaken your health over time. Speak to our lady gynecologist if:',
+      signs: [
+        'Heavy periods leave you feeling exhausted, pale, dizzy, or breathless (signs of low hemoglobin / anemia)',
+        'Bleeding is so heavy that you soak through two or more thick pads every hour',
+        'Sudden, severe pelvic pain that does not settle with standard pain relief tablets',
+        'Difficulty passing urine or severe constipation caused by large pelvic swelling',
+      ],
+    },
+    diagramTitle: 'Understanding Uterine Fibroids & Uterus-Preserving Options',
+    diagramDescription:
+      'This simple diagram shows the uterus, the different places fibroids can grow, and how keyhole myomectomy gently removes the fibroids while preserving the healthy uterus.',
     treatmentOptions: [
       {
-        title: 'Observation & Monitoring',
-        subtitle: 'Watchful Clinical Waiting',
-        description: 'For suitable patients who may not require immediate active intervention, with routine ultrasound check-ups to track growth.',
-        suitableFor: 'Suitable for small, asymptomatic fibroids in patients approaching menopause or with stable clinical findings.',
-        badge: 'Regular Monitoring',
+        title: 'Ultrasound Check & Monitoring',
+        subtitle: 'For Small Asymptomatic Fibroids',
+        description:
+          'Routine ultrasound scans and doctor review for small fibroids that do not cause heavy bleeding or pain.',
+        suitableFor: 'Suitable for small fibroids in women nearing menopause with stable findings.',
+        badge: 'Regular Checkups',
       },
       {
-        title: 'Medication-Based Management',
-        subtitle: 'Symptom Relief & Medical Therapy',
-        description: 'Treatment may be considered to help manage certain symptoms such as heavy bleeding and cramps, depending on the clinical situation.',
-        suitableFor: 'Recommended for managing bleeding irregularities or reducing discomfort under specialist guidance.',
-        badge: 'Medical Therapy',
+        title: 'Medication & Cycle Regulation',
+        subtitle: 'Symptom Relief',
+        description:
+          'Simple medical therapies to reduce heavy menstrual blood flow, correct anemia, and ease period cramps.',
+        suitableFor: 'Recommended for symptom management under senior gynecologist guidance.',
+        badge: 'Medical Care',
       },
       {
-        title: 'Minimally Invasive Treatment',
-        subtitle: 'Organ-Preserving Advanced Care',
-        description: 'Appropriate modern procedures (e.g. hysteroscopic resection or laparoscopic myomectomy) may be considered for selected patients.',
-        suitableFor: 'Considered for patients wishing to preserve uterine anatomy with targeted fibroid removal.',
-        badge: 'Minimally Invasive',
+        title: 'Uterus-Preserving Laparoscopic Myomectomy',
+        subtitle: 'Keyhole Fibroid Removal',
+        description:
+          'Minimally invasive keyhole surgery to remove only the fibroids while reconstructing and preserving your uterus and fertility.',
+        suitableFor: 'Ideal for women wanting relief from fibroids while protecting their fertility and natural uterus.',
+        badge: 'Fertility Preserving',
       },
       {
-        title: 'Surgical Treatment',
-        subtitle: 'Definitive Surgical Care',
-        description: 'Surgery may be recommended depending on fibroid size, number, location, severity of symptoms, and individual health circumstances.',
-        suitableFor: 'Decided after proper clinical evaluation by a qualified specialist based on individual patient health.',
-        badge: 'Specialist Surgery',
+        title: 'Definitive Surgical Care',
+        subtitle: 'When Clinically Indicated',
+        description:
+          'Careful surgical options for very large or multiple fibroids in women who have completed their family.',
+        suitableFor: 'Decided after thoughtful consultation and clear discussion of your personal health wishes.',
+        badge: 'Definitive Option',
       },
     ],
+    daycareInfo: {
+      headline: 'Ask About Same-Day Discharge Options',
+      summary:
+        'Some procedures allow patients to return home on the same day or within 24 to 48 hours. Our team will explain the expected discharge time based on your treatment and medical condition.',
+      bulletPoints: [
+        'Ask about same-day discharge options for suitable minor or hysteroscopic procedures',
+        'Explore daycare surgery for suitable conditions with gentle keyhole access',
+        'Understand your expected recovery timeline: comfortable walking within 24 hours, desk work in 7 to 10 days',
+        'Speak to our team about your treatment options and personalized care plan',
+      ],
+      recoveryTimeline:
+        'Following keyhole laparoscopic fibroid removal, most women walk comfortably the next day. You can usually return to desk work and everyday social routines in 7 to 10 days with simple guidance.',
+      clinicalDisclaimer:
+        'Clinical Note: Same-day discharge and recovery timelines depend on individual clinical assessment, fibroid number, size, and surgical scope. Discharge timing is determined solely by your doctor for your safety.',
+    },
+    insuranceInfo: {
+      title: 'Need Help With Insurance? Speak to Our Team',
+      badge: 'Insurance Assistance',
+      description:
+        'Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
+      ctaText: 'Enquire About Insurance Support',
+      coverageNote:
+        'Cashless hospitalisation facility is available subject to verification of your specific insurer, active policy terms, and third-party administrator (TPA) approval.',
+      points: [
+        'Guidance on pre-authorization forms and claim paperwork',
+        'Help with hospital bills, diagnostic records, and discharge summaries',
+        'Support for corporate insurance policies and individual health plans',
+        'Clear cost estimates explained upfront so there are no surprises',
+      ],
+    },
     faqs: [
       {
-        question: 'What are uterine fibroids?',
-        answer: 'Uterine fibroids (leiomyomas) are non-cancerous muscular growths that develop within or on the muscular wall of the uterus. They vary in size from microscopic nodules to larger masses, and a woman may have a single fibroid or multiple fibroids.',
+        question: 'Are uterine fibroids cancerous?',
+        answer:
+          'No. Uterine fibroids are benign (non-cancerous) muscle growths. Having fibroids does not mean you have cancer, and cancerous change is extremely rare. However, they should be checked because they can cause severe bleeding and anemia.',
       },
       {
-        question: 'What causes uterine fibroids?',
-        answer: 'The exact cause is not fully understood, but clinical research indicates that reproductive hormones (estrogen and progesterone), genetic predispositions, and cellular growth factors influence their development and growth during reproductive years.',
+        question: 'Can my uterus be saved if I have fibroid surgery?',
+        answer:
+          'Yes, certainly. At PUNYA Hospital, Dr. Punyavathi C. Nagaraj specializes in laparoscopic myomectomy—a gentle keyhole surgery that removes only the fibroids and carefully reconstructs the uterine muscle, keeping your uterus safe.',
       },
       {
-        question: 'What are the common symptoms?',
-        answer: 'Common symptoms include heavy or prolonged menstrual bleeding, pelvic pressure or chronic fullness, lower abdominal pain, frequent urination, difficulty emptying the bladder, and lower back ache. However, many women have fibroids with no symptoms at all.',
+        question: 'Do all fibroids require surgery?',
+        answer:
+          'No, not at all. If fibroids are small and not causing pain or heavy bleeding, they can often be monitored safely with periodic ultrasound scans and simple medicines.',
       },
       {
-        question: 'Can fibroids cause heavy periods?',
-        answer: 'Yes. Fibroids that press against or distort the uterine lining (particularly submucosal and intramural fibroids) frequently lead to heavy menstrual bleeding, presence of blood clots, and prolonged menstrual cycles, which may lead to iron-deficiency anemia if left unaddressed.',
+        question: 'Can fibroids cause tiredness and low hemoglobin?',
+        answer:
+          'Yes, very commonly. Continuous heavy periods lead to iron deficiency anemia, making you feel weak, dizzy, and exhausted. Treating fibroids stops excess blood loss so your energy can return.',
       },
       {
-        question: 'Do all fibroids require treatment?',
-        answer: 'No, not every fibroid requires treatment. Small, asymptomatic fibroids that do not interfere with daily life or fertility can often be monitored safely through periodic ultrasound imaging and specialist check-ups.',
+        question: 'How much does fibroid treatment cost?',
+        answer:
+          'We understand that treatment costs matter to every family. Speak to our team to understand the available treatment options and expected costs before making a decision.',
       },
       {
-        question: 'Can fibroids be treated without surgery?',
-        answer: 'Yes, medication-based management can help regulate heavy bleeding and relieve pain for many patients. Your gynecologist will evaluate your symptoms, age, fertility preferences, and ultrasound scans to recommend whether medical management or observation is suitable.',
+        question: 'Does PUNYA Hospital provide insurance assistance?',
+        answer:
+          'Yes. Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
       },
       {
-        question: 'When should I consult a gynecologist?',
-        answer: 'You should consult a gynecologist if you experience unusually heavy bleeding, severe menstrual pain, pelvic fullness or pain, bleeding between periods, or symptoms that affect your quality of life or energy levels.',
+        question: 'Who will evaluate me at PUNYA Hospital?',
+        answer:
+          'You will be personally consulted by Dr. Punyavathi C. Nagaraj, Senior Consultant Gynecologist with over 20 years of experience and specialized laparoscopic training from Germany.',
       },
       {
-        question: 'What tests are used to diagnose fibroids?',
-        answer: 'A pelvic examination by a gynecologist along with a pelvic ultrasound (abdominal or transvaginal) is the standard diagnostic tool. In certain complex cases, an MRI or saline infusion sonogram (SIS) may be recommended for detailed mapping of the fibroids.',
-      },
-      {
-        question: 'What treatment options are available?',
-        answer: 'Treatment options at PUNYA Hospital include clinical observation & monitoring, medical symptom management, minimally invasive endoscopic or laparoscopic procedures (such as myomectomy), and definitive surgical options tailored to your specific clinical findings.',
-      },
-      {
-        question: 'How do I book an appointment at PUNYA Hospital?',
-        answer: 'You can easily book your consultation by submitting the quick form on this page, calling our direct hospital helpline, or messaging us on WhatsApp to speak with our women’s healthcare team.',
+        question: 'How do I book a confidential consultation?',
+        answer:
+          'Fill in the consultation form on this page, call our hospital helpline (+91 94038 90559), or message us on WhatsApp. Our women’s care team will assist you with complete privacy.',
       },
     ],
   },
+
   endometriosis: {
     id: 'endometriosis',
     path: '/endometriosis',
+    canonicalUrl: 'https://punyahospital.acquiresurgery.com/endometriosis',
     adKeyword: 'Endometriosis Treatment in Bangalore',
-    title: 'Endometriosis Treatment in Bangalore | PUNYA Hospital',
-    metaTitle: 'Endometriosis Treatment in Bangalore | PUNYA Hospital',
-    metaDescription: 'Get expert evaluation and personalised care for endometriosis at PUNYA Hospital Bangalore. Comprehensive women’s healthcare with experienced gynecologists.',
-    heroHeadline: 'Endometriosis Treatment in Bangalore',
-    heroSupportingText: 'Get expert evaluation and personalised care for endometriosis at PUNYA Hospital.',
-    whatsappMessage: 'Hello PUNYA Hospital, I would like to consult a specialist regarding endometriosis. Please help me with an appointment.',
-    doctorSpeciality: 'Gynecology & Endometriosis Care',
+    title: 'Endometriosis Treatment in Bangalore — Get the Right Guidance | PUNYA Hospital',
+    metaTitle: 'Endometriosis Treatment in Bangalore — Get the Right Guidance | PUNYA Hospital',
+    metaDescription:
+      'Living with pelvic pain or painful periods? Learn about assessment and treatment options with guidance from a healthcare professional at PUNYA Hospital Bangalore.',
+    heroHeadline: 'Endometriosis Treatment in Bangalore — Get the Right Guidance',
+    heroSubheadline:
+      'Living with pelvic pain or painful periods? Learn about assessment and treatment options with guidance from a healthcare professional.',
+    heroSupportingText:
+      'Severe menstrual pain that stops your daily life is not normal. Consult Dr. Punyavathi C. Nagaraj (20+ years experience, German fellowship in laparoscopy) for clear diagnosis, gentle pain management, and empathetic care in Basaveshwar Nagar, Bangalore.',
+    heroBadge: 'Pelvic Pain & Advanced Laparoscopy • Bangalore',
+    heroCtaText: 'Enquire About Endometriosis Care',
+    whatsappMessage:
+      'Hello PUNYA Hospital, I am looking for guidance on endometriosis care options and insurance support. Please help me with an appointment.',
+    doctorSpeciality: 'Senior Consultant – Gynecology, Endometriosis & Laparoscopy',
+    benefitCards: [
+      {
+        title: 'Care That Understands Your Needs',
+        description: 'Discuss your symptoms and concerns openly with a senior lady doctor who listens with patience.',
+        iconName: 'Heart',
+        badge: 'Empathetic Care',
+      },
+      {
+        title: 'Treatment Guidance',
+        description: 'Explore options based on your clinical assessment, from hormonal balance to keyhole surgery.',
+        iconName: 'Compass',
+        badge: 'Clear Options',
+      },
+      {
+        title: 'Recovery and Follow-Up',
+        description: 'Understand the next steps in your care clearly, including long-term lifestyle and pain relief support.',
+        iconName: 'Clock',
+        badge: 'Ongoing Support',
+      },
+      {
+        title: 'Insurance Assistance',
+        description: 'Ask our team about available insurance support and paperwork guidance for your hospital visit.',
+        iconName: 'ShieldCheck',
+        badge: 'Insurance Desk',
+      },
+    ],
     symptoms: [
       {
         id: 'painful-periods',
-        name: 'Painful periods',
-        description: 'Severe menstrual cramps and pelvic pain (dysmenorrhea) that may begin before and extend several days into your period.',
+        name: 'Severe period cramps that disrupt your routine',
+        description: 'Period pain that begins days before bleeding, worsens during the cycle, and does not settle with standard pain tablets.',
         iconName: 'Flame',
       },
       {
         id: 'pelvic-pain',
-        name: 'Pelvic pain',
-        description: 'Chronic pelvic pain and lower abdominal aching that may persist outside of the menstrual cycle.',
+        name: 'Chronic lower stomach ache between periods',
+        description: 'A constant dull ache or heaviness in your lower belly that persists throughout the month.',
         iconName: 'ShieldAlert',
       },
       {
         id: 'pain-intercourse',
-        name: 'Pain during or after intercourse',
-        description: 'Deep pelvic pain experienced during or immediately following sexual intercourse (dyspareunia).',
+        name: 'Deep pain during or after intimacy',
+        description: 'Deep discomfort felt during sexual intercourse or a lingering ache in the pelvic area afterwards.',
         iconName: 'AlertCircle',
       },
       {
         id: 'pain-bowel',
-        name: 'Pain during bowel movements',
-        description: 'Painful bowel movements, particularly noticeable during or immediately around menstrual periods.',
+        name: 'Pain while passing motion during periods',
+        description: 'Sharp pain or difficulty when using the washroom, especially during menstrual days.',
         iconName: 'Activity',
       },
       {
         id: 'pain-urination',
-        name: 'Pain during urination',
-        description: 'Discomfort, urinary urgency, or burning sensations, particularly experienced around menstrual cycles.',
+        name: 'Pain or burning while urinating during cycle',
+        description: 'Frequent urge to urinate or bladder discomfort coinciding with your menstrual cycle.',
         iconName: 'Droplets',
       },
       {
         id: 'fertility-issues',
-        name: 'Difficulty becoming pregnant',
-        description: 'Challenges with fertility; endometriosis is sometimes first identified during clinical evaluation for conception difficulties.',
+        name: 'Difficulty conceiving or delayed pregnancy',
+        description: 'Endometriosis is often discovered when evaluating difficulties in getting pregnant naturally.',
         iconName: 'HeartHandshake',
       },
     ],
-    diagramTitle: 'Understanding Endometriosis',
-    diagramDescription: 'Professional, non-graphic medical diagram showing the uterus, ovaries, fallopian tubes, and ectopic endometrial-like tissue implants.',
+    warningSigns: {
+      title: 'When Should You Speak to a Specialist Doctor?',
+      description:
+        'Period pain that forces you to stay in bed or miss work is a medical sign that needs gentle evaluation. Speak to our team if:',
+      signs: [
+        'Menstrual pain causes you to take leave from college or office regularly',
+        'Over-the-counter painkillers no longer bring adequate relief',
+        'Pelvic pain has become a daily or weekly problem rather than just on cycle days',
+        'You have been trying for a baby for over a year without success alongside painful cycles',
+      ],
+    },
+    diagramTitle: 'Understanding Endometriosis in Simple Words',
+    diagramDescription:
+      'This simple diagram explains how tissue similar to the uterine lining grows outside the uterus on ovaries and pelvic areas, and how gentle keyhole surgery clears the implants to bring relief.',
     treatmentOptions: [
       {
-        title: 'Medical Management',
-        subtitle: 'Targeted Clinical Therapy',
-        description: 'Medication may be recommended depending on symptoms, age, and individual health circumstances to help manage inflammation and discomfort.',
-        suitableFor: 'Suitable for initial clinical care and symptom regulation under specialist oversight.',
+        title: 'Diagnostic Scan & Assessment',
+        subtitle: 'Thorough Specialist Review',
+        description:
+          'Expert pelvic checkup, high-definition ultrasound, and MRI scan to clearly map out areas of irritation.',
+        suitableFor: 'The first essential step for any woman experiencing chronic period or pelvic pain.',
+        badge: 'Diagnostic Review',
+      },
+      {
+        title: 'Hormonal & Medical Management',
+        subtitle: 'Symptom Relief',
+        description:
+          'Targeted hormonal therapies and anti-inflammatory medicines to calm tissue irritation and reduce monthly pain.',
+        suitableFor: 'Effective for regulating periods and managing pain under careful clinical oversight.',
         badge: 'Medical Care',
       },
       {
-        title: 'Pain & Symptom Management',
-        subtitle: 'Multimodal Comfort Care',
-        description: 'A personalised approach may be used to help manage symptoms and improve daily quality of life through tailored medical therapies.',
-        suitableFor: 'Designed to relieve chronic pelvic discomfort and cycle-related pain effectively.',
-        badge: 'Personalised Relief',
+        title: 'Laparoscopic Excision Surgery',
+        subtitle: 'Gentle Keyhole Care',
+        description:
+          'Careful keyhole removal of endometriotic implants and ovarian chocolate cysts while safeguarding your healthy ovaries.',
+        suitableFor: 'Recommended for persistent pain or when fertility optimization is needed.',
+        badge: 'Advanced Laparoscopy',
       },
       {
-        title: 'Hormonal Treatment',
-        subtitle: 'Endocrine Therapy Options',
-        description: 'May be considered for suitable patients based on thorough medical evaluation to help slow the progression of endometrial-like tissue.',
-        suitableFor: 'Evaluated individually taking reproductive plans and health history into account.',
-        badge: 'Hormone Therapy',
-      },
-      {
-        title: 'Surgical Treatment',
-        subtitle: 'Laparoscopic Care in Selected Cases',
-        description: 'Surgery may be considered in selected cases when clinically appropriate (e.g. diagnostic laparoscopy or targeted excision of lesions).',
-        suitableFor: 'Recommended by qualified specialists when non-surgical approaches require definitive evaluation or intervention.',
-        badge: 'Specialist Surgery',
+        title: 'Lifestyle & Nutritional Guidance',
+        subtitle: 'Holistic Support',
+        description:
+          'Simple anti-inflammatory diet tips and pelvic health counseling to help you feel your best every day.',
+        suitableFor: 'Included in all care plans to support your overall energy and wellbeing.',
+        badge: 'Holistic Support',
       },
     ],
+    daycareInfo: {
+      headline: 'Ask About Same-Day Discharge Options',
+      summary:
+        'Some procedures allow patients to return home on the same day or within 24 hours. Our team will explain the expected discharge time based on your treatment and medical condition.',
+      bulletPoints: [
+        'Ask about same-day discharge options for diagnostic or minor keyhole procedures',
+        'Explore daycare surgery for suitable conditions with gentle care protocols',
+        'Understand your expected recovery timeline: light activities often resumed in 3 to 7 days',
+        'Speak to our team about your treatment options and long-term pelvic comfort support',
+      ],
+      recoveryTimeline:
+        'Following laparoscopic keyhole care, most women mobilize on the same day. You can usually return to desk work and regular light activities in 3 to 7 days, with ongoing improvement in cycle comfort.',
+      clinicalDisclaimer:
+        'Clinical Note: Same-day discharge and recovery timelines depend on individual clinical assessment, the stage of endometriosis, and your surgeon’s guidance. Discharge timing is determined solely by your doctor for your safety.',
+    },
+    insuranceInfo: {
+      title: 'Need Help With Insurance? Speak to Our Team',
+      badge: 'Insurance Assistance',
+      description:
+        'Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
+      ctaText: 'Enquire About Insurance Support',
+      coverageNote:
+        'Cashless hospitalisation facility is available subject to verification of your specific insurer, active policy terms, and third-party administrator (TPA) approval.',
+      points: [
+        'Guidance on pre-authorization forms and claim paperwork',
+        'Help with hospital bills, diagnostic records, and discharge summaries',
+        'Support for corporate insurance policies and individual health plans',
+        'Clear cost estimates explained upfront so there are no surprises',
+      ],
+    },
     faqs: [
       {
-        question: 'What is endometriosis?',
-        answer: 'Endometriosis is a condition in which tissue similar to the lining inside the uterus (the endometrium) grows outside the uterus—such as on the ovaries, fallopian tubes, outer uterine surface, and pelvic peritoneum. This ectopic tissue responds to hormonal changes, causing localized inflammation and pain.',
+        question: 'What is endometriosis and why does it cause so much pain?',
+        answer:
+          'Endometriosis happens when tissue similar to the lining inside the uterus grows outside—on ovaries, tubes, or pelvic walls. During each period, this tissue swells and bleeds. Because the blood cannot leave the body, it creates inflammation and pain.',
       },
       {
-        question: 'What are the symptoms of endometriosis?',
-        answer: 'Common symptoms include severe menstrual cramps, chronic pelvic pain, deep pain during or after intercourse, pain with bowel movements or urination around periods, fatigue, and difficulty becoming pregnant.',
+        question: 'Is severe period pain normal?',
+        answer:
+          'No. Mild discomfort that goes away with simple home remedies is common, but pain that disrupts your studies, job, or routine life is not normal and should be checked by a specialist doctor.',
       },
       {
-        question: 'Why are periods painful with endometriosis?',
-        answer: 'Endometrial-like tissue outside the uterus thickens, breaks down, and bleeds during each menstrual cycle just like normal uterine lining. Because this tissue has no exit route from the body, it becomes trapped, triggering inflammation, swelling, and nerve irritation.',
+        question: 'Can endometriosis affect my chances of getting pregnant?',
+        answer:
+          'It can make conceiving more difficult in some women by causing tissue adhesions or ovarian inflammation. However, with early checkup and proper treatment from our specialist, many women conceive naturally or with simple medical guidance.',
       },
       {
-        question: 'Can endometriosis cause pelvic pain?',
-        answer: 'Yes. Chronic pelvic pain is one of the hallmark characteristics of endometriosis. The ongoing inflammation and formation of internal scar tissue (adhesions) can cause persistent discomfort even between menstrual periods.',
+        question: 'Can endometriosis be treated without surgery?',
+        answer:
+          'Yes. Many women get good relief with hormonal medicines, pain-relieving tablets, and dietary adjustments without needing immediate surgery. Our doctor will explain all your options.',
       },
       {
-        question: 'Can endometriosis affect fertility?',
-        answer: 'Endometriosis can impact fertility in some women by causing pelvic adhesions, altering anatomical relationships between fallopian tubes and ovaries, or creating an inflammatory environment. However, many women with endometriosis do conceive successfully with proper medical evaluation and management.',
+        question: 'How much does endometriosis treatment cost?',
+        answer:
+          'We understand that treatment costs matter to every family. Speak to our team to understand the available treatment options and expected costs before making a decision.',
       },
       {
-        question: 'How is endometriosis diagnosed?',
-        answer: 'Diagnosis begins with a thorough clinical history and pelvic examination by a gynecologist. High-resolution ultrasound and pelvic MRI can identify endometriomas ("chocolate cysts") and deep infiltrating lesions. In select cases, minimally invasive laparoscopy provides definitive visualization and treatment.',
+        question: 'Does PUNYA Hospital offer insurance assistance?',
+        answer:
+          'Yes. Our team can guide you on available insurance assistance and required documentation for your treatment. Coverage and approval depend on your insurance policy and insurer’s terms.',
       },
       {
-        question: 'Can endometriosis be managed without surgery?',
-        answer: 'Yes. Many women achieve significant symptom relief through medical and hormonal therapies, including anti-inflammatory medications, oral contraceptives, progestin therapies, or hormonal IUDs, avoiding the immediate need for surgery.',
+        question: 'Who will evaluate me at PUNYA Hospital?',
+        answer:
+          'You will be evaluated by Dr. Punyavathi C. Nagaraj, Senior Consultant Gynecologist with 20+ years of dedicated experience and specialized laparoscopic training in Germany.',
       },
       {
-        question: 'When should I consult a gynecologist?',
-        answer: 'You should consult a gynecologist if your period pain is severe enough to interfere with work, school, or daily life, if over-the-counter pain relievers do not provide adequate relief, or if you experience pain during intercourse or difficulty conceiving.',
-      },
-      {
-        question: 'What treatment options are available?',
-        answer: 'PUNYA Hospital provides comprehensive endometriosis care including medical pain management, hormonal therapies, nutritional and lifestyle guidance, and advanced laparoscopic surgery when clinically indicated.',
-      },
-      {
-        question: 'How do I book an appointment at PUNYA Hospital?',
-        answer: 'You can book your consultation by completing the quick appointment form on this page, calling our direct hospital line, or sending us a message on WhatsApp for personalized support.',
+        question: 'How do I book a private consultation?',
+        answer:
+          'Fill in the appointment form on this page, call our direct hospital desk (+91 94038 90559), or message us on WhatsApp. Our friendly team will assist you with complete privacy.',
       },
     ],
   },

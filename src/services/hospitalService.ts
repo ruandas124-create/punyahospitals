@@ -278,6 +278,38 @@ class HospitalDataService {
   }
 
   /**
+   * Helper for public website lead capture
+   */
+  public addPublicWebLead(params: {
+    name: string;
+    mobile: string;
+    condition: string;
+    treatmentName: string;
+    doctor: string;
+    source?: string;
+    preferredDate?: string;
+    insuranceHelpRequested?: boolean;
+  }): PatientRecord {
+    return this.schedulePatient({
+      fullName: params.name,
+      mobileNumber: params.mobile,
+      age: 35,
+      gender: 'Other',
+      condition: params.treatmentName,
+      doctor: params.doctor,
+      hospitalBranch: HOSPITAL_BRANCHES[0],
+      appointmentDate: params.preferredDate || new Date().toISOString().split('T')[0],
+      appointmentTime: '10:00 AM',
+      notes: params.insuranceHelpRequested
+        ? 'Patient requested assistance with Insurance documentation & TPA support.'
+        : 'Inquiry via Website Landing Page',
+      bookedByRole: 'front_office',
+      bookedByName: 'Website Online Lead System',
+      customSourceForFrontOfficeOnly: 'Website Landing Page',
+    });
+  }
+
+  /**
    * IMPORTANT:
    * Editing appointment date, time, doctor, hospital, status, or notes must NOT change the source!
    * The source remains immutable.
