@@ -36,9 +36,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   // Realistic consultation imagery tailored to conditions
   const isGyn = content.id === 'uterine-fibroids' || content.id === 'endometriosis';
-  const heroImage = isGyn
-    ? '/src/assets/images/gyn_consultation_1789460990250.jpg'
-    : '/src/assets/images/indian_doctor_consultation_1789457537922.jpg';
+  const heroImage = 'https://images.unsplash.com/photo-1620989983305-be972a0e290e?q=80&w=744&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D';
 
   const doctorName = isGyn ? 'Dr. Punyavathi C. Nagaraj' : 'Dr. Nagaraj B. Puttaswamy';
   const doctorExperience = isGyn ? '20+ Yrs Exp (Trained in Germany)' : '30+ Yrs Surgical Excellence';
@@ -227,27 +225,8 @@ _Enquiry submitted via website. Please confirm doctor consultation availability.
             </div>
           </div>
 
-          {/* Right Column: Realistic Doctor Image + Compact Direct Booking Form (lg:col-span-5) */}
+          {/* Right Column: Compact Direct Booking Form (lg:col-span-5) */}
           <div className="lg:col-span-5 space-y-5">
-            {/* Doctor & Consultation Photography */}
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border-2 border-white bg-white group">
-              <img
-                src={heroImage}
-                alt={`Doctor consultation for ${content.title} at PUNYA Hospital Bangalore`}
-                referrerPolicy="no-referrer"
-                className="w-full h-56 sm:h-64 md:h-72 object-cover object-center group-hover:scale-102 transition-transform duration-500"
-              />
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-4 text-white">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#EAF4E5] flex items-center gap-1.5">
-                  <Stethoscope className="w-3.5 h-3.5 text-[#579B35]" />
-                  <span>Lead Specialist: {doctorName}</span>
-                </div>
-                <div className="text-sm font-semibold text-white/95">
-                  {doctorExperience}
-                </div>
-              </div>
-            </div>
-
             {/* High-Converting Consultation Request Card */}
             <div className="bg-white rounded-2xl p-5 sm:p-6 border border-purple-100 shadow-xl relative">
               <div className="flex items-center justify-between mb-3">
