@@ -256,20 +256,7 @@ _Booked via official PUNYA Hospital website. Please confirm doctor availability 
                   </div>
                 </div>
 
-                {/* Insurance Support Request Checkbox */}
-                <div className="p-3 rounded-xl bg-purple-50/60 border border-purple-100 flex items-start gap-2.5">
-                  <input
-                    type="checkbox"
-                    id="modal-insurance-check"
-                    checked={needInsuranceHelp}
-                    onChange={(e) => setNeedInsuranceHelp(e.target.checked)}
-                    className="mt-0.5 rounded border-gray-300 text-[#7B4FA3] focus:ring-[#7B4FA3]"
-                  />
-                  <label htmlFor="modal-insurance-check" className="text-xs text-gray-700 cursor-pointer select-none">
-                    <strong className="text-[#5D367F] block">Insurance Assistance:</strong>
-                    I would like guidance on insurance documentation & TPA support for my treatment.
-                  </label>
-                </div>
+
 
                 {/* Message */}
                 <div>

@@ -334,19 +334,7 @@ _Enquiry submitted via website. Please confirm doctor consultation availability.
                     />
                   </div>
 
-                  {/* Insurance Assistance Checkbox */}
-                  <div className="flex items-start gap-2 pt-1 pb-1">
-                    <input
-                      type="checkbox"
-                      id="hero-insurance-help"
-                      checked={needInsuranceHelp}
-                      onChange={(e) => setNeedInsuranceHelp(e.target.checked)}
-                      className="mt-0.5 rounded border-gray-300 text-[#7B4FA3] focus:ring-[#7B4FA3]"
-                    />
-                    <label htmlFor="hero-insurance-help" className="text-xs text-gray-600 cursor-pointer select-none">
-                      I would like assistance with <strong className="text-gray-800">Insurance documentation & TPA support</strong>
-                    </label>
-                  </div>
+
 
                   <button
                     type="submit"
