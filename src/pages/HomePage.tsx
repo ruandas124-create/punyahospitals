@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ConditionId } from '../types';
 import { Calendar, ArrowRight, ShieldCheck, Stethoscope, Award, Users, CheckCircle2, Clock, MapPin, Phone, MessageSquare, ChevronRight } from 'lucide-react';
 import { LANDING_PAGES_DATA } from '../data/landingPagesData';
 import { HOSPITAL_CONTACT } from '../constants/contactInfo';
@@ -11,10 +11,10 @@ import { FinalCtaSection } from '../components/FinalCtaSection';
 
 interface HomePageProps {
   onOpenAppointmentModal: () => void;
+  onNavigate: (condition: ConditionId) => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onOpenAppointmentModal }) => {
-  const navigate = useNavigate();
+export const HomePage: React.FC<HomePageProps> = ({ onOpenAppointmentModal, onNavigate }) => {
 
   const specialities = [
     {
@@ -204,7 +204,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenAppointmentModal }) =>
                 <div className="pt-6 mt-6 border-t border-purple-100/60 flex items-center justify-between">
                   <button
                     type="button"
-                    onClick={() => navigate(item.path)}
+                    onClick={() => onNavigate(item.id)}
                     className="inline-flex items-center gap-2 text-sm font-extrabold text-[#7B4FA3] group-hover:text-[#5D367F] hover:underline cursor-pointer"
                   >
                     <span>View Speciality Page</span>

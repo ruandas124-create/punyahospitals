@@ -1,14 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ConditionId } from '../types';
 import { Calendar, ArrowRight, ShieldCheck, Stethoscope, CheckCircle2, Zap } from 'lucide-react';
 import { LANDING_PAGES_DATA } from '../data/landingPagesData';
 
 interface TreatmentsPageProps {
   onOpenAppointmentModal: () => void;
+  onNavigate: (condition: ConditionId) => void;
 }
 
-export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onOpenAppointmentModal }) => {
-  const navigate = useNavigate();
+export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onOpenAppointmentModal, onNavigate }) => {
 
   const treatmentsList = [
     {
@@ -103,7 +103,7 @@ export const TreatmentsPage: React.FC<TreatmentsPageProps> = ({ onOpenAppointmen
               <div className="flex flex-col sm:flex-row md:flex-col gap-2.5 w-full md:w-auto flex-shrink-0">
                 <button
                   type="button"
-                  onClick={() => navigate(item.path)}
+                  onClick={() => onNavigate(item.id)}
                   className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#7B4FA3] hover:bg-[#5D367F] text-white font-extrabold text-sm transition-all shadow-md cursor-pointer"
                 >
                   <span>VIEW DEDICATED PAGE</span>

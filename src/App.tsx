@@ -25,33 +25,30 @@ import { FloatingWhatsAppButton } from './components/FloatingWhatsAppButton';
 import { trackConversionEvent } from './utils/analytics';
 import { resolveConditionFromPath, TREATMENT_URLS } from './constants/treatmentRoutes';
 
-export default function App() {
-  // Determine initial condition based on pathname
-  const getConditionFromPath = (): ConditionId => {
-    if (typeof window === 'undefined') return 'piles';
-    return resolveConditionFromPath(window.location.pathname);
-  };
+import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
+import { TreatmentsPage } from './pages/TreatmentsPage';
+import { DoctorsPage } from './pages/DoctorsPage';
+import { ContactPage } from './pages/ContactPage';
+import { FaqPage } from './pages/FaqPage';
 
-  const [currentCondition, setCurrentCondition] = useState<ConditionId>(getConditionFromPath);
+export default function App() {
+  const getPathname = () => (typeof window !== 'undefined' ? window.location.pathname.toLowerCase() : '/');
+
+  const [currentPath, setCurrentPath] = useState<string>(getPathname);
+  const [currentCondition, setCurrentCondition] = useState<ConditionId>(() => resolveConditionFromPath(window.location.pathname));
   const [isAppointmentModalOpen, setIsAppointmentModalOpen] = useState(false);
 
   // Track scroll depth triggers
   const scrolled50Ref = useRef(false);
   const scrolled90Ref = useRef(false);
 
-  // Sync initial URL if loaded on root /
-  useEffect(() => {
-    const currentPath = window.location.pathname.toLowerCase();
-    if (currentPath === '/' || currentPath === '' || currentPath.includes('/admin') || currentPath.includes('/sales') || currentPath.includes('/front-office')) {
-      window.history.replaceState(null, '', TREATMENT_URLS[currentCondition]);
-    }
-  }, []);
-
   // Handle URL changes & popstate
   useEffect(() => {
     const handlePopState = () => {
-      const condition = resolveConditionFromPath(window.location.pathname);
-      setCurrentCondition(condition);
+      const path = window.location.pathname.toLowerCase();
+      setCurrentPath(path);
+      setCurrentCondition(resolveConditionFromPath(path));
       window.scrollTo({ top: 0, behavior: 'instant' });
     };
     window.addEventListener('popstate', handlePopState);
@@ -84,31 +81,60 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [currentCondition]);
 
-  const handleNavigate = (condition: ConditionId) => {
-    setCurrentCondition(condition);
-    const targetPath = TREATMENT_URLS[condition];
+  const handleNavigate = (targetPathOrCondition: string | ConditionId) => {
+    let targetPath = '/';
+    if (targetPathOrCondition in TREATMENT_URLS) {
+      targetPath = TREATMENT_URLS[targetPathOrCondition as ConditionId];
+      setCurrentCondition(targetPathOrCondition as ConditionId);
+    } else {
+      targetPath = targetPathOrCondition;
+      if (targetPath.includes('piles') || targetPath.includes('gallstone') || targetPath.includes('hernia') || targetPath.includes('uterine') || targetPath.includes('endometriosis')) {
+        setCurrentCondition(resolveConditionFromPath(targetPath));
+      }
+    }
+
+    setCurrentPath(targetPath.toLowerCase());
     if (window.location.pathname !== targetPath) {
       window.history.pushState(null, '', targetPath);
     }
     window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  const content = LANDING_PAGES_DATA[currentCondition];
+  const content = LANDING_PAGES_DATA[currentCondition] || LANDING_PAGES_DATA.piles;
 
-  return (
-    <div className="min-h-screen bg-[#FDFCFE] text-[#252525] flex flex-col font-sans selection:bg-[#7B4FA3]/20 selection:text-[#5D367F]">
-      {/* Dynamic SEO Meta & JSON-LD Structured Data */}
-      <SeoStructuredData content={content} />
+  const renderPageContent = () => {
+    if (currentPath === '/' || currentPath === '') {
+      return (
+        <HomePage
+          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+          onNavigate={(cond) => handleNavigate(cond)}
+        />
+      );
+    }
+    if (currentPath.includes('/about')) {
+      return <AboutPage onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)} />;
+    }
+    if (currentPath.includes('/treatments')) {
+      return (
+        <TreatmentsPage
+          onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+          onNavigate={(cond) => handleNavigate(cond)}
+        />
+      );
+    }
+    if (currentPath.includes('/doctors')) {
+      return <DoctorsPage onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)} />;
+    }
+    if (currentPath.includes('/contact')) {
+      return <ContactPage onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)} />;
+    }
+    if (currentPath.includes('/faq')) {
+      return <FaqPage onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)} />;
+    }
 
-      {/* Header with Navigation and Conversion CTAs */}
-      <Header
-        currentCondition={currentCondition}
-        onNavigate={handleNavigate}
-        onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
-      />
-
-      {/* Main Landing Page Body */}
-      <main className="flex-1 pb-16 md:pb-0">
+    // Default to treatment landing page sections for /piles-treatment, /gallstone-treatment, etc.
+    return (
+      <>
         {/* 1. Hero Section */}
         <HeroSection
           content={content}
@@ -189,6 +215,25 @@ export default function App() {
           content={content}
           onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
         />
+      </>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-[#FDFCFE] text-[#252525] flex flex-col font-sans selection:bg-[#7B4FA3]/20 selection:text-[#5D367F]">
+      {/* Dynamic SEO Meta & JSON-LD Structured Data */}
+      <SeoStructuredData content={content} />
+
+      {/* Header with Navigation and Conversion CTAs */}
+      <Header
+        currentCondition={currentCondition}
+        onNavigate={handleNavigate}
+        onOpenAppointmentModal={() => setIsAppointmentModalOpen(true)}
+      />
+
+      {/* Main Page Body */}
+      <main className="flex-1 pb-16 md:pb-0">
+        {renderPageContent()}
       </main>
 
       {/* Footer */}

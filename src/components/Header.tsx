@@ -7,7 +7,7 @@ import { ALL_TREATMENTS, TREATMENT_URLS } from '../constants/treatmentRoutes';
 
 interface HeaderProps {
   currentCondition: ConditionId;
-  onNavigate: (condition: ConditionId) => void;
+  onNavigate: (pathOrCondition: string) => void;
   onOpenAppointmentModal: () => void;
 }
 
@@ -40,11 +40,11 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center justify-between h-16 sm:h-20 gap-2">
           {/* Logo */}
           <a 
-            href={TREATMENT_URLS[currentCondition]}
+            href="/"
             className="cursor-pointer py-1 flex-shrink-0"
             onClick={(e) => {
               e.preventDefault();
-              onNavigate(currentCondition);
+              onNavigate('/');
             }}
           >
             <PunyaLogo size="md" />
