@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ConditionId } from '../types';
 import { Calendar, ArrowRight, ShieldCheck, Stethoscope, Award, Users, CheckCircle2, Clock, MapPin, Phone, MessageSquare, ChevronRight } from 'lucide-react';
 import { LANDING_PAGES_DATA } from '../data/landingPagesData';
 import { HOSPITAL_CONTACT } from '../constants/contactInfo';
+import { trackConversionEvent } from '../utils/analytics';
 import { DoctorSection } from '../components/DoctorSection';
 import { WhyPunyaSection } from '../components/WhyPunyaSection';
 import { PatientTrustSection } from '../components/PatientTrustSection';
@@ -15,6 +16,9 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onOpenAppointmentModal, onNavigate }) => {
+  useEffect(() => {
+    trackConversionEvent('page_view', 'piles', { page: 'home_page' });
+  }, []);
 
   const specialities = [
     {

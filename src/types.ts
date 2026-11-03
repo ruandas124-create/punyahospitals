@@ -87,7 +87,7 @@ export interface AppointmentFormData {
 }
 
 export interface AnalyticsEvent {
-  eventName: 'form_submit' | 'phone_click' | 'whatsapp_click' | 'appointment_click' | 'scroll_50' | 'scroll_90';
+  eventName: 'page_view' | 'form_submit' | 'phone_click' | 'whatsapp_click' | 'appointment_click' | 'scroll_50' | 'scroll_90';
   condition: ConditionId;
   timestamp: number;
   metadata?: Record<string, string | number | boolean>;
